@@ -162,7 +162,6 @@
 <!-- Cards List Section -->
 <div id="cardList">
 <h2>Cards Database</h2>
-<input id="fileInput" type="file"/>
 <ul id="cards"></ul> <!-- Cards will be dynamically added here -->
 </div>
 <script>
@@ -214,11 +213,8 @@
         }
 
         let cardsDatabase = [];
-        document.getElementById('fileInput').addEventListener('change', handleFile, false);
 
-        function handleFile(event) {
             const file = event.target.files[0];
-            const reader = new FileReader();
 
             reader.onload = function (e) {
                 const data = new Uint8Array(e.target.result);
@@ -283,5 +279,37 @@
             }
         }
     </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
+<script>
+    // Function to load Excel data when the page loads
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('Card Database Kami with tags.xlsx')
+            .then(response => response.arrayBuffer())
+            .then(data => {
+                const workbook = XLSX.read(data, {type: 'array'});
+                const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                const cardData = XLSX.utils.sheet_to_json(firstSheet);
+
+                // Store card data in a global variable or use it as needed
+                window.cardDatabase = cardData;
+
+                // Function to search card by number and apply tags
+                function searchCard(cardNumber) {
+                    const card = cardData.find(c => c['Card Number'] == cardNumber);
+                    if (card) {
+                        // Logic to add tags to the interface or wherever needed
+                        console.log('Card found:', card);
+                        // Example of accessing tags: card['Tags']
+                    } else {
+                        console.log('Card not found');
+                    }
+                }
+
+                // Example usage: Call searchCard(123) with a card number
+            })
+            .catch(error => console.error('Error loading Excel file:', error));
+    });
+</script>
 </body>
 </html>
