@@ -282,8 +282,8 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
 <script>
-    // Function to load Excel data when the page loads
     document.addEventListener("DOMContentLoaded", function() {
+        // Load the Excel file data when the page loads
         fetch('Card Database Kami with tags.xlsx')
             .then(response => response.arrayBuffer())
             .then(data => {
@@ -291,25 +291,35 @@
                 const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
                 const cardData = XLSX.utils.sheet_to_json(firstSheet);
 
-                // Store card data in a global variable or use it as needed
+                // Make the card data globally accessible
                 window.cardDatabase = cardData;
-
-                // Function to search card by number and apply tags
-                function searchCard(cardNumber) {
-                    const card = cardData.find(c => c['Card Number'] == cardNumber);
-                    if (card) {
-                        // Logic to add tags to the interface or wherever needed
-                        console.log('Card found:', card);
-                        // Example of accessing tags: card['Tags']
-                    } else {
-                        console.log('Card not found');
-                    }
-                }
-
-                // Example usage: Call searchCard(123) with a card number
             })
             .catch(error => console.error('Error loading Excel file:', error));
     });
+
+    // Function to search for and display a card by its number
+    function searchCard() {
+        // Get the card number from an input field with ID 'cardNumberInput'
+        const cardNumber = parseInt(document.getElementById('cardNumberInput').value);
+        
+        // Ensure cardDatabase is loaded
+        if (!window.cardDatabase) {
+            document.getElementById('cardDetails').innerHTML = '<p>Database not loaded. Please try again shortly.</p>';
+            return;
+        }
+        
+        // Find the card in the cardDatabase
+        const card = window.cardDatabase.find(c => c['Card Number'] === cardNumber);
+        const cardDetailsDiv = document.getElementById('cardDetails');
+
+        if (card) {
+            // Display card details, including tags, directly in the HTML
+            cardDetailsDiv.innerHTML = `<p><strong>Card Name:</strong> ${card['Name']}<br><strong>Tags:</strong> ${card['Tags']}</p>`;
+        } else {
+            // Display a message if the card is not found
+            cardDetailsDiv.innerHTML = '<p>Card not found. Please try a different number.</p>';
+        }
+    }
 </script>
 </body>
 </html>
