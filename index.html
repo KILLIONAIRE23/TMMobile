@@ -20,6 +20,28 @@
     button { margin: 5px; padding: 5px 10px; background-color: #333; color: white; }
     img { max-width: 100%; width: 40px; height: auto; }
     h1, h2 { background-color: rgba(0, 0, 0, 0.6); padding: 10px; display: inline-block; border-radius: 10px;}
+
+    /* Add these new styles for the VP Tracker Icon */
+    .icon-container {
+        position: relative;
+        width: 200px; /* Adjust size as needed to make the icon relatively big */
+        margin: 20px auto;
+    }
+    .icon-container img {
+        width: 100%;
+        height: auto;
+        border-radius: 50%;
+    }
+    .icon-container .vp-number {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        font-size: 50px; /* Adjust size for the VP number */
+        font-weight: bold;
+        color: #ffffff;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    }
 </style>
 </head>
 <body>
@@ -61,7 +83,10 @@
 <!-- VP and TR Trackers -->
 <div id="vpTracker">
     <h2>Victory Points Tracker</h2>
-    <p>Current VP: <span id="vpCount">0</span></p>
+    <div class="icon-container">
+        <img src="mars.png" alt="Mars Icon">
+        <div id="vpNumber" class="vp-number">0</div> <!-- Initial VP value is 0 -->
+    </div>
     <button onclick="changeVP(1)">Add VP</button>
     <button onclick="changeVP(-1)">Remove VP</button>
 </div>
@@ -110,7 +135,7 @@
     function changeVP(delta) {
         vpCount += delta;
         if (vpCount < 0) { vpCount = 0; }
-        document.getElementById('vpCount').innerText = vpCount;
+        document.getElementById('vpNumber').innerText = vpCount;
         saveGameState(); // Save after updating VP
     }
 
@@ -182,7 +207,7 @@
             const gameState = JSON.parse(savedState);
             vpCount = gameState.vpCount || 0;
             trCount = gameState.trCount || 0;
-            document.getElementById('vpCount').innerText = vpCount;
+            document.getElementById('vpNumber').innerText = vpCount;
             document.getElementById('trCount').innerText = trCount;
 
             Object.keys(gameState.tagCounts).forEach(tag => {
@@ -201,7 +226,7 @@
             tagCounts[tag] = 0;
             document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
         });
-        document.getElementById('vpCount').innerText = vpCount;
+        document.getElementById('vpNumber').innerText = vpCount;
         document.getElementById('trCount').innerText = trCount;
         updateTotalTags();
         localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
