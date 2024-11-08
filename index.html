@@ -81,6 +81,11 @@
     <div id="cardDetails"></div>
 </div>
 
+<!-- Reset Game Button -->
+<div id="resetSection">
+    <button onclick="resetGameState()">Reset Game</button>
+</div>
+
 <script>
     const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
 
@@ -167,32 +172,4 @@
             trCount,
             tagCounts
         };
-        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
-    }
-
-    // Load game state from local storage
-    function loadGameState() {
-        const savedState = localStorage.getItem('terraformingMarsGameState');
-        if (savedState) {
-            const gameState = JSON.parse(savedState);
-            vpCount = gameState.vpCount || 0;
-            trCount = gameState.trCount || 0;
-            document.getElementById('vpCount').innerText = vpCount;
-            document.getElementById('trCount').innerText = trCount;
-
-            Object.keys(gameState.tagCounts).forEach(tag => {
-                tagCounts[tag] = gameState.tagCounts[tag];
-                document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-            });
-            updateTotalTags();
-        }
-    }
-
-    // Load JSON and game state on Page Load
-    document.addEventListener("DOMContentLoaded", () => {
-        loadJSONData();
-        loadGameState();
-    });
-</script>
-</body>
-</html>
+        localStorage.setItem('terraformingMarsGameState
