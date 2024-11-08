@@ -42,6 +42,13 @@
         color: #ffffff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
+
+    /* Style for making tag counter numbers more visible */
+    #tagTable td span {
+        font-size: 1.5em; /* Make numbers bigger */
+        font-weight: bold; /* Make numbers thicker */
+        color: #ffffff; /* Ensure the numbers are visible */
+    }
 </style>
 </head>
 <body>
@@ -84,7 +91,7 @@
 <div id="vpTracker">
     <h2>Victory Points Tracker</h2>
     <div class="icon-container">
-        <img src="Mars.png" alt="Mars Icon">
+        <img src="mars.png" alt="Mars Icon">
         <div id="vpNumber" class="vp-number">0</div> <!-- Initial VP value is 0 -->
     </div>
     <button onclick="changeVP(1)">Add VP</button>
