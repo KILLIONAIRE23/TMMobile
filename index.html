@@ -38,7 +38,28 @@
 <tbody id="tagTable">
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Earth.png"/> Earth Tag</td><td><span id="earthCount">0</span></td>
 <td><button onclick="changeCount('earth', 1)">Add</button><button onclick="changeCount('earth', -1)">Remove</button></td></tr>
-<!-- Repeat rows for other tags as necessary -->
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Space.png"/> Space Tag</td><td><span id="spaceCount">0</span></td>
+<td><button onclick="changeCount('space', 1)">Add</button><button onclick="changeCount('space', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Animal.png"/> Animal Tag</td><td><span id="animalCount">0</span></td>
+<td><button onclick="changeCount('animal', 1)">Add</button><button onclick="changeCount('animal', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Plant.png"/> Plant Tag</td><td><span id="plantCount">0</span></td>
+<td><button onclick="changeCount('plant', 1)">Add</button><button onclick="changeCount('plant', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Building.png"/> Building Tag</td><td><span id="buildingCount">0</span></td>
+<td><button onclick="changeCount('building', 1)">Add</button><button onclick="changeCount('building', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Event.png"/> Event Tag</td><td><span id="eventCount">0</span></td>
+<td><button onclick="changeCount('event', 1)">Add</button><button onclick="changeCount('event', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Science.png"/> Science Tag</td><td><span id="scienceCount">0</span></td>
+<td><button onclick="changeCount('science', 1)">Add</button><button onclick="changeCount('science', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Energy.png"/> Energy Tag</td><td><span id="energyCount">0</span></td>
+<td><button onclick="changeCount('energy', 1)">Add</button><button onclick="changeCount('energy', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Microbe.png"/> Microbe Tag</td><td><span id="microbeCount">0</span></td>
+<td><button onclick="changeCount('microbe', 1)">Add</button><button onclick="changeCount('microbe', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Jovian.png"/> Jovian Tag</td><td><span id="jovianCount">0</span></td>
+<td><button onclick="changeCount('jovian', 1)">Add</button><button onclick="changeCount('jovian', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/City.png"/> City Tag</td><td><span id="cityCount">0</span></td>
+<td><button onclick="changeCount('city', 1)">Add</button><button onclick="changeCount('city', -1)">Remove</button></td></tr>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Venus.png"/> Venus Tag</td><td><span id="venusCount">0</span></td>
+<td><button onclick="changeCount('venus', 1)">Add</button><button onclick="changeCount('venus', -1)">Remove</button></td></tr>
 </tbody>
 </table>
 
@@ -62,15 +83,16 @@
 
 <!-- Card Lookup Section -->
 <div id="cardLookupSection">
-<h2>Search Card by Name or Tags</h2>
-<p>Search for a card by name, VP, or tag:</p>
-<input id="search-input" placeholder="Enter card name, VP, or tag"/>
+<h2>Search Card by Number</h2>
+<p>Enter a card number to find VP and tags:</p>
+<input id="cardNumberInput" placeholder="Enter card number" type="text"/>
+<button onclick="searchCard()">Search</button>
 <div id="cardDetails"></div>
 </div>
 
 <!-- Cards Database Section -->
 <div id="cardList">
-<h2>Cards Database</h2>
+<h2>All Cards Database</h2>
 <ul id="cards"></ul>
 </div>
 
@@ -107,7 +129,7 @@
 
     // Load JSON Data
     async function loadJSONData() {
-        const response = await fetch('Card Database Kami with tags.json'); // Local or server path
+        const response = await fetch('Card Database Kami with tags.json');
         const data = await response.json();
         window.cardsDatabase = data.Sheet1;
         displayCards(data.Sheet1);
@@ -124,21 +146,30 @@
         });
     }
 
-    // Search functionality
-    function searchCards() {
-        const query = document.getElementById('search-input').value.toLowerCase();
-        const filteredCards = window.cardsDatabase.filter(card => {
-            const matchesName = card['Card Name'] && card['Card Name'].toLowerCase().includes(query);
-            const matchesVP = card['VP'] && card['VP'].toString().includes(query);
-            const matchesTags = Object.keys(card).some(key => key.startsWith('Tag:') && card[key] === 1 && key.toLowerCase().includes(query));
-            return matchesName || matchesVP || matchesTags;
-        });
-        displayCards(filteredCards);
+    // Search by Card Number and apply VP and tags to trackers
+    function searchCard() {
+        const cardNumber = document.getElementById('cardNumberInput').value;
+        const card = window.cardsDatabase.find(c => c['Card Name'] === cardNumber);
+
+        if (card) {
+            // Add VP to the tracker
+            changeVP(Number(card.VP) || 0);
+
+            // Loop through each tag in the card and update counts if the tag exists
+            Object.keys(card).forEach(key => {
+                if (key.startsWith("Tag:") && card[key] === 1) {
+                    const tag = key.replace("Tag: ", "").toLowerCase();
+                    changeCount(tag, 1);
+                }
+            });
+
+            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
+        } else {
+            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+        }
     }
 
-    document.getElementById('search-input').addEventListener('input', searchCards);
-
-    // Load the JSON data when page loads
+    // Load JSON when page loads
     document.addEventListener("DOMContentLoaded", loadJSONData);
 </script>
 </body>
