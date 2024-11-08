@@ -120,5 +120,4 @@
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
             const data = await response.json();
-            cardsDatabase = data;
-            console.log("JSON Data Loaded Successfully:", cardsDatabase);
+            cardsDatabase = data
