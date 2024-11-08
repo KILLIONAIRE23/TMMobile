@@ -93,6 +93,7 @@
         if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
         document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
         updateTotalTags();
+        saveGameState(); // Save after updating tag counts
     }
 
     function updateTotalTags() {
@@ -105,6 +106,7 @@
         vpCount += delta;
         if (vpCount < 0) { vpCount = 0; }
         document.getElementById('vpCount').innerText = vpCount;
+        saveGameState(); // Save after updating VP
     }
 
     let trCount = 0;
@@ -112,6 +114,7 @@
         trCount += delta;
         if (trCount < 0) { trCount = 0; }
         document.getElementById('trCount').innerText = trCount;
+        saveGameState(); // Save after updating TR
     }
 
     let cardsDatabase = [];
@@ -135,40 +138,61 @@
 
     // Search Card by Card Number and update VP and tags
     function searchCard() {
-    // Retrieve the value from the input field and trim whitespace
-    const cardInput = document.getElementById('cardNumberInput').value.trim();
+        const cardInput = document.getElementById('cardNumberInput').value.trim();
+        const isNumeric = /^\d+$/.test(cardInput);
+        const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
+        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
 
-    // Check if the input is numeric or alphanumeric
-    const isNumeric = /^\d+$/.test(cardInput);
+        if (card) {
+            changeVP(Number(card.VP) || 0);
+            Object.keys(card).forEach(key => {
+                if (key.startsWith("Tag:") && card[key] === 1) {
+                    const tag = key.replace("Tag: ", "").toLowerCase();
+                    changeCount(tag, 1);
+                }
+            });
 
-    // Convert to a number if input is numeric; otherwise, keep it as a string
-    const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
-
-    // Search for the card in the cardsDatabase
-    const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
-
-    if (card) {
-        // Add VP from the card to the VP tracker
-        changeVP(Number(card.VP) || 0);
-
-        // Loop through each tag in the card and increment tag counters if applicable
-        Object.keys(card).forEach(key => {
-            if (key.startsWith("Tag:") && card[key] === 1) {
-                const tag = key.replace("Tag: ", "").toLowerCase();
-                changeCount(tag, 1);
-            }
-        });
-
-        document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
-        console.log("Card found:", card); 
+            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
+            console.log("Card found:", card); 
         } else {
-        document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
-        console.log("Card not found:", cardInput); 
+            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+            console.log("Card not found:", cardInput); 
         }
     }
 
-    // Load JSON on Page Load
-    document.addEventListener("DOMContentLoaded", loadJSONData);
+    // Save game state to local storage
+    function saveGameState() {
+        const gameState = {
+            vpCount,
+            trCount,
+            tagCounts
+        };
+        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
+    }
+
+    // Load game state from local storage
+    function loadGameState() {
+        const savedState = localStorage.getItem('terraformingMarsGameState');
+        if (savedState) {
+            const gameState = JSON.parse(savedState);
+            vpCount = gameState.vpCount || 0;
+            trCount = gameState.trCount || 0;
+            document.getElementById('vpCount').innerText = vpCount;
+            document.getElementById('trCount').innerText = trCount;
+
+            Object.keys(gameState.tagCounts).forEach(tag => {
+                tagCounts[tag] = gameState.tagCounts[tag];
+                document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+            });
+            updateTotalTags();
+        }
+    }
+
+    // Load JSON and game state on Page Load
+    document.addEventListener("DOMContentLoaded", () => {
+        loadJSONData();
+        loadGameState();
+    });
 </script>
 </body>
 </html>
