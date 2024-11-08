@@ -145,31 +145,4 @@
     function searchCard() {
         const cardInput = document.getElementById('cardNumberInput').value.trim();
         const isNumeric = /^\d+$/.test(cardInput);
-        const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
-        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
-
-        if (card) {
-            changeVP(Number(card.VP) || 0);
-            Object.keys(card).forEach(key => {
-                if (key.startsWith("Tag:") && card[key] === 1) {
-                    const tag = key.replace("Tag: ", "").toLowerCase();
-                    changeCount(tag, 1);
-                }
-            });
-
-            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
-            console.log("Card found:", card); 
-        } else {
-            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
-            console.log("Card not found:", cardInput); 
-        }
-    }
-
-    // Save game state to local storage
-    function saveGameState() {
-        const gameState = {
-            vpCount,
-            trCount,
-            tagCounts
-        };
-        localStorage.setItem('terraformingMarsGameState
+        const card
