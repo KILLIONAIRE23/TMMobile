@@ -111,16 +111,4 @@
     function changeVP(delta) {
         vpCount += delta;
         if (vpCount < 0) { vpCount = 0; }
-        document.getElementById('vpCount').innerText = vpCount;
-    }
-
-    let trCount = 0;
-    function changeTR(delta) {
-        trCount += delta;
-        if (trCount < 0) { trCount = 0; }
-        document.getElementById('trCount').innerText = trCount;
-    }
-
-    let cardsDatabase = [];
-
-    async function load
+        document.getElementById('vpCount').innerText
