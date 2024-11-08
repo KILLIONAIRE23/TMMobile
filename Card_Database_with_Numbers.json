@@ -6443,7 +6443,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X63,
+        "Card Number": "X63",
         "Card Name": "Solar Logistics",
         "VP": 1,
         "Tag: Science": 0,
@@ -6460,7 +6460,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C42,
+        "Card Number": "C42",
         "Card Name": "Sub-Zero Salt Fish",
         "VP": 0,
         "Tag: Science": 0,
@@ -6477,7 +6477,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C12,
+        "Card Number": "C12",
         "Card Name": "Floater Technology",
         "VP": 0,
         "Tag: Science": 1,
@@ -6494,7 +6494,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C49,
+        "Card Number": "C49",
         "Card Name": "Warp Drive",
         "VP": 2,
         "Tag: Science": 1,
@@ -6511,7 +6511,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P36,
+        "Card Number": "P36",
         "Card Name": "House Printing",
         "VP": 1,
         "Tag: Science": 0,
@@ -6528,7 +6528,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C28,
+        "Card Number": "C28",
         "Card Name": "Nitrogen From Titan",
         "VP": 1,
         "Tag: Science": 0,
@@ -6545,7 +6545,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X24,
+        "Card Number": "X24",
         "Card Name": "Magnetic Shield",
         "VP": 0,
         "Tag: Science": 0,
@@ -6562,7 +6562,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X21,
+        "Card Number": "X21",
         "Card Name": "Field-Capped City",
         "VP": 0,
         "Tag: Science": 0,
@@ -6579,7 +6579,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C36,
+        "Card Number": "C36",
         "Card Name": "Sky Docks",
         "VP": 2,
         "Tag: Science": 0,
@@ -6596,7 +6596,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P37,
+        "Card Number": "P37",
         "Card Name": "Lava Tube Settlement",
         "VP": 0,
         "Tag: Science": 0,
@@ -6613,7 +6613,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X16,
+        "Card Number": "X16",
         "Card Name": "Comet Aiming",
         "VP": 0,
         "Tag: Science": 0,
@@ -6630,7 +6630,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X48,
+        "Card Number": "X48",
         "Card Name": "Directed Heat Usage",
         "VP": 0,
         "Tag: Science": 0,
@@ -6647,7 +6647,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X37,
+        "Card Number": "X37",
         "Card Name": "Harvest",
         "VP": 0,
         "Tag: Science": 0,
@@ -6664,7 +6664,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X30,
+        "Card Number": "X30",
         "Card Name": "Topsoil Contract",
         "VP": 0,
         "Tag: Science": 0,
@@ -6681,7 +6681,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P87,
+        "Card Number": "P87",
         "Card Name": "Venus Allies",
         "VP": 2,
         "Tag: Science": 0,
@@ -6698,7 +6698,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X15,
+        "Card Number": "X15",
         "Card Name": "Asteroid Hollowing",
         "VP": 0,
         "Tag: Science": 0,
@@ -6715,7 +6715,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C48,
+        "Card Number": "C48",
         "Card Name": "Urban Decomposers",
         "VP": 0,
         "Tag: Science": 0,
@@ -6732,7 +6732,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P72,
+        "Card Number": "P72",
         "Card Name": "Envoys From Venus",
         "VP": 0,
         "Tag: Science": 0,
@@ -6749,7 +6749,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P75,
+        "Card Number": "P75",
         "Card Name": "GHG Shipment",
         "VP": 0,
         "Tag: Science": 0,
@@ -6766,7 +6766,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P73,
+        "Card Number": "P73",
         "Card Name": "Floating Refinery",
         "VP": 0,
         "Tag: Science": 0,
@@ -6783,7 +6783,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C18,
+        "Card Number": "C18",
         "Card Name": "Jovian Lanterns",
         "VP": 0,
         "Tag: Science": 0,
@@ -6800,7 +6800,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X15,
+        "Card Number": "X15",
         "Card Name": "Asteroid Deflection System",
         "VP": 0,
         "Tag: Science": 0,
@@ -6817,7 +6817,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C43,
+        "Card Number": "C43",
         "Card Name": "Titan Air-Scrapping",
         "VP": 2,
         "Tag: Science": 0,
@@ -6834,7 +6834,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C19,
+        "Card Number": "C19",
         "Card Name": "Jupiter Floating Station",
         "VP": 1,
         "Tag: Science": 0,
@@ -6851,7 +6851,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C35,
+        "Card Number": "C35",
         "Card Name": "Rim Freighters",
         "VP": 0,
         "Tag: Science": 0,
@@ -6868,7 +6868,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X18,
+        "Card Number": "X18",
         "Card Name": "Cutting Edge Technology",
         "VP": 1,
         "Tag: Science": 1,
@@ -6885,8 +6885,8 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C15,
-        "Card Name": "Solar Logistics",
+        "Card Number": "C15",
+        "Card Name": "Ice Moon Colony",
         "VP": 0,
         "Tag: Science": 0,
         "Tag: Building": 0,
@@ -6902,7 +6902,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X32,
+        "Card Number": "X32",
         "Card Name": "Great Dam",
         "VP": 1,
         "Tag: Science": 0,
@@ -6919,7 +6919,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X53,
+        "Card Number": "X53",
         "Card Name": "Cyberia Systems",
         "VP": 0,
         "Tag: Science": 0,
@@ -6936,7 +6936,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X33,
+        "Card Number": "X33",
         "Card Name": "Magnetic Field Generators",
         "VP": 0,
         "Tag: Science": 0,
@@ -6953,7 +6953,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C38,
+        "Card Number": "C38",
         "Card Name": "Solar Reflectors",
         "VP": 0,
         "Tag: Science": 0,
@@ -6970,7 +6970,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C39,
+        "Card Number": "C39",
         "Card Name": "Space Port",
         "VP": 0,
         "Tag: Science": 0,
@@ -6987,8 +6987,8 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C31,
-        "Card Name": "Solar Logistics",
+        "Card Number": "C31",
+        "Card Name": "Quantum Communications",
         "VP": 1,
         "Tag: Science": 0,
         "Tag: Building": 0,
@@ -7004,7 +7004,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X35,
+        "Card Number": "X35",
         "Card Name": "Bactoviral Research",
         "VP": 0,
         "Tag: Science": 1,
@@ -7021,7 +7021,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C06,
+        "Card Number": "C06",
         "Card Name": "Corona Extractor",
         "VP": 0,
         "Tag: Science": 0,
@@ -7038,7 +7038,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C02,
+        "Card Number": "C02",
         "Card Name": "Air Raid",
         "VP": 0,
         "Tag: Science": 0,
@@ -7055,7 +7055,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X61,
+        "Card Number": "X61",
         "Card Name": "Neptunian Power Consultants",
         "VP": 0,
         "Tag: Science": 0,
@@ -7072,7 +7072,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P74,
+        "Card Number": "P74",
         "Card Name": "Frontier Town",
         "VP": 0,
         "Tag: Science": 0,
@@ -7089,7 +7089,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P82,
+        "Card Number": "P82",
         "Card Name": "Special Permit",
         "VP": 0,
         "Tag: Science": 0,
@@ -7106,7 +7106,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X60,
+        "Card Number": "X60",
         "Card Name": "Martian Lumber Corp",
         "VP": 0,
         "Tag: Science": 0,
@@ -7123,7 +7123,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P84,
+        "Card Number": "P84",
         "Card Name": "Stratospheric Expedition",
         "VP": 1,
         "Tag: Science": 0,
@@ -7140,7 +7140,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": C30,
+        "Card Number": "C30",
         "Card Name": "Productive Outpost",
         "VP": 0,
         "Tag: Science": 0,
@@ -7157,7 +7157,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P91,
+        "Card Number": "P91",
         "Card Name": "WG Project",
         "VP": 0,
         "Tag: Science": 0,
@@ -7174,7 +7174,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C33,
+        "Card Number": "C33",
         "Card Name": "Refugee Camp",
         "VP": 0,
         "Tag: Science": 0,
@@ -7191,7 +7191,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X67,
+        "Card Number": "X67",
         "Card Name": "Soil Enrichment",
         "VP": 0,
         "Tag: Science": 0,
@@ -7208,7 +7208,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X25,
+        "Card Number": "X25",
         "Card Name": "Meat Industry",
         "VP": 0,
         "Tag: Science": 0,
@@ -7225,7 +7225,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X22,
+        "Card Number": "X22",
         "Card Name": "Imported Nutrients",
         "VP": 0,
         "Tag: Science": 0,
@@ -7242,7 +7242,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X17,
+        "Card Number": "X17",
         "Card Name": "Crash Site Cleanup",
         "VP": 1,
         "Tag: Science": 0,
@@ -7259,7 +7259,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X27,
+        "Card Number": "X27",
         "Card Name": "Mohole Lake",
         "VP": 0,
         "Tag: Science": 0,
@@ -7276,7 +7276,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P81,
+        "Card Number": "P81",
         "Card Name": "Soil Studies",
         "VP": 0,
         "Tag: Science": 0,
@@ -7293,7 +7293,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X44,
+        "Card Number": "X44",
         "Card Name": "16 Psyche",
         "VP": 2,
         "Tag: Science": 0,
@@ -7310,7 +7310,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P79,
+        "Card Number": "P79",
         "Card Name": "Microgravity Nutrition",
         "VP": 1,
         "Tag: Science": 0,
@@ -7327,7 +7327,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C40,
+        "Card Number": "C40",
         "Card Name": "Space Port Colony",
         "VP": 0,
         "Tag: Science": 0,
@@ -7344,7 +7344,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C01,
+        "Card Number": "C01",
         "Card Name": "Airliners",
         "VP": 1,
         "Tag: Science": 0,
@@ -7361,7 +7361,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C41,
+        "Card Number": "C41",
         "Card Name": "Spin-Off Department",
         "VP": 0,
         "Tag: Science": 0,
@@ -7378,7 +7378,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C47,
+        "Card Number": "C47",
         "Card Name": "Trading Colony",
         "VP": 0,
         "Tag: Science": 0,
@@ -7395,7 +7395,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X66,
+        "Card Number": "X66",
         "Card Name": "Teslaract",
         "VP": 0,
         "Tag: Science": 0,
@@ -7412,7 +7412,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C46,
+        "Card Number": "C46",
         "Card Name": "Trade Envoys",
         "VP": 0,
         "Tag: Science": 0,
@@ -7429,7 +7429,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C44,
+        "Card Number": "C44",
         "Card Name": "Titan Floating Launch-Pad",
         "VP": 1,
         "Tag: Science": 0,
@@ -7446,7 +7446,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C13,
+        "Card Number": "C13",
         "Card Name": "Galilean Waystation",
         "VP": 1,
         "Tag: Science": 0,
@@ -7463,7 +7463,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C25,
+        "Card Number": "C25",
         "Card Name": "Mining Colony",
         "VP": 0,
         "Tag: Science": 0,
@@ -7480,7 +7480,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P90,
+        "Card Number": "P90",
         "Card Name": "Venus Trade Hub",
         "VP": 1,
         "Tag: Science": 0,
@@ -7497,7 +7497,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X51,
+        "Card Number": "X51",
         "Card Name": "Astra Mechanica",
         "VP": 0,
         "Tag: Science": 1,
@@ -7514,7 +7514,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C29,
+        "Card Number": "C29",
         "Card Name": "Pioneer Settlement",
         "VP": 2,
         "Tag: Science": 0,
@@ -7531,7 +7531,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C21,
+        "Card Number": "C21",
         "Card Name": "Lunar Exports",
         "VP": 0,
         "Tag: Science": 0,
@@ -7548,7 +7548,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X693,
+        "Card Number": "X69",
         "Card Name": "Hospitals",
         "VP": 1,
         "Tag: Science": 0,
@@ -7565,8 +7565,8 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C26,
-        "Card Name": "Solar Logistics",
+        "Card Number": "C26",
+        "Card Name": "Minority Refuge",
         "VP": 0,
         "Tag: Science": 0,
         "Tag: Building": 0,
@@ -7582,24 +7582,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": XP76,
-        "Card Name": "Solar Logistics",
-        "VP": 0,
-        "Tag: Science": 0,
-        "Tag: Building": 0,
-        "Tag: Space": 0,
-        "Tag: Microbe": 0,
-        "Tag: Plant": 0,
-        "Tag: Animal": 0,
-        "Tag: City": 0,
-        "Tag: Earth": 0,
-        "Tag: Jovian": 0,
-        "Tag: Energy": 0,
-        "Tag: Venus": 0,
-        "Tag: Event": 1
-    },
-    {
-        "Card Number": P41,
+        "Card Number": "P41",
         "Card Name": "SF Memorial",
         "VP": 1,
         "Tag: Science": 0,
@@ -7616,7 +7599,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P83,
+        "Card Number": "P83",
         "Card Name": "Sponsoring Nation",
         "VP": 0,
         "Tag: Science": 0,
@@ -7633,7 +7616,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C32,
+        "Card Number": "C32",
         "Card Name": "Red Spot Observatory",
         "VP": 2,
         "Tag: Science": 1,
@@ -7650,7 +7633,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C23,
+        "Card Number": "C23",
         "Card Name": "Market Manipulation",
         "VP": 0,
         "Tag: Science": 0,
@@ -7667,7 +7650,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P85,
+        "Card Number": "P85",
         "Card Name": "Summit Logistics",
         "VP": 0,
         "Tag: Science": 0,
@@ -7684,7 +7667,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C45,
+        "Card Number": "C45",
         "Card Name": "Titan Shuttles",
         "VP": 1,
         "Tag: Science": 0,
@@ -7701,7 +7684,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C24,
+        "Card Number": "C24",
         "Card Name": "Martian Zoo",
         "VP": 1,
         "Tag: Science": 0,
@@ -7718,7 +7701,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X59,
+        "Card Number": "X59",
         "Card Name": "Mars Nomads",
         "VP": 0,
         "Tag: Science": 0,
@@ -7735,7 +7718,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C03,
+        "Card Number": "C03",
         "Card Name": "Atmo Collectors",
         "VP": 0,
         "Tag: Science": 0,
@@ -7752,7 +7735,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C04,
+        "Card Number": "C04",
         "Card Name": "Community Services",
         "VP": 1,
         "Tag: Science": 0,
@@ -7769,7 +7752,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X36,
+        "Card Number": "X36",
         "Card Name": "Bio Printing Facility",
         "VP": 0,
         "Tag: Science": 0,
@@ -7786,7 +7769,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": XP78,
+        "Card Number": "P78",
         "Card Name": "L1 Trade Terminal",
         "VP": 2,
         "Tag: Science": 0,
@@ -7803,7 +7786,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C22,
+        "Card Number": "C22",
         "Card Name": "Lunar Mining",
         "VP": 0,
         "Tag: Science": 0,
@@ -7820,7 +7803,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P80,
+        "Card Number": "P80",
         "Card Name": "Red Appeasement",
         "VP": 0,
         "Tag: Science": 0,
@@ -7837,7 +7820,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": C17,
+        "Card Number": "C17",
         "Card Name": "Interplanetary Colony Ship",
         "VP": 0,
         "Tag: Science": 0,
@@ -7854,7 +7837,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X29,
+        "Card Number": "X29",
         "Card Name": "Sub-Crust Measurements",
         "VP": 2,
         "Tag: Science": 1,
@@ -7871,7 +7854,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C37,
+        "Card Number": "C37",
         "Card Name": "Solar Probe",
         "VP": 1,
         "Tag: Science": 0,
@@ -7888,7 +7871,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X23,
+        "Card Number": "X23",
         "Card Name": "Jovian Embassy",
         "VP": 1,
         "Tag: Science": 0,
@@ -7905,7 +7888,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X58,
+        "Card Number": "X58",
         "Card Name": "Kaguya Tech",
         "VP": 0,
         "Tag: Science": 0,
@@ -7922,7 +7905,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X50,
+        "Card Number": "X50",
         "Card Name": "Aqueduct Systems",
         "VP": 1,
         "Tag: Science": 0,
@@ -7939,7 +7922,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X45,
+        "Card Number": "X45",
         "Card Name": "Robot Pollinators",
         "VP": 0,
         "Tag: Science": 0,
@@ -7956,7 +7939,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X31,
+        "Card Number": "X31",
         "Card Name": "Deimos Down",
         "VP": 0,
         "Tag: Science": 0,
@@ -7973,7 +7956,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P40,
+        "Card Number": "P40",
         "Card Name": "Research Coordination",
         "VP": 0,
         "Tag: Science": 0,
@@ -7990,7 +7973,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C16,
+        "Card Number": "C16",
         "Card Name": "Impactor Swarm",
         "VP": 0,
         "Tag: Science": 0,
@@ -8007,7 +7990,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P89,
+        "Card Number": "P89",
         "Card Name": "Venus Shuttles",
         "VP": 0,
         "Tag: Science": 0,
@@ -8024,7 +8007,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X34,
+        "Card Number": "X34",
         "Card Name": "Asteroid Rights",
         "VP": 0,
         "Tag: Science": 0,
@@ -8041,7 +8024,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X19,
+        "Card Number": "X19",
         "Card Name": "Directed Impactors",
         "VP": 0,
         "Tag: Science": 0,
@@ -8058,7 +8041,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P70,
+        "Card Number": "P70",
         "Card Name": "Colonial Envoys",
         "VP": 0,
         "Tag: Science": 0,
@@ -8075,7 +8058,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P42,
+        "Card Number": "P42",
         "Card Name": "Space Hotels",
         "VP": 0,
         "Tag: Science": 0,
@@ -8092,7 +8075,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P71,
+        "Card Number": "P71",
         "Card Name": "Colonial Representation",
         "VP": 0,
         "Tag: Science": 0,
@@ -8109,7 +8092,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X56,
+        "Card Number": "X56",
         "Card Name": "Hermetic Order Of Mars",
         "VP": 0,
         "Tag: Science": 0,
@@ -8126,7 +8109,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P77,
+        "Card Number": "P77",
         "Card Name": "Jovian Envoys",
         "VP": 0,
         "Tag: Science": 0,
@@ -8143,7 +8126,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X26,
+        "Card Number": "X26",
         "Card Name": "Meltworks",
         "VP": 0,
         "Tag: Science": 0,
@@ -8160,7 +8143,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P38,
+        "Card Number": "P38",
         "Card Name": "Martian Survey",
         "VP": 1,
         "Tag: Science": 0,
@@ -8177,7 +8160,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X13,
+        "Card Number": "X13",
         "Card Name": "Advertising",
         "VP": 0,
         "Tag: Science": 0,
@@ -8194,7 +8177,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P88,
+        "Card Number": "P88",
         "Card Name": "Venus Orbital Survey",
         "VP": 0,
         "Tag: Science": 0,
@@ -8211,7 +8194,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X47,
+        "Card Number": "X47",
         "Card Name": "Icy Impactors",
         "VP": 0,
         "Tag: Science": 0,
@@ -8228,7 +8211,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C10,
+        "Card Number": "C10",
         "Card Name": "Floater Leasing",
         "VP": 0,
         "Tag: Science": 0,
@@ -8245,7 +8228,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X38,
+        "Card Number": "X38",
         "Card Name": "Outdoor Sports",
         "VP": 1,
         "Tag: Science": 0,
@@ -8262,7 +8245,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C09,
+        "Card Number": "C09",
         "Card Name": "Ecology Research",
         "VP": 1,
         "Tag: Science": 1,
@@ -8279,7 +8262,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X20,
+        "Card Number": "X20",
         "Card Name": "Diversity Support",
         "VP": 0,
         "Tag: Science": 0,
@@ -8296,7 +8279,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": P39,
+        "Card Number": "P39",
         "Card Name": "SPsychrophiles",
         "VP": 0,
         "Tag: Science": 0,
@@ -8313,7 +8296,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X62,
+        "Card Number": "X62",
         "Card Name": "Red Ships",
         "VP": 0,
         "Tag: Science": 0,
@@ -8330,7 +8313,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X69,
+        "Card Number": "X69",
         "Card Name": "Cloud Tourism",
         "VP": 0,
         "Tag: Science": 0,
@@ -8347,7 +8330,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C14,
+        "Card Number": "C14",
         "Card Name": "Heavy Taxation",
         "VP": -1,
         "Tag: Science": 0,
@@ -8364,7 +8347,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C05,
+        "Card Number": "C05",
         "Card Name": "Conscription",
         "VP": -1,
         "Tag: Science": 0,
@@ -8381,7 +8364,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X28,
+        "Card Number": "X28",
         "Card Name": "Potatoes",
         "VP": 0,
         "Tag: Science": 0,
@@ -8398,7 +8381,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C27,
+        "Card Number": "C27",
         "Card Name": "Molecular Printing",
         "VP": 1,
         "Tag: Science": 1,
@@ -8415,7 +8398,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C08,
+        "Card Number": "C08",
         "Card Name": "Earth Elevator",
         "VP": 4,
         "Tag: Science": 0,
@@ -8432,7 +8415,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P68,
+        "Card Number": "P68",
         "Card Name": "Ceres Tech Market",
         "VP": 1,
         "Tag: Science": 1,
@@ -8449,7 +8432,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X64,
+        "Card Number": "X64",
         "Card Name": "St. Joseph Of Cupertino Mission",
         "VP": 0,
         "Tag: Science": 0,
@@ -8466,7 +8449,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": X52,
+        "Card Number": "X52",
         "Card Name": "Carbon Nanosystems",
         "VP": 1,
         "Tag: Science": 1,
@@ -8483,7 +8466,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C07,
+        "Card Number": "C07",
         "Card Name": "Cryo-Sleep",
         "VP": 1,
         "Tag: Science": 1,
@@ -8500,7 +8483,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C11,
+        "Card Number": "C11",
         "Card Name": "Floater Prototypes",
         "VP": 0,
         "Tag: Science": 0,
@@ -8517,7 +8500,7 @@
         "Tag: Event": 1
     },
     {
-        "Card Number": X57,
+        "Card Number": "X57",
         "Card Name": "SHomeostasis Bureau",
         "VP": 0,
         "Tag: Science": 0,
@@ -8534,7 +8517,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": C34,
+        "Card Number": "C34",
         "Card Name": "Research Colony",
         "VP": 0,
         "Tag: Science": 1,
@@ -8551,7 +8534,7 @@
         "Tag: Event": 0
     },
     {
-        "Card Number": P86,
+        "Card Number": "P86",
         "Card Name": "Unexpected Application",
         "VP": 0,
         "Tag: Science": 0,
