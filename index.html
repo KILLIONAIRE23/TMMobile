@@ -135,29 +135,35 @@
 
     // Search Card by Card Number and update VP and tags
     function searchCard() {
-        const cardNumber = parseInt(document.getElementById('cardNumberInput').value.trim(), 10);
-        
-        console.log("Searching for Card Number:", cardNumber);
-        
-        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
+    // Retrieve the value from the input field and trim whitespace
+    const cardInput = document.getElementById('cardNumberInput').value.trim();
 
-        if (card) {
-            // Add VP to the tracker
-            changeVP(Number(card.VP) || 0);
+    // Check if the input is numeric or alphanumeric
+    const isNumeric = /^\d+$/.test(cardInput);
 
-            // Loop through each tag in the card and increment tag counters if applicable
-            Object.keys(card).forEach(key => {
-                if (key.startsWith("Tag:") && card[key] === 1) {
-                    const tag = key.replace("Tag: ", "").toLowerCase();
-                    changeCount(tag, 1);
-                }
-            });
+    // Convert to a number if input is numeric; otherwise, keep it as a string
+    const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
 
-            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
-            console.log("Card found:", card); 
+    // Search for the card in the cardsDatabase
+    const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
+
+    if (card) {
+        // Add VP from the card to the VP tracker
+        changeVP(Number(card.VP) || 0);
+
+        // Loop through each tag in the card and increment tag counters if applicable
+        Object.keys(card).forEach(key => {
+            if (key.startsWith("Tag:") && card[key] === 1) {
+                const tag = key.replace("Tag: ", "").toLowerCase();
+                changeCount(tag, 1);
+            }
+        });
+
+        document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
+        console.log("Card found:", card); 
         } else {
-            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
-            console.log("Card not found:", cardNumber); 
+        document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+        console.log("Card not found:", cardInput); 
         }
     }
 
