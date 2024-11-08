@@ -88,7 +88,39 @@
 </div>
 
 <script>
-    // JavaScript code remains the same as before, no functionality changes made
-</script>
-</body>
-</html>
+    // Original JavaScript code with no changes to functionality
+    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
+
+    function changeCount(tag, delta) {
+        if (!document.getElementById(`${tag}Count`)) {
+            console.warn(`Tag element for "${tag}" not found.`);
+            return;
+        }
+        tagCounts[tag] += delta;
+        if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
+        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        updateTotalTags();
+    }
+
+    function updateTotalTags() {
+        const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
+        document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
+    }
+
+    let vpCount = 0;
+    function changeVP(delta) {
+        vpCount += delta;
+        if (vpCount < 0) { vpCount = 0; }
+        document.getElementById('vpCount').innerText = vpCount;
+    }
+
+    let trCount = 0;
+    function changeTR(delta) {
+        trCount += delta;
+        if (trCount < 0) { trCount = 0; }
+        document.getElementById('trCount').innerText = trCount;
+    }
+
+    let cardsDatabase = [];
+
+    async function load
