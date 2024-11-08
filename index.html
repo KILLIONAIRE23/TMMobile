@@ -20,9 +20,6 @@
     button { margin: 5px; padding: 5px 10px; background-color: #333; color: white; }
     img { max-width: 100%; width: 40px; height: auto; }
     h1, h2 { background-color: rgba(0, 0, 0, 0.6); padding: 10px; display: inline-block; }
-    #vpTracker, #trTracker, #cardLookupSection, #cardList {
-        margin-top: 20px; background-color: rgba(0, 0, 0, 0.6); padding: 20px; color: white;
-    }
 </style>
 </head>
 <body>
@@ -34,28 +31,7 @@
 <tbody id="tagTable">
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Earth.png"/> Earth Tag</td><td><span id="earthCount">0</span></td>
 <td><button onclick="changeCount('earth', 1)">Add</button><button onclick="changeCount('earth', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Space.png"/> Space Tag</td><td><span id="spaceCount">0</span></td>
-<td><button onclick="changeCount('space', 1)">Add</button><button onclick="changeCount('space', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Animal.png"/> Animal Tag</td><td><span id="animalCount">0</span></td>
-<td><button onclick="changeCount('animal', 1)">Add</button><button onclick="changeCount('animal', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Plant.png"/> Plant Tag</td><td><span id="plantCount">0</span></td>
-<td><button onclick="changeCount('plant', 1)">Add</button><button onclick="changeCount('plant', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Building.png"/> Building Tag</td><td><span id="buildingCount">0</span></td>
-<td><button onclick="changeCount('building', 1)">Add</button><button onclick="changeCount('building', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Event.png"/> Event Tag</td><td><span id="eventCount">0</span></td>
-<td><button onclick="changeCount('event', 1)">Add</button><button onclick="changeCount('event', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Science.png"/> Science Tag</td><td><span id="scienceCount">0</span></td>
-<td><button onclick="changeCount('science', 1)">Add</button><button onclick="changeCount('science', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Energy.png"/> Energy Tag</td><td><span id="energyCount">0</span></td>
-<td><button onclick="changeCount('energy', 1)">Add</button><button onclick="changeCount('energy', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Microbe.png"/> Microbe Tag</td><td><span id="microbeCount">0</span></td>
-<td><button onclick="changeCount('microbe', 1)">Add</button><button onclick="changeCount('microbe', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Jovian.png"/> Jovian Tag</td><td><span id="jovianCount">0</span></td>
-<td><button onclick="changeCount('jovian', 1)">Add</button><button onclick="changeCount('jovian', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/City.png"/> City Tag</td><td><span id="cityCount">0</span></td>
-<td><button onclick="changeCount('city', 1)">Add</button><button onclick="changeCount('city', -1)">Remove</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Venus.png"/> Venus Tag</td><td><span id="venusCount">0</span></td>
-<td><button onclick="changeCount('venus', 1)">Add</button><button onclick="changeCount('venus', -1)">Remove</button></td></tr>
+<!-- Repeat for other tags if needed -->
 </tbody>
 </table>
 
@@ -115,11 +91,44 @@
 
     let cardsDatabase = [];
 
-    // Load JSON Data with Debugging Messages
+    // Load JSON Data with Error Handling
     async function loadJSONData() {
         try {
             console.log("Attempting to load JSON...");
             const response = await fetch('Card_Database_with_Numbers.json');
             
             if (!response.ok) {
-               
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            cardsDatabase = data;
+            console.log("JSON Data Loaded Successfully:", cardsDatabase);
+        } catch (error) {
+            console.error("Error loading JSON:", error);
+            document.getElementById("cardDetails").innerHTML = "<p>Error loading card data. Please check the file path and console for details.</p>";
+        }
+    }
+
+    // Search Card by Card Number
+    function searchCard() {
+        const cardNumber = parseInt(document.getElementById('cardNumberInput').value.trim(), 10);
+        
+        console.log("Searching for Card Number:", cardNumber);
+        
+        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
+
+        if (card) {
+            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
+            console.log("Card found:", card); 
+        } else {
+            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+            console.log("Card not found:", cardNumber); 
+        }
+    }
+
+    // Load JSON on Page Load
+    document.addEventListener("DOMContentLoaded", loadJSONData);
+</script>
+</body>
+</html>
