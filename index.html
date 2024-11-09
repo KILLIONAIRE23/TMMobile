@@ -65,9 +65,16 @@
 <audio id="backgroundMusic" src="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/refs/heads/main/background-music.zip" loop>
     Your browser does not support the audio element.
 </audio>
+<button id="startMusicButton" onclick="startMusic()">Start Music</button>
 
-<button id="musicToggle" onclick="toggleMusic()">Pause Music</button>
-
+<script>
+    function startMusic() {
+        const music = document.getElementById('backgroundMusic');
+        music.play().catch(error => {
+            console.log('Playback error:', error);
+        });
+    }
+</script>
 <script>
     function toggleMusic() {
         const music = document.getElementById('backgroundMusic');
