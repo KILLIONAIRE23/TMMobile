@@ -62,28 +62,6 @@
 </head>
 <body>
 <h1>Terraforming Mars Manager by Kami</h1>
-<audio id="backgroundMusic" src="https://media1.vocaroo.com/mp3/14EZWylueMrc" autoplay loop muted>
-    Your browser does not support the audio element.
-</audio>
-<button id="unmuteButton" onclick="unmuteMusic()">Unmute Music</button>
-
-<script>
-    function unmuteMusic() {
-        const music = document.getElementById('backgroundMusic');
-        music.muted = false; // Unmute the audio
-        music.play().catch(error => {
-            console.log('Playback error:', error);
-        });
-    }
-
-    // Attempt to autoplay the music when the page loads
-    window.addEventListener('load', () => {
-        const music = document.getElementById('backgroundMusic');
-        music.play().catch(error => {
-            console.log('Autoplay prevented:', error);
-        });
-    });
-</script>
 
 <!-- Tag Tracker Table with All Tags -->
 <table>
