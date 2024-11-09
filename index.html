@@ -112,9 +112,9 @@
     <button onclick="searchCard()">Search</button>
     <div id="cardDetails"></div>
 </div>
-<div style="margin-top: 50px;">
+<div id="progressChartContainer">
     <h2>Progress Graph</h2>
-    <canvas id="progressChart" width="400" height="200"></canvas>
+    <canvas id="progressChart"></canvas>
 </div>
 <!-- Reset Game Button -->
 <div id="resetSection" style="margin-top: 50px;">
@@ -315,7 +315,6 @@
         }
     });
 
-    // Function to update the chart
     function updateChart() {
         const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
         const currentTurn = progressChart.data.labels.length + 1;
