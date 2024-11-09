@@ -127,13 +127,7 @@
         tagCounts[tag] += delta;
         if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
         document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-        updateTotalTags();
         saveGameState(); // Save after updating tag counts
-    }
-
-    function updateTotalTags() {
-        const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
-        document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
     }
 
     let vpCount = 0;
@@ -208,7 +202,6 @@
                 tagCounts[tag] = gameState.tagCounts[tag];
                 document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
             });
-            updateTotalTags();
         }
     }
 
@@ -220,7 +213,6 @@
             document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
         });
         document.getElementById('vpNumber').innerText = vpCount;
-        updateTotalTags();
         localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
     }
 
