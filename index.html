@@ -60,7 +60,7 @@
 <thead><tr><th>Tag</th><th>Count</th><th>Actions</th></tr></thead>
 <tbody id="tagTable">
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Earth.png"/> Earth </td><td><span id="earthCount">0</span></td>
-<td><button onclick="changeCount('earth', 1)">+</button><button onclick="changeCount('earth', -1')">-</button></td></tr>
+<td><button onclick="changeCount('earth', 1)">+</button><button onclick="changeCount('earth', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Space.png"/> Space </td><td><span id="spaceCount">0</span></td>
 <td><button onclick="changeCount('space', 1)">+</button><button onclick="changeCount('space', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Animal.png"/> Animal </td><td><span id="animalCount">0</span></td>
@@ -68,7 +68,7 @@
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Plant.png"/> Plant </td><td><span id="plantCount">0</span></td>
 <td><button onclick="changeCount('plant', 1)">+</button><button onclick="changeCount('plant', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Building.png"/> Building </td><td><span id="buildingCount">0</span></td>
-<td><button onclick="changeCount('building', 1)">+</button><button onclick="changeCount('building', -1')">-</button></td></tr>
+<td><button onclick="changeCount('building', 1)">+</button><button onclick="changeCount('building', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Event.png"/> Event </td><td><span id="eventCount">0</span></td>
 <td><button onclick="changeCount('event', 1)">+</button><button onclick="changeCount('event', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Science.png"/> Science </td><td><span id="scienceCount">0</span></td>
@@ -126,15 +126,4 @@
 </div>
 
 <script>
-    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
-
-    function changeCount(tag, delta) {
-        if (!document.getElementById(`${tag}Count`)) {
-            console.warn(`Tag element for "${tag}" not found.`);
-            return; // Safely skip if the tag does not exist in the HTML
-        }
-        tagCounts[tag] += delta;
-        if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
-        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-        updateTotalTags();
-        saveGameState(); // Save after updating tag counts
+    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0,
