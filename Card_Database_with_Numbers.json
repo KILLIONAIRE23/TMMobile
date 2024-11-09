@@ -8563,15 +8563,15 @@
         "Tag: City": 0,
         "Tag: Earth": 0,
         "Tag: Jovian": 0,
-        "Tag: Energy": 0,
+        "Tag: Energy": 1,
         "Tag: Venus": 0,
-        "Tag: Event": 0
+        "Tag: Event": 1
     },
     {
         "Card Number": "Ulugbek",
         "Card Name": "Bu issiq qizni tekshiring!",
         "VP": 0,
-        "Tag: Science": 100,
+        "Tag: Science": 1,
         "Tag: Building": 0,
         "Tag: Space": 0,
         "Tag: Microbe": 0,
@@ -8580,15 +8580,15 @@
         "Tag: City": 0,
         "Tag: Earth": 0,
         "Tag: Jovian": 0,
-        "Tag: Energy": 100,
+        "Tag: Energy": 1,
         "Tag: Venus": 0,
         "Tag: Event": 0
     },
     {
         "Card Number": "Heidi",
         "Card Name": "Doctor to the rescue!",
-        "VP": 0,
-        "Tag: Science": 1000,
+        "VP": 112,
+        "Tag: Science": 1,
         "Tag: Building": 0,
         "Tag: Space": 0,
         "Tag: Microbe": 0,
@@ -8604,13 +8604,13 @@
     {
         "Card Number": "Carl",
         "Card Name": "Have I fed the cat today?",
-        "VP": CAT,
+        "VP": 9,
         "Tag: Science": 0,
         "Tag: Building": 0,
         "Tag: Space": 0,
         "Tag: Microbe": 0,
         "Tag: Plant": 0,
-        "Tag: Animal": 100,
+        "Tag: Animal": 1,
         "Tag: City": 0,
         "Tag: Earth": 0,
         "Tag: Jovian": 0,
@@ -8685,5 +8685,22 @@
         "Tag: Energy": 420,
         "Tag: Venus": 420,
         "Tag: Event": 420
-    }
+    ,
+    {
+        "Card Number": "Carl",
+        "Card Name": "Have I fed the cat today?",
+        "VP": 9,
+        "Tag: Science": 0,
+        "Tag: Building": 0,
+        "Tag: Space": 0,
+        "Tag: Microbe": 0,
+        "Tag: Plant": 0,
+        "Tag: Animal": 1,
+        "Tag: City": 0,
+        "Tag: Earth": 0,
+        "Tag: Jovian": 0,
+        "Tag: Energy": 0,
+        "Tag: Venus": 0,
+        "Tag: Event": 0
+    },
 ]
