@@ -2,120 +2,6 @@
 <html lang="en">
 <head>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-    // JavaScript to handle VP, TR changes and chart setup
-    let vpCount = 0;
-    let trCount = 0;
-    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
-
-    // Load Chart.js and create the chart
-    let ctx = document.getElementById('progressChart').getContext('2d');
-    let progressChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-            labels: [], // Labels for the x-axis (e.g., turns or actions)
-            datasets: [
-                {
-                    label: 'Victory Points (VP)',
-                    data: [],
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 2,
-                    fill: false
-                },
-                {
-                    label: 'Terraforming Rating (TR)',
-                    data: [],
-                    borderColor: 'rgba(54, 162, 235, 1)',
-                    borderWidth: 2,
-                    fill: false
-                },
-                {
-                    label: 'Total Tags',
-                    data: [],
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    borderWidth: 2,
-                    fill: false
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            maintainAspectRatio: false,
-            scales: {
-                x: {
-                    title: {
-                        display: true,
-                        text: 'Turn/Action Number'
-                    }
-                },
-                y: {
-                    beginAtZero: true,
-                    title: {
-                        display: true,
-                        text: 'Count'
-                    }
-                }
-            }
-        }
-    });
-
-    // Function to update the chart
-    function updateChart() {
-        const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
-        const currentTurn = progressChart.data.labels.length + 1;
-
-        progressChart.data.labels.push('Turn ' + currentTurn);
-        progressChart.data.datasets[0].data.push(vpCount);
-        progressChart.data.datasets[1].data.push(trCount);
-        progressChart.data.datasets[2].data.push(totalTags);
-
-        progressChart.update();
-    }
-
-    function changeCount(tag, delta) {
-        if (!document.getElementById(`${tag}Count`)) {
-            console.warn(`Tag element for "${tag}" not found.`);
-            return; // Safely skip if the tag does not exist in the HTML
-        }
-        tagCounts[tag] += delta;
-        if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
-        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-        updateTotalTags();
-        saveGameState(); // Save after updating tag counts
-        updateChart(); // Update chart with new data
-    }
-
-    function changeVP(delta) {
-        vpCount += delta;
-        if (vpCount < 0) { vpCount = 0; }
-        document.getElementById('vpNumber').innerText = vpCount;
-        saveGameState(); // Save after updating VP
-        updateChart(); // Update chart with new data
-    }
-
-    function changeTR(delta) {
-        trCount += delta;
-        if (trCount < 0) { trCount = 0; }
-        document.getElementById('trCount').innerText = trCount;
-        saveGameState(); // Save after updating TR
-        updateChart(); // Update chart with new data
-    }
-
-    function updateTotalTags() {
-        const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
-        document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
-    }
-
-    function saveGameState() {
-        const gameState = {
-            vpCount,
-            trCount,
-            tagCounts
-        };
-        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
-    }
-</script>
-
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Kami's Terraforming Mars Tag Manager</title>
@@ -379,6 +265,118 @@
     <img src="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/IMG_20241003_123711%20-%20Copy.jpg" alt="My Photo" style="width: 800px; height: auto; border-radius: 10px;">
 </div>
 
+<script>
+    // JavaScript to handle VP, TR changes and chart setup
+    let vpCount = 0;
+    let trCount = 0;
+    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
 
+    // Load Chart.js and create the chart
+    let ctx = document.getElementById('progressChart').getContext('2d');
+    let progressChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [], // Labels for the x-axis (e.g., turns or actions)
+            datasets: [
+                {
+                    label: 'Victory Points (VP)',
+                    data: [],
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: 'Terraforming Rating (TR)',
+                    data: [],
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: 'Total Tags',
+                    data: [],
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Turn/Action Number'
+                    }
+                },
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'Count'
+                    }
+                }
+            }
+        }
+    });
+
+    // Function to update the chart
+    function updateChart() {
+        const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
+        const currentTurn = progressChart.data.labels.length + 1;
+
+        progressChart.data.labels.push('Turn ' + currentTurn);
+        progressChart.data.datasets[0].data.push(vpCount);
+        progressChart.data.datasets[1].data.push(trCount);
+        progressChart.data.datasets[2].data.push(totalTags);
+
+        progressChart.update();
+    }
+
+    function changeCount(tag, delta) {
+        if (!document.getElementById(`${tag}Count`)) {
+            console.warn(`Tag element for "${tag}" not found.`);
+            return; // Safely skip if the tag does not exist in the HTML
+        }
+        tagCounts[tag] += delta;
+        if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
+        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        updateTotalTags();
+        saveGameState(); // Save after updating tag counts
+        updateChart(); // Update chart with new data
+    }
+
+    function changeVP(delta) {
+        vpCount += delta;
+        if (vpCount < 0) { vpCount = 0; }
+        document.getElementById('vpNumber').innerText = vpCount;
+        saveGameState(); // Save after updating VP
+        updateChart(); // Update chart with new data
+    }
+
+    function changeTR(delta) {
+        trCount += delta;
+        if (trCount < 0) { trCount = 0; }
+        document.getElementById('trCount').innerText = trCount;
+        saveGameState(); // Save after updating TR
+        updateChart(); // Update chart with new data
+    }
+
+    function updateTotalTags() {
+        const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
+        document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
+    }
+
+    function saveGameState() {
+        const gameState = {
+            vpCount,
+            trCount,
+            tagCounts
+        };
+        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
+    }
+</script>
 </body>
 </html>
