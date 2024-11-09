@@ -241,7 +241,7 @@
         // Calculate the total tags for the current state
         const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
 
-        // Add new labels and data points to the chart
+        // Add new labels and data points to the chart if needed
         progressChart.data.labels.push(`Turn ${progressChart.data.labels.length + 1}`);
         progressChart.data.datasets[0].data.push(vpCount);
         progressChart.data.datasets[1].data.push(trCount);
@@ -285,9 +285,9 @@
             updateTotalTags();
 
             // Load chart data without duplicating entries
-            progressChart.data.labels = gameState.chartData.labels || ['Turn 1'];
+            progressChart.data.labels = gameState.chartData.labels.slice(0); // Copy the saved labels
             gameState.chartData.datasets.forEach((dataset, index) => {
-                progressChart.data.datasets[index].data = dataset.data;
+                progressChart.data.datasets[index].data = dataset.data.slice(0); // Copy saved data to avoid unintended reference
             });
 
             progressChart.update();
