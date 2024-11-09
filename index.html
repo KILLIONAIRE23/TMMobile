@@ -51,17 +51,39 @@
     }
     /* Style for making the graph much smaller and with a dark background */
     #progressChartContainer {
-        width: 250px; /* Make the graph container much smaller */
-        height: 600px; /* Start with this and adjust if needed */
-        margin: 20px auto;
-        background-color: rgba(0, 0, 0, 0.8); /* Dark background for the chart */
-        padding: 10px;
-        border-radius: 10px;
+    width: 90%; /* Use percentage for better responsiveness */
+    max-width: 300px; /* Cap the maximum size */
+    margin: 20px auto;
+    background-color: rgba(0, 0, 0, 0.8); /* Dark background for easier readability */
+    padding: 10px;
+    border-radius: 10px;
+}
+#progressChart {
+    width: 100%;
+    height: 150px; /* Default height for smaller screens */
+}
+
+/* Larger screens (like tablets and PCs) */
+@media (min-width: 768px) {
+    #progressChartContainer {
+        width: 50%; /* Make the container larger for wider screens */
+        max-width: 500px; /* Set a larger max width */
     }
     #progressChart {
-        max-width: 100%;
-        height: 150px;
+        height: 250px; /* Increase height for better visibility on larger screens */
     }
+}
+
+/* Even larger screens (desktops and above) */
+@media (min-width: 1200px) {
+    #progressChartContainer {
+        width: 40%; /* Increase width for larger screens */
+        max-width: 600px; /* Set a larger max width for desktops */
+    }
+    #progressChart {
+        height: 300px; /* Adjust height accordingly */
+    }
+}
 </style>
 </style>
 </head>
