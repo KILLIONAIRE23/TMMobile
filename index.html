@@ -112,143 +112,102 @@
     <button onclick="searchCard()">Search</button>
     <div id="cardDetails"></div>
 </div>
-    
-<div style="margin-top: 50px;">
-    <h2>Progress Graph</h2>
-    <canvas id="progressChart" width="400" height="200"></canvas>
-</div>
 
 <!-- Reset Game Button -->
 <div id="resetSection" style="margin-top: 50px;">
     <button onclick="resetGameState()">Reset Game</button>
 </div>
-    <!-- Personal Introduction Text Box -->
-<div id="personalIntro" style="margin-top: 50px; padding: 20px; background: rgba(239, 126, 55, 0.9); color: #000000; max-width: 800px; margin-left: auto; margin-right: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
-    <h2 style="background: rgba(0, 0, 0, 0.7); color: #FFFFFF; padding: 10px; border-radius: 10px;">About Me and the App</h2>
-    <p>Hi there!<br> Welcome to my App! My name is Kami :)</p> 
-    <p>As a huge Terraforming Mars fan, I decided to create this app to help players easily track their progress in Terraforming Mars. </p>
-    <p>Originally, the main intention was (and still is) to track VPs and Tags, which are the two main reasons why we keep all the cards face up on the table. It can take a lot of space on the table, especially if you don't own a large boardgame table. With this app, you can simply stack your played cards and put them aside, not having to worry about their visibility all the time.</p>
-    <p>This app also helps you manage resources (not implemented yet), track tags, VPs and enjoy your game more efficiently without the hassle of manual calculations. I hope you find it as fun and useful as I intended it to be! If you have any feedback, please contact me via killionaire23ttv@gmail.com. I'd love to hear from you!</p>
-    <p>As a little something extra, here is a photo of the designer of Terraforming Mars/co-owner of Fryxgames Jacob Fryxelius and I, posing with a custom TM card I made for Spiel Essen in '24 for giggles. Before you ask, yes, while it was not my intention, he did insist on giving me a 50% off! What a lad!</p>
-
-<!-- Personal Photo -->
-<div id="personalPhoto" style="margin-top: 50px;">
-    <img src="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/IMG_20241003_123711%20-%20Copy.jpg" alt="My Photo" style="width: 800px; height: auto; border-radius: 10px;">
-</div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Step 1: Declare necessary variables
-        let vpCount = 0;
-        let trCount = 0;
-        const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
+    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
 
-        // Step 2: Initialize Chart.js and Create the Chart
-        let ctx = document.getElementById('progressChart').getContext('2d');
-        let progressChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [
-                    {
-                        label: 'Victory Points (VP)',
-                        data: [],
-                        borderColor: 'rgba(255, 99, 132, 1)',
-                        borderWidth: 2,
-                        fill: false
-                    },
-                    {
-                        label: 'Terraforming Rating (TR)',
-                        data: [],
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        borderWidth: 2,
-                        fill: false
-                    },
-                    {
-                        label: 'Total Tags',
-                        data: [],
-                        borderColor: 'rgba(75, 192, 192, 1)',
-                        borderWidth: 2,
-                        fill: false
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    x: {
-                        title: {
-                            display: true,
-                            text: 'Turn/Action Number'
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        title: {
-                            display: true,
-                            text: 'Count'
-                        }
-                    }
+    function changeCount(tag, delta) {
+        if (!document.getElementById(`${tag}Count`)) {
+            console.warn(`Tag element for "${tag}" not found.`);
+            return; // Safely skip if the tag does not exist in the HTML
+        }
+        tagCounts[tag] += delta;
+        if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
+        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        updateTotalTags();
+        saveGameState(); // Save after updating tag counts
+    }
+
+    function updateTotalTags() {
+        const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
+        document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
+    }
+
+    let vpCount = 0;
+    function changeVP(delta) {
+        vpCount += delta;
+        if (vpCount < 0) { vpCount = 0; }
+        document.getElementById('vpNumber').innerText = vpCount;
+        saveGameState(); // Save after updating VP
+    }
+
+    let trCount = 0;
+    function changeTR(delta) {
+        trCount += delta;
+        if (trCount < 0) { trCount = 0; }
+        document.getElementById('trCount').innerText = trCount;
+        saveGameState(); // Save after updating TR
+    }
+
+    let cardsDatabase = [];
+
+    // Load JSON Data and handle any errors
+    async function loadJSONData() {
+        try {
+            console.log("Attempting to load JSON...");
+            const response = await fetch('Card_Database_with_Numbers.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            cardsDatabase = data;
+            console.log("JSON Data Loaded Successfully:", cardsDatabase);
+        } catch (error) {
+            console.error("Error loading JSON:", error);
+            document.getElementById("cardDetails").innerHTML = "<p>Error loading card data. Check console for details.</p>";
+        }
+    }
+
+    // Search Card by Card Number and update VP and tags
+    function searchCard() {
+        const cardInput = document.getElementById('cardNumberInput').value.trim();
+        const isNumeric = /^\d+$/.test(cardInput);
+        const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
+        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
+
+        if (card) {
+            changeVP(Number(card.VP) || 0);
+            Object.keys(card).forEach(key => {
+                if (key.startsWith("Tag:") && card[key] === 1) {
+                    const tag = key.replace("Tag: ", "").toLowerCase();
+                    changeCount(tag, 1);
                 }
-            }
-        });
+            });
 
-        // Step 3: Define Functions that Depend on progressChart
-        function updateChart() {
-            // Always ensure the progressChart is initialized before calling updateChart
-            const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
-            const currentTurn = progressChart.data.labels.length + 1;
-
-            progressChart.data.labels.push('Turn ' + currentTurn);
-            progressChart.data.datasets[0].data.push(vpCount);
-            progressChart.data.datasets[1].data.push(trCount);
-            progressChart.data.datasets[2].data.push(totalTags);
-
-            progressChart.update();
+            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
+            console.log("Card found:", card); 
+        } else {
+            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+            console.log("Card not found:", cardInput); 
         }
+    }
 
-        function changeCount(tag, delta) {
-            if (!document.getElementById(`${tag}Count`)) {
-                console.warn(`Tag element for "${tag}" not found.`);
-                return; // Safely skip if the tag does not exist in the HTML
-            }
-            tagCounts[tag] += delta;
-            if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
-            document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-            updateTotalTags();
-            updateChart(); // Update chart with new data
-        }
+    // Save game state to local storage
+    function saveGameState() {
+        const gameState = {
+            vpCount,
+            trCount,
+            tagCounts
+        };
+        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
+    }
 
-        function changeVP(delta) {
-            vpCount += delta;
-            if (vpCount < 0) { vpCount = 0; }
-            document.getElementById('vpNumber').innerText = vpCount;
-            updateChart(); // Update chart with new data
-        }
-
-        function changeTR(delta) {
-            trCount += delta;
-            if (trCount < 0) { trCount = 0; }
-            document.getElementById('trCount').innerText = trCount;
-            updateChart(); // Update chart with new data
-        }
-
-        function updateTotalTags() {
-            const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
-            document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
-        }
-
-        // Step 4: Existing functions, such as searchCard(), saveGameState(), etc.
-        // Place other existing functions here, ensuring they are within the DOMContentLoaded listener
-        function searchCard() {
-            // Existing search functionality
-        }
-
-        // Load game state and initialize data after page load
-        loadGameState();
-    });
-
+    // Load game state from local storage
     function loadGameState() {
         const savedState = localStorage.getItem('terraformingMarsGameState');
         if (savedState) {
@@ -265,6 +224,41 @@
             updateTotalTags();
         }
     }
+
+    // Reset game state
+    function resetGameState() {
+        vpCount = 0;
+        trCount = 0;
+        Object.keys(tagCounts).forEach(tag => {
+            tagCounts[tag] = 0;
+            document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        });
+        document.getElementById('vpNumber').innerText = vpCount;
+        document.getElementById('trCount').innerText = trCount;
+        updateTotalTags();
+        localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
+    }
+
+    // Load JSON and game state on Page Load
+    document.addEventListener("DOMContentLoaded", () => {
+        loadJSONData();
+        loadGameState();
+    });
 </script>
+    <!-- Personal Introduction Text Box -->
+<div id="personalIntro" style="margin-top: 50px; padding: 20px; background: rgba(239, 126, 55, 0.9); color: #000000; max-width: 800px; margin-left: auto; margin-right: auto; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);">
+    <h2 style="background: rgba(0, 0, 0, 0.7); color: #FFFFFF; padding: 10px; border-radius: 10px;">About Me and the App</h2>
+    <p>Hi there!<br> Welcome to my App! My name is Kami :)</p> 
+    <p>As a huge Terraforming Mars fan, I decided to create this app to help players easily track their progress in Terraforming Mars. </p>
+    <p>Originally, the main intention was (and still is) to track VPs and Tags, which are the two main reasons why we keep all the cards face up on the table. It can take a lot of space on the table, especially if you don't own a large boardgame table. With this app, you can simply stack your played cards and put them aside, not having to worry about their visibility all the time.</p>
+    <p>This app also helps you manage resources (not implemented yet), track tags, VPs and enjoy your game more efficiently without the hassle of manual calculations. I hope you find it as fun and useful as I intended it to be! If you have any feedback, please contact me via killionaire23ttv@gmail.com. I'd love to hear from you!</p>
+    <p>As a little something extra, here is a photo of the designer of Terraforming Mars/co-owner of Fryxgames Jacob Fryxelius and I, posing with a custom TM card I made for Spiel Essen in '24 for giggles. Before you ask, yes, while it was not my intention, he did insist on giving me a 50% off! What a lad!</p>
+
+<!-- Personal Photo -->
+<div id="personalPhoto" style="margin-top: 50px;">
+    <img src="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/IMG_20241003_123711%20-%20Copy.jpg" alt="My Photo" style="width: 800px; height: auto; border-radius: 10px;">
+</div>
+
+
 </body>
 </html>
