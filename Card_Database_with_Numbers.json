@@ -8654,8 +8654,8 @@
     },
     {
         "Card Number": "Pie",
-        "Card Name": "Sir Isaac Newton's favourite dessert?",
-        "VP": 3.141592653589793238462643383279502884197,
+        "Card Name": "Sir Isaac Newton's favourite dessert.",
+        "VP": 3.141592653,
         "Tag: Science": 3.14,
         "Tag: Building": 3.14,
         "Tag: Space": 3.14,
