@@ -120,7 +120,7 @@
 <div id="resetSection" style="margin-top: 50px;">
     <button onclick="resetGameState()">Reset Game</button>
 </div>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
 
@@ -374,6 +374,5 @@
         localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
     }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html>
