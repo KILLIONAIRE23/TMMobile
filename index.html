@@ -7,27 +7,38 @@
 <style>
      button.increment {
           margin-right: 0px; /* Adds space between + and - buttons */
-     }
+     }/* Styling for tag tracker table */
+table {
+    width: 100%;
+    max-width: 800px; /* Consistent width */
+    margin: 0 auto; /* Center the table */
+    border-collapse: collapse; /* Remove spacing between cells */
+    background-color: rgba(0, 0, 0, 0.7);
+}
 
-     /* Styles for search bar and button */
-    #cardLookupSection {
-        max-width: 800px; /* Limit width to match the table */
-        margin: 20px auto; /* Center the section */
-    }
-    /* Styling for body, table, and cards */
-    body {
-        font-family: Arial, sans-serif;
-        text-align: center;
-        margin: 20px;
-        background: #000 url('wallpaper.jpg') no-repeat center center fixed;
-        background-size: cover;
-        color: white;
-    }
-    table { width: 100%; max-width: 800px; margin: 0 auto; border-collapse: collapse; background-color: rgba(0, 0, 0, 0.7); }
-    th, td { padding: 10px; border: 1px solid #ccc; }
-    th { background-color: rgba(255, 255, 255, 0.2); }
+th, td {
+    padding: 15px; /* Increase padding to add space inside the cells */
+    border: 1px solid #ccc;
+    text-align: center; /* Horizontal center alignment */
+    vertical-align: middle; /* Vertical center alignment */
+}
+
+th {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+td img {
+    width: 40px; /* Fixed image size */
+    height: 40px; /* Fixed image size */
+    display: block; /* Ensure it behaves like a block element */
+    margin: 0 auto; /* Horizontally center the image in its cell */
+}
+
+td:first-child {
+    padding-left: 20px; /* Add extra padding to the left */
+    padding-right: 20px; /* Add extra padding to the right */
+}
     button { margin: 5px; padding: 5px 10px; background-color: #333; color: white; }
-    img { max-width: 100%; width: 40px; height: auto; display: block; margin: 0 auto;}
     h1, h2 { background-color: rgba(0, 0, 0, 0.6); padding: 10px; display: inline-block; border-radius: 10px;}
 
     /* Add these new styles for the VP Tracker Icon */
