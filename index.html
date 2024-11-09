@@ -383,79 +383,13 @@
         // Function to add a new data point at the end of each turn
         const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
 
-        // Check if the last label is already 'Turn X' (don't add unnecessary turns)
-        if (progressChart.data.labels.length === 0 || progressChart.data.labels[progressChart.data.labels.length - 1] !== `Turn ${progressChart.data.labels.length}`) {
-            progressChart.data.labels.push(`Turn ${progressChart.data.labels.length + 1}`);
-        }
+        progressChart.data.labels.push(`Turn ${progressChart.data.labels.length + 1}`);
         progressChart.data.datasets[0].data.push(vpCount);
         progressChart.data.datasets[1].data.push(trCount);
         progressChart.data.datasets[2].data.push(totalTags);
 
         progressChart.update();
-        saveGameState(); // Save chart state
     }
-
-    function saveGameState() {
-        const gameState = {
-            vpCount,
-            trCount,
-            tagCounts,
-            chartData: {
-                labels: progressChart.data.labels,
-                datasets: progressChart.data.datasets.map(dataset => ({
-                    label: dataset.label,
-                    data: dataset.data
-                }))
-            }
-        };
-        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
-    }
-
-    function loadGameState() {
-        const savedState = localStorage.getItem('terraformingMarsGameState');
-        if (savedState) {
-            const gameState = JSON.parse(savedState);
-            vpCount = gameState.vpCount || 0;
-            trCount = gameState.trCount || 0;
-            document.getElementById('vpNumber').innerText = vpCount;
-            document.getElementById('trCount').innerText = trCount;
-
-            Object.keys(gameState.tagCounts).forEach(tag => {
-                tagCounts[tag] = gameState.tagCounts[tag];
-                document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-            });
-            updateTotalTags();
-
-            // Load chart data without duplicating entries
-            progressChart.data.labels = gameState.chartData.labels || ['Turn 1'];
-            gameState.chartData.datasets.forEach((dataset, index) => {
-                progressChart.data.datasets[index].data = dataset.data;
-            });
-
-            progressChart.update();
-        }
-    }
-
-    document.addEventListener("DOMContentLoaded", () => {
-        loadGameState();
-    });
-
-    function resetGameState() {
-        vpCount = 0;
-        trCount = 0;
-        Object.keys(tagCounts).forEach(tag => {
-            tagCounts[tag] = 0;
-            document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-        });
-        document.getElementById('vpNumber').innerText = vpCount;
-        document.getElementById('trCount').innerText = trCount;
-        updateTotalTags();
-        localStorage.removeItem('terraformingMarsGameState');
-        progressChart.data.labels = ['Turn 1'];
-        progressChart.data.datasets.forEach(dataset => dataset.data = [0]);
-        progressChart.update();
-    }
-
 
     function saveGameState() {
         const gameState = {
