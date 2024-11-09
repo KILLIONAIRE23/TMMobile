@@ -176,7 +176,17 @@
         const total = Object.values(tagCounts).reduce((a, b) => a + b, 0);
         document.getElementById('totalTags').innerText = `Total Tags: ${total}`;
     }
+    function addNewTurn() {
+        // Function to add a new data point at the end of each turn
+        const totalTags = Object.values(tagCounts).reduce((a, b) => a + b, 0);
 
+        progressChart.data.labels.push(`Turn ${progressChart.data.labels.length + 1}`);
+        progressChart.data.datasets[0].data.push(vpCount);
+        progressChart.data.datasets[1].data.push(trCount);
+        progressChart.data.datasets[2].data.push(totalTags);
+
+        progressChart.update();
+    }
     let vpCount = 0;
     function changeVP(delta) {
         vpCount += delta;
