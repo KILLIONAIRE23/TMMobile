@@ -8604,7 +8604,7 @@
     {
         "Card Number": "Carl",
         "Card Name": "Have I fed the cat today?",
-        "VP": 0,
+        "VP": CAT,
         "Tag: Science": 0,
         "Tag: Building": 0,
         "Tag: Space": 0,
@@ -8655,7 +8655,7 @@
     {
         "Card Number": "pie",
         "Card Name": "Sir Isaac Newton's favourite dessert?",
-        "VP": 3.14,
+        "VP": 3.141592653589793238462643383279502884197,
         "Tag: Science": 3.14,
         "Tag: Building": 3.14,
         "Tag: Space": 3.14,
