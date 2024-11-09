@@ -17,7 +17,7 @@
     table { width: 100%; margin: 0 auto; border-collapse: collapse; background-color: rgba(0, 0, 0, 0.7); }
     th, td { padding: 10px; border: 1px solid #ccc; }
     th { background-color: rgba(255, 255, 255, 0.2); }
-    button { margin: 5px; padding: 5px 10px; background-color: #333; color: white; }
+    button { margin: 5px; padding: 5px 10px; background-color: #333; color: white; cursor: pointer; }
     img { max-width: 100%; width: 40px; height: auto; }
     h1, h2 { background-color: rgba(0, 0, 0, 0.6); padding: 10px; display: inline-block; border-radius: 10px;}
 
@@ -126,4 +126,17 @@
 </div>
 
 <script>
-    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0,
+    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
+    let vpCount = 0;
+    let trCount = 0;
+
+    // Load Chart.js and create the chart
+    let ctx = document.getElementById('progressChart').getContext('2d');
+    let progressChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: [], // Labels for the x-axis (e.g., turns or actions)
+            datasets: [
+                {
+                    label: 'Victory Points (VP)',
+                    data: [],
