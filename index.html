@@ -8,7 +8,37 @@
      button.increment {
           margin-right: 0px; /* Adds space between + and - buttons */
      }
+/* Futuristic Frame Style for the Box */
+        #personalIntro {
+            margin-top: 0px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 140, 0, 0.9), rgba(255, 165, 0, 0.9));
+            color: #000000;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 20px;
+            box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.5),  /* Outer glow effect */
+                0 0 40px rgba(0, 255, 255, 0.4);  /* Stronger outer glow */
+            border: 2px solid transparent;
+            background-clip: padding-box;  /* Ensures the gradient does not spill into border */
+            position: relative; /* Allows the pseudo-elements to be positioned */
+        }
 
+        /* Futuristic Corners using Pseudo-elements */
+        #personalIntro::before, #personalIntro::after {
+            content: "";
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid rgba(0, 255, 255, 0.5);  /* Glowing cyan border for futuristic effect */
+            border-radius: 25px;
+            filter: blur(15px);
+            z-index: -1;
+        }
      /* Styles for search bar and button */
     #cardLookupSection {
         max-width: 800px; /* Limit width to match the table */
