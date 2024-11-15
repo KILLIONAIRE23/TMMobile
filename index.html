@@ -7,7 +7,7 @@
 <style>
      
      button.increment {
-          margin-right: 0px; /* Adds space between + and - buttons */
+          margin-right: 0px; /* Adds space between + and - buttons *s/
      }
      /* Modal Sections for Resource and Production */
 .modal-section {
@@ -352,7 +352,7 @@
 
     <!-- Produce Button -->
     <div class="produce-container full-width">
-    <button class="produce-button">Produce</button>
+    <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
      <!-- Modal for Add/Remove Options -->
 <div id="resourceModal" class="modal">
@@ -598,7 +598,7 @@ function updateProduction(delta) {
 
 // Function to produce resources by adding production counts to resources
 function produceResources() {
-    const resources = ['credit', 'steel', 'titanium', 'plantresource', 'energy', 'heat'];
+    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
     let trValue = parseInt(document.getElementById('trCount').innerText);
     
     resources.forEach(resource => {
@@ -623,6 +623,7 @@ function produceResources() {
         resourceCountElement.innerText = resourceValue;
     });
 }
+
     // Load game state from local storage
     function loadGameState() {
         const savedState = localStorage.getItem('terraformingMarsGameState');
