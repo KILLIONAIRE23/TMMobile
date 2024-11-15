@@ -20,7 +20,11 @@
     height: 100%; /* Full height */
     background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
 }
-
+/* Container for full-width buttons like Terraforming and Produce */
+.full-width {
+    max-width: 800px; /* Align with other elements on the page */
+    margin: 0 auto; /* Center the container */
+}
 .modal-content {
     background-color: #fefefe;
     margin: 15% auto; /* 15% from the top and centered */
@@ -168,8 +172,7 @@
 
 /* Terraforming Rating Button */
 .terraforming-button {
-    max-width: 800px; /* Match the container width */
-    margin: 0 auto; /* Center the buttons */
+    width: 100%; /* Take up full width of container */
     padding: 20px;
     font-size: 1.5em;
     border: 1px solid #000000;
@@ -178,7 +181,7 @@
     cursor: pointer;
     border-radius: 10px;
     box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-    position: relative; /* To properly position the value */
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -251,9 +254,7 @@
 
 /* Produce Button */
 .produce-button {
-    margin-top: 20px;
-    max-width: 800px; /* Match the container width */
-    margin: 0 auto; /* Center the buttons */
+    width: 100%; /* Take up full width of container */
     padding: 10px;
     font-size: 1.2em;
     border: 1px solid #000000;
@@ -263,6 +264,15 @@
     border-radius: 10px;
     box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
 }
+     
+/* Container for the 3 equal-sized resource buttons */
+.resources-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+
 
 </style>
 </head>
@@ -270,51 +280,50 @@
 <h2>Standard Resources and TR</h2>
      
     <!-- Terraforming Rating Button -->
-    <div class="terraforming-container">
-        <h2 class="terraforming-title">Terraforming Rating</h2>
-        <button class="terraforming-button">
-            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
-            <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
-        </button>
-    </div>
+<div class="terraforming-container full-width">
+    <button class="terraforming-button">
+        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+    </button>
+</div>
      
      <!-- Resources Buttons - 2 Rows of 3 Buttons -->
-    <div class="resources-container">
-        <div class="resources-row">
-            <button class="resource-button" onclick="openModal('credit')">
-                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Credit.png" alt="Credit">
-                <span id="creditCount">0</span>
-                <span class="production-count" id="creditProduction">0</span> <!-- Production count in brown -->
-            </button>
-            <button class="resource-button" onclick="openModal('steel')">
-                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Steel.png" alt="Steel">
-                <span id="steelCount">0</span>
-                <span class="production-count" id="steelProduction">0</span>
-            </button>
-            <button class="resource-button" onclick="openModal('titanium')">
-                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Titanium.png" alt="Titanium">
-                <span id="titaniumCount">0</span>
-                <span class="production-count" id="titaniumProduction">0</span>
-            </button>
-        </div>
-        <div class="resources-row">
-            <button class="resource-button" onclick="openModal('plant')">
-                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
-                <span id="plantresourceCount">0</span>
-                <span class="production-count" id="plantProduction">0</span>
-            </button>
-            <button class="resource-button" onclick="openModal('energy')">
-                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Energy.png" alt="Energy">
-                <span id="energyresourceCount">0</span>
-                <span class="production-count" id="energyProduction">0</span>
-            </button>
-            <button class="resource-button" onclick="openModal('heat')">
-                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Heat.png" alt="Heat">
-                <span id="heatCount">0</span>
-                <span class="production-count" id="heatProduction">0</span>
-            </button>
-        </div>
+<div class="resources-container">
+    <div class="resources-row">
+        <button class="resource-button" onclick="openModal('credit')">
+            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Credit.png" alt="Credit">
+            <span id="creditCount">0</span>
+            <span class="production-count" id="creditProduction">0</span>
+        </button>
+        <button class="resource-button" onclick="openModal('steel')">
+            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Steel.png" alt="Steel">
+            <span id="steelCount">0</span>
+            <span class="production-count" id="steelProduction">0</span>
+        </button>
+        <button class="resource-button" onclick="openModal('titanium')">
+            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Titanium.png" alt="Titanium">
+            <span id="titaniumCount">0</span>
+            <span class="production-count" id="titaniumProduction">0</span>
+        </button>
     </div>
+    <div class="resources-row">
+        <button class="resource-button" onclick="openModal('plant')">
+            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
+            <span id="plantresourceCount">0</span>
+            <span class="production-count" id="plantProduction">0</span>
+        </button>
+        <button class="resource-button" onclick="openModal('energy')">
+            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Energy.png" alt="Energy">
+            <span id="energyresourceCount">0</span>
+            <span class="production-count" id="energyProduction">0</span>
+        </button>
+        <button class="resource-button" onclick="openModal('heat')">
+            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Heat.png" alt="Heat">
+            <span id="heatCount">0</span>
+            <span class="production-count" id="heatProduction">0</span>
+        </button>
+    </div>
+</div>
 
     <!-- Produce Button -->
     <button class="produce-button" onclick="produceResources()">Produce</button>
