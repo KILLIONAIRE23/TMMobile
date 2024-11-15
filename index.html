@@ -267,10 +267,10 @@
 <body>
 <h2>Standard Resources and TR</h2>
      
-    <!-- Terraforming Rating Button -->
+     <!-- Terraforming Rating Button -->
     <div class="terraforming-container">
         <h2 class="terraforming-title">Terraforming Rating</h2>
-        <button class="terraforming-button">
+        <button class="terraforming-button" onclick="openModal('tr')">
             <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
             <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
         </button>
@@ -315,7 +315,7 @@
     </div>
 
     <!-- Produce Button -->
-    <button class="produce-button">Produce</button>
+    <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
      <!-- Modal for Add/Remove Options -->
 <div id="resourceModal" class="modal">
@@ -323,8 +323,10 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Update Resource</h2>
         <p id="modalResourceName">Resource: Credit</p>
-        <button onclick="updateResource(1)">Add</button>
-        <button onclick="updateResource(-1)">Remove</button>
+        <button onclick="updateResource(1)">Add Resource</button>
+        <button onclick="updateResource(-1)">Remove Resource</button>
+        <button onclick="updateProduction(1)">Add Production</button>
+        <button onclick="updateProduction(-1)">Remove Production</button>
     </div>
 </div>
 
