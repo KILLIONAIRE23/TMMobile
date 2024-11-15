@@ -363,7 +363,7 @@
 <td><button onclick="changeCount('space', 1)">+</button><button onclick="changeCount('space', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Animal.png"/> Animal </td><td><span id="animalCount">0</span></td>
 <td><button onclick="changeCount('animal', 1)">+</button><button onclick="changeCount('animal', -1)">-</button></td></tr>
-<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Plant.png"/> Plant </td><td><span id="planttagCount">0</span></td>
+<tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Plant.png"/> Plant </td><td><span id="plantCount">0</span></td>
 <td><button onclick="changeCount('plant', 1)">+</button><button onclick="changeCount('plant', -1)">-</button></td></tr>
 <tr><td><img src="https://killionaire23.github.io/Terraforming-Mars/Building.png"/> Building </td><td><span id="buildingCount">0</span></td>
 <td><button onclick="changeCount('building', 1)">+</button><button onclick="changeCount('building', -1)">-</button></td></tr>
@@ -542,7 +542,7 @@ function updateProduction(delta) {
 
 // Function to produce resources by adding production counts to resources
 function produceResources() {
-    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
+    const resources = ['credit', 'steel', 'titanium', 'plantresource', 'energy', 'heat'];
     let trValue = parseInt(document.getElementById('trCount').innerText);
     
     resources.forEach(resource => {
