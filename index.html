@@ -168,7 +168,8 @@
 
 /* Terraforming Rating Button */
 .terraforming-button {
-    width: 100%;
+    max-width: 800px; /* Match the container width */
+    margin: 0 auto; /* Center the buttons */
     padding: 20px;
     font-size: 1.5em;
     border: 1px solid #000000;
@@ -250,8 +251,9 @@
 
 /* Produce Button */
 .produce-button {
-    width: 100%;
     margin-top: 20px;
+    max-width: 800px; /* Match the container width */
+    margin: 0 auto; /* Center the buttons */
     padding: 10px;
     font-size: 1.2em;
     border: 1px solid #000000;
@@ -315,7 +317,7 @@
     </div>
 
     <!-- Produce Button -->
-    <button class="produce-button">Produce</button>
+    <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
      <!-- Modal for Add/Remove Options -->
 <div id="resourceModal" class="modal">
@@ -323,8 +325,16 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Update Resource</h2>
         <p id="modalResourceName">Resource: Credit</p>
-        <button onclick="updateResource(1)">Add</button>
-        <button onclick="updateResource(-1)">Remove</button>
+        
+        <!-- Update Resource Count -->
+        <h3>Update Resource Value</h3>
+        <button onclick="updateResource(1)">Add Resource</button>
+        <button onclick="updateResource(-1)">Remove Resource</button>
+        
+        <!-- Update Production Count -->
+        <h3>Update Production Value</h3>
+        <button onclick="updateProduction(1)">Add Production</button>
+        <button onclick="updateProduction(-1)">Remove Production</button>
     </div>
 </div>
 
@@ -505,7 +515,48 @@ window.onclick = function(event) {
         };
         localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
     }
+     // Function to update the production value
+function updateProduction(delta) {
+    if (currentResource) {
+        const productionCountElement = document.getElementById(`${currentResource}Production`);
+        let production = parseInt(productionCountElement.innerText);
+        production += delta;
+        // Allow negative values for credit production only
+        if (currentResource !== 'credit' && production < 0) {
+            production = 0;
+        }
+        productionCountElement.innerText = production;
+        closeModal(); // Close modal after update
+    }
+}
 
+// Function to produce resources by adding production counts to resources
+function produceResources() {
+    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
+    let trValue = parseInt(document.getElementById('trCount').innerText);
+    
+    resources.forEach(resource => {
+        const resourceCountElement = document.getElementById(`${resource}Count`);
+        const productionCountElement = document.getElementById(`${resource}Production`);
+        
+        let resourceValue = parseInt(resourceCountElement.innerText);
+        let productionValue = parseInt(productionCountElement.innerText);
+
+        // Special logic for credit: add TR value to credit production
+        if (resource === 'credit') {
+            resourceValue += productionValue + trValue;
+        } else {
+            resourceValue += productionValue;
+        }
+
+        // Ensure the new value is not negative
+        if (resource !== 'credit' && resourceValue < 0) {
+            resourceValue = 0;
+        }
+
+        resourceCountElement.innerText = resourceValue;
+    });
+}
     // Load game state from local storage
     function loadGameState() {
         const savedState = localStorage.getItem('terraformingMarsGameState');
