@@ -267,10 +267,10 @@
 <body>
 <h2>Standard Resources and TR</h2>
      
-     <!-- Terraforming Rating Button -->
+    <!-- Terraforming Rating Button -->
     <div class="terraforming-container">
         <h2 class="terraforming-title">Terraforming Rating</h2>
-        <button class="terraforming-button" onclick="openModal('tr')">
+        <button class="terraforming-button">
             <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
             <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
         </button>
@@ -315,7 +315,7 @@
     </div>
 
     <!-- Produce Button -->
-    <button class="produce-button" onclick="produceResources()">Produce</button>
+    <button class="produce-button">Produce</button>
 </div>
      <!-- Modal for Add/Remove Options -->
 <div id="resourceModal" class="modal">
@@ -323,10 +323,8 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <h2>Update Resource</h2>
         <p id="modalResourceName">Resource: Credit</p>
-        <button onclick="updateResource(1)">Add Resource</button>
-        <button onclick="updateResource(-1)">Remove Resource</button>
-        <button onclick="updateProduction(1)">Add Production</button>
-        <button onclick="updateProduction(-1)">Remove Production</button>
+        <button onclick="updateResource(1)">Add</button>
+        <button onclick="updateResource(-1)">Remove</button>
     </div>
 </div>
 
@@ -399,7 +397,27 @@
 </p>
 
 <script>
-let currentResource = '';
+    const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
+
+    function changeCount(tag, delta) {
+        if (!document.getElementById(`${tag}Count`)) {
+            console.warn(`Tag element for "${tag}" not found.`);
+            return; // Safely skip if the tag does not exist in the HTML
+        }
+        tagCounts[tag] += delta;
+        if (tagCounts[tag] < 0) { tagCounts[tag] = 0; }
+        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        saveGameState(); // Save after updating tag counts
+    }
+
+    let vpCount = 0;
+    function changeVP(delta) {
+        vpCount += delta;
+        if (vpCount < 0) { vpCount = 0; }
+        document.getElementById('vpNumber').innerText = vpCount;
+        saveGameState(); // Save after updating VP
+    }
+    let currentResource = '';
 
 function openModal(resource) {
     currentResource = resource; // Store the current resource being edited
@@ -419,16 +437,8 @@ function updateResource(delta) {
         count += delta;
         if (count < 0) count = 0; // Ensure count does not go below 0
         resourceCountElement.innerText = count;
-    }
-}
 
-function updateProduction(delta) {
-    if (currentResource) {
-        const productionCountElement = document.getElementById(`${currentResource}Production`);
-        let count = parseInt(productionCountElement.innerText);
-        count += delta;
-        if (currentResource !== 'credit' && count < 0) count = 0; // Ensure non-credit production doesn't go below 0
-        productionCountElement.innerText = count;
+        closeModal(); // Close modal after update
     }
 }
 
@@ -444,22 +454,89 @@ window.onclick = function(event) {
     }
 }
 
-function produceResources() {
-    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
-    resources.forEach(resource => {
-        const resourceCountElement = document.getElementById(`${resource}Count`);
-        const productionCountElement = document.getElementById(`${resource}Production`);
-        let resourceCount = parseInt(resourceCountElement.innerText);
-        let productionCount = parseInt(productionCountElement.innerText);
-        if (resource === 'credit') {
-            let trCount = parseInt(document.getElementById('trCount').innerText);
-            resourceCount += productionCount + trCount;
-        } else {
-            resourceCount += productionCount;
+    let cardsDatabase = [];
+
+    // Load JSON Data and handle any errors
+    async function loadJSONData() {
+        try {
+            console.log("Attempting to load JSON...");
+            const response = await fetch('Card_Database_with_Numbers.json');
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            const data = await response.json();
+            cardsDatabase = data;
+            console.log("JSON Data Loaded Successfully:", cardsDatabase);
+        } catch (error) {
+            console.error("Error loading JSON:", error);
+            document.getElementById("cardDetails").innerHTML = "<p>Error loading card data. Check console for details.</p>";
         }
-        resourceCountElement.innerText = resourceCount;
+    }
+
+    // Search Card by Card Number and update VP and tags
+    function searchCard() {
+        const cardInput = document.getElementById('cardNumberInput').value.trim();
+        const isNumeric = /^\d+$/.test(cardInput);
+        const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
+        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
+
+        if (card) {
+            changeVP(Number(card.VP) || 0);
+            Object.keys(card).forEach(key => {
+                if (key.startsWith("Tag:") && card[key] === 1) {
+                    const tag = key.replace("Tag: ", "").toLowerCase();
+                    changeCount(tag, 1);
+                }
+            });
+
+            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
+            console.log("Card found:", card); 
+        } else {
+            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+            console.log("Card not found:", cardInput); 
+        }
+    }
+
+    // Save game state to local storage
+    function saveGameState() {
+        const gameState = {
+            vpCount,
+            tagCounts
+        };
+        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
+    }
+
+    // Load game state from local storage
+    function loadGameState() {
+        const savedState = localStorage.getItem('terraformingMarsGameState');
+        if (savedState) {
+            const gameState = JSON.parse(savedState);
+            vpCount = gameState.vpCount || 0;
+            document.getElementById('vpNumber').innerText = vpCount;
+
+            Object.keys(gameState.tagCounts).forEach(tag => {
+                tagCounts[tag] = gameState.tagCounts[tag];
+                document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+            });
+        }
+    }
+
+    // Reset game state
+    function resetGameState() {
+        vpCount = 0;
+        Object.keys(tagCounts).forEach(tag => {
+            tagCounts[tag] = 0;
+            document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        });
+        document.getElementById('vpNumber').innerText = vpCount;
+        localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
+    }
+
+    // Load JSON and game state on Page Load
+    document.addEventListener("DOMContentLoaded", () => {
+        loadJSONData();
+        loadGameState();
     });
-}
 </script>
     <!-- Personal Introduction Text Box -->
 <div id="personalIntro" style="margin-top: 0px; padding: 10px; background: linear-gradient(45deg, rgba(0, 0, 0, 0.8), rgba(245, 126, 55, 0.8)); color: #000000; max-width: 800px; margin-left: auto; margin-right: auto; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black;">
