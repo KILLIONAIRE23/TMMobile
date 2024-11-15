@@ -59,7 +59,7 @@
      /* Span inside Resource Button for value */
     .resource-button span {
         margin-top: 10px;  /* Increase the space between the icon and the number */
-        font-size: 2em;  /* Adjust the size of the number */
+        font-size: 1.5em;  /* Adjust the size of the number */
         font-weight: bold; /* Make the number bold for visibility */
     }
      /* Styles for search bar and button */
@@ -113,64 +113,119 @@
     }
 
      /* Styles for the Terraforming Rating and Resources Section */
-    .rating-container, .resources-container {
-        max-width: 800px;
-        margin: 20px auto;
-    }
+.rating-container, .resources-container {
+    max-width: 800px;
+    margin: 20px auto;
+}
 
-    /* Terraforming Rating Button */
-    .terraforming-button {
-        width: 100%;
-        padding: 20px;
-        font-size: 1.5em;
-        border: 1px solid #000000;
-        background-color: #e6e3e3;
-        color: black;
-        cursor: pointer;
-        border-radius: 10px;
-        box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-    }
+/* Terraforming Rating Container */
+.terraforming-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
 
-    /* Container for the 3 equal-sized resource buttons */
-    .resources-row {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
+.terraforming-title {
+    font-size: 1.5em;
+    color: #ffffff; /* White color for contrast */
+    margin-bottom: 10px;
+}
 
-    /* Individual Resource Button */
-    .resource-button {
-        flex: 1;
-        padding: 15px;
-        margin: 0 5px;
-        border: 1px solid #000000;
-        font-size: 1em;
-        background-color: #e6e3e3;
-        color: black;
-        border-radius: 10px;
-        cursor: pointer;
-        box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-        transition: background-color 0.3s ease;
-    }
+/* Terraforming Rating Button */
+.terraforming-button {
+    width: 100%;
+    padding: 20px;
+    font-size: 1.5em;
+    border: 1px solid #000000;
+    background-color: #e6e3e3;
+    color: black;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
+    position: relative; /* To properly position the value */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 
-    /* Make the button stand out a bit when hovered */
-    .resource-button:hover {
-        background-color: #fff;
-    }
+.terraforming-button img {
+    width: 60px; /* Adjust size if necessary */
+    height: auto;
+}
 
-    /* Produce Button */
-    .produce-button {
-        width: 100%;
-        margin-top: 20px;
-        padding: 10px;
-        font-size: 1.2em;
-        border: 1px solid #000000;
-        background-color: #e6e3e3;
-        color: black;
-        cursor: pointer;
-        border-radius: 10px;
-        box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-    }
+.terraforming-button span {
+    margin-top: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+/* Container for the 3 equal-sized resource buttons */
+.resources-row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+/* Individual Resource Button */
+.resource-button {
+    flex: 1;
+    padding: 15px;
+    margin: 0 5px;
+    border: 1px solid #000000;
+    font-size: 1em;
+    background-color: #e6e3e3;
+    color: black;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
+    transition: background-color 0.3s ease;
+    position: relative; /* To properly position the values */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Make the button stand out a bit when hovered */
+.resource-button:hover {
+    background-color: #fff;
+}
+
+/* Image inside Resource Button */
+.resource-button img {
+    width: 60px;  /* Adjust size to fit nicely in the button */
+    height: 60px; /* Keep proportions consistent */
+}
+
+/* Span inside Resource Button for value */
+.resource-button span {
+    margin-top: 10px;  /* Space between the icon and the number */
+    font-size: 1.2em;  /* Adjust the size of the number */
+    font-weight: bold; /* Make the number bold for visibility */
+}
+
+/* Production count (brown number) under resource value */
+.production-count {
+    margin-top: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    color: brown;  /* Brown color for resource production count */
+}
+
+/* Produce Button */
+.produce-button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 10px;
+    font-size: 1.2em;
+    border: 1px solid #000000;
+    background-color: #e6e3e3;
+    color: black;
+    cursor: pointer;
+    border-radius: 10px;
+    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
+}
+
 </style>
 </head>
 <body>
@@ -181,34 +236,51 @@
     <!-- Terraforming Rating Button -->
     <button class="terraforming-button"><img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR"></button>
     
+   <!-- Resource Tracker Section with Background Box -->
+<div class="resource-tracker-box">
+    <!-- Terraforming Rating Button -->
+    <div class="terraforming-container">
+        <h2 class="terraforming-title">Terraforming Rating</h2>
+        <button class="terraforming-button">
+            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+            <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+        </button>
+    </div>
+    
     <!-- Resources Buttons - 2 Rows of 3 Buttons -->
     <div class="resources-container">
         <div class="resources-row">
             <button class="resource-button">
                 <img src="https://killionaire23.github.io/TMMobile/Credit.png" alt="Credit">
                 <span id="creditCount">0</span>
+                <span class="production-count" id="creditProduction">0</span> <!-- Production count in brown -->
             </button>
             <button class="resource-button">
                 <img src="https://killionaire23.github.io/TMMobile/Steel.png" alt="Steel">
                 <span id="steelCount">0</span>
+                <span class="production-count" id="steelProduction">0</span>
             </button>
             <button class="resource-button">
                 <img src="https://killionaire23.github.io/TMMobile/Titanium.png" alt="Titanium">
                 <span id="titaniumCount">0</span>
+                <span class="production-count" id="titaniumProduction">0</span>
             </button>
         </div>
         <div class="resources-row">
             <button class="resource-button">
                 <img src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
                 <span id="plantCount">0</span>
+                <span class="production-count" id="plantProduction">0</span>
             </button>
             <button class="resource-button">
                 <img src="https://killionaire23.github.io/TMMobile/Energy.png" alt="Energy">
                 <span id="energyCount">0</span>
+                <span class="production-count" id="energyProduction">0</span>
             </button>
             <button class="resource-button">
                 <img src="https://killionaire23.github.io/TMMobile/Heat.png" alt="Heat">
                 <span id="heatCount">0</span>
+                <span class="production-count" id="heatProduction">0</span>
             </button>
         </div>
     </div>
@@ -216,6 +288,7 @@
     <!-- Produce Button -->
     <button class="produce-button">Produce</button>
 </div>
+
 
     <!-- Produce Button -->
     <button class="produce-button">Produce</button>
