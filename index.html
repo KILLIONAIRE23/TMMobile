@@ -5,6 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Kami's Terraforming Mars Tag Manager</title>
 <style>
+     
      button.increment {
           margin-right: 0px; /* Adds space between + and - buttons */
      }
@@ -41,6 +42,7 @@
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
+     
         /* Futuristic Corners using Pseudo-elements */
         #personalIntro::before, #personalIntro::after {
             content: "";
@@ -54,6 +56,12 @@
             filter: blur(15px);
             z-index: -1;
         }
+     /* Span inside Resource Button for value */
+    .resource-button span {
+        margin-top: 10px;  /* Increase the space between the icon and the number */
+        font-size: 2em;  /* Adjust the size of the number */
+        font-weight: bold; /* Make the number bold for visibility */
+    }
      /* Styles for search bar and button */
     #cardLookupSection {
         max-width: 800px; /* Limit width to match the table */
