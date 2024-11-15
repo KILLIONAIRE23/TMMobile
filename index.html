@@ -7,31 +7,8 @@
 <style>
      
      button.increment {
-          margin-right: 0px; /* Adds space between + and - buttons *s/
+          margin-right: 0px; /* Adds space between + and - buttons */
      }
-     /* Modal Sections for Resource and Production */
-.modal-section {
-    margin: 20px 0;
-}
-
-.value-controls {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.value-controls span {
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-.value-controls button {
-    padding: 5px 10px;
-    font-size: 1.2em;
-    cursor: pointer;
-}
-
      /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -352,7 +329,7 @@
 
     <!-- Produce Button -->
     <div class="produce-container full-width">
-    <button class="produce-button" onclick="produceResources()">Produce</button>
+    <button class="produce-button">Produce</button>
 </div>
      <!-- Modal for Add/Remove Options -->
 <div id="resourceModal" class="modal">
@@ -361,25 +338,15 @@
         <h2>Update Resource</h2>
         <p id="modalResourceName">Resource: Credit</p>
         
-        <!-- Resource Count Section -->
-        <div class="modal-section">
-            <h3>Resource Value</h3>
-            <div class="value-controls">
-                <span id="modalResourceValue">0</span> <!-- Display resource value -->
-                <button onclick="updateResource(1)">+</button>
-                <button onclick="updateResource(-1)">-</button>
-            </div>
-        </div>
+        <!-- Update Resource Count -->
+        <h3>Update Resource Value</h3>
+        <button onclick="updateResource(1)">Add Resource</button>
+        <button onclick="updateResource(-1)">Remove Resource</button>
         
-        <!-- Production Count Section (not shown for TR) -->
-        <div id="productionSection" class="modal-section">
-            <h3>Production Value</h3>
-            <div class="value-controls">
-                <span id="modalProductionValue">0</span> <!-- Display production value -->
-                <button onclick="updateProduction(1)">+</button>
-                <button onclick="updateProduction(-1)">-</button>
-            </div>
-        </div>
+        <!-- Update Production Count -->
+        <h3>Update Production Value</h3>
+        <button onclick="updateProduction(1)">Add Production</button>
+        <button onclick="updateProduction(-1)">Remove Production</button>
     </div>
 </div>
 
@@ -476,22 +443,7 @@
 
 function openModal(resource) {
     currentResource = resource; // Store the current resource being edited
-    const resourceCountElement = document.getElementById(`${currentResource}Count`);
-    const productionCountElement = document.getElementById(`${currentResource}Production`);
-
-    // Update the modal with current values
     document.getElementById('modalResourceName').innerText = `Resource: ${capitalizeFirstLetter(resource)}`;
-    document.getElementById('modalResourceValue').innerText = resourceCountElement.innerText;
-
-    // If the resource is "tr", hide production section, otherwise show it
-    if (currentResource === 'tr') {
-        document.getElementById('productionSection').style.display = 'none';
-    } else {
-        document.getElementById('productionSection').style.display = 'block';
-        document.getElementById('modalProductionValue').innerText = productionCountElement ? productionCountElement.innerText : '0';
-    }
-
-    // Display the modal
     document.getElementById('resourceModal').style.display = "block";
 }
 
@@ -503,13 +455,14 @@ function closeModal() {
 function updateResource(delta) {
     if (currentResource) {
         const resourceCountElement = document.getElementById(`${currentResource}Count`);
+        if (!resourceCountElement) {
+            console.error(`Resource count element for "${currentResource}" not found.`);
+            return;
+        }
         let count = parseInt(resourceCountElement.innerText);
         count += delta;
         if (count < 0) count = 0; // Ensure count does not go below 0
         resourceCountElement.innerText = count;
-
-        // Update the modal value as well
-        document.getElementById('modalResourceValue').innerText = count;
     }
 }
 
@@ -577,10 +530,13 @@ window.onclick = function(event) {
         localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
     }
      // Function to update the production value
-
 function updateProduction(delta) {
-    if (currentResource && currentResource !== 'tr') {
+    if (currentResource) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
+        if (!productionCountElement) {
+            console.error(`Production count element for "${currentResource}" not found.`);
+            return;
+        }
         let production = parseInt(productionCountElement.innerText);
         production += delta;
 
@@ -590,15 +546,12 @@ function updateProduction(delta) {
         }
 
         productionCountElement.innerText = production;
-
-        // Update the modal value as well
-        document.getElementById('modalProductionValue').innerText = production;
     }
 }
 
 // Function to produce resources by adding production counts to resources
 function produceResources() {
-    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
+    const resources = ['credit', 'steel', 'titanium', 'plantresource', 'energy', 'heat'];
     let trValue = parseInt(document.getElementById('trCount').innerText);
     
     resources.forEach(resource => {
@@ -623,7 +576,6 @@ function produceResources() {
         resourceCountElement.innerText = resourceValue;
     });
 }
-
     // Load game state from local storage
     function loadGameState() {
         const savedState = localStorage.getItem('terraformingMarsGameState');
