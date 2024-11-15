@@ -444,7 +444,22 @@
 
 function openModal(resource) {
     currentResource = resource; // Store the current resource being edited
+    const resourceCountElement = document.getElementById(`${currentResource}Count`);
+    const productionCountElement = document.getElementById(`${currentResource}Production`);
+
+    // Update the modal with current values
     document.getElementById('modalResourceName').innerText = `Resource: ${capitalizeFirstLetter(resource)}`;
+    document.getElementById('modalResourceValue').innerText = resourceCountElement.innerText;
+
+    // If the resource is "tr", hide production section, otherwise show it
+    if (currentResource === 'tr') {
+        document.getElementById('productionSection').style.display = 'none';
+    } else {
+        document.getElementById('productionSection').style.display = 'block';
+        document.getElementById('modalProductionValue').innerText = productionCountElement ? productionCountElement.innerText : '0';
+    }
+
+    // Display the modal
     document.getElementById('resourceModal').style.display = "block";
 }
 
@@ -456,14 +471,13 @@ function closeModal() {
 function updateResource(delta) {
     if (currentResource) {
         const resourceCountElement = document.getElementById(`${currentResource}Count`);
-        if (!resourceCountElement) {
-            console.error(`Resource count element for "${currentResource}" not found.`);
-            return;
-        }
         let count = parseInt(resourceCountElement.innerText);
         count += delta;
         if (count < 0) count = 0; // Ensure count does not go below 0
         resourceCountElement.innerText = count;
+
+        // Update the modal value as well
+        document.getElementById('modalResourceValue').innerText = count;
     }
 }
 
@@ -532,49 +546,52 @@ window.onclick = function(event) {
     }
      // Function to update the production value
 function updateProduction(delta) {
-    if (currentResource) {
+    if (currentResource && currentResource !== 'tr') {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
-        if (!productionCountElement) {
-            console.error(`Production count element for "${currentResource}" not found.`);
-            return;
-        }
-        let production = parseInt(productionCountElement.innerText);
-        production += delta;
+        if (productionCountElement) {
+            let production = parseInt(productionCountElement.innerText);
+            production += delta;
 
-        // Allow negative values for credit production only
-        if (currentResource !== 'credit' && production < 0) {
-            production = 0;
-        }
+            // Allow negative values for credit production only
+            if (currentResource !== 'credit' && production < 0) {
+                production = 0;
+            }
 
-        productionCountElement.innerText = production;
+            productionCountElement.innerText = production;
+
+            // Update the modal value as well
+            document.getElementById('modalProductionValue').innerText = production;
+        }
     }
 }
 
 // Function to produce resources by adding production counts to resources
 function produceResources() {
-    const resources = ['credit', 'steel', 'titanium', 'plantresource', 'energy', 'heat'];
+    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
     let trValue = parseInt(document.getElementById('trCount').innerText);
     
     resources.forEach(resource => {
         const resourceCountElement = document.getElementById(`${resource}Count`);
         const productionCountElement = document.getElementById(`${resource}Production`);
         
-        let resourceValue = parseInt(resourceCountElement.innerText);
-        let productionValue = parseInt(productionCountElement.innerText);
+        if (resourceCountElement && productionCountElement) {
+            let resourceValue = parseInt(resourceCountElement.innerText);
+            let productionValue = parseInt(productionCountElement.innerText);
 
-        // Special logic for credit: add TR value to credit production
-        if (resource === 'credit') {
-            resourceValue += productionValue + trValue;
-        } else {
-            resourceValue += productionValue;
+            // Special logic for credit: add TR value to credit production
+            if (resource === 'credit') {
+                resourceValue += productionValue + trValue;
+            } else {
+                resourceValue += productionValue;
+            }
+
+            // Ensure the new value is not negative
+            if (resource !== 'credit' && resourceValue < 0) {
+                resourceValue = 0;
+            }
+
+            resourceCountElement.innerText = resourceValue;
         }
-
-        // Ensure the new value is not negative
-        if (resource !== 'credit' && resourceValue < 0) {
-            resourceValue = 0;
-        }
-
-        resourceCountElement.innerText = resourceValue;
     });
 }
     // Load game state from local storage
