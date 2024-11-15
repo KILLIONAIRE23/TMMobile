@@ -9,6 +9,42 @@
      button.increment {
           margin-right: 0px; /* Adds space between + and - buttons */
      }
+     /* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    max-width: 400px; /* Limit max width to fit comfortably */
+    text-align: center;
+    border-radius: 10px;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
 /* Futuristic Frame Style for the Box */
         #personalIntro {
             margin-top: 0px;
@@ -236,39 +272,48 @@
             <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
         </button>
     </div>
-    
-    <!-- Resources Buttons - 2 Rows of 3 Buttons -->
+    <!-- Resource Tracker Section with Background Box -->
+<div class="resource-tracker-box">
+    <!-- Terraforming Rating Button -->
+    <div class="terraforming-container">
+        <h2 class="terraforming-title">Terraforming Rating</h2>
+        <button class="terraforming-button">
+            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+            <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+        </button>
+    </div>
+     <!-- Resources Buttons - 2 Rows of 3 Buttons -->
     <div class="resources-container">
         <div class="resources-row">
-            <button class="resource-button">
-                <img src="https://killionaire23.github.io/TMMobile/Credit.png" alt="Credit">
+            <button class="resource-button" onclick="openModal('credit')">
+                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Credit.png" alt="Credit">
                 <span id="creditCount">0</span>
                 <span class="production-count" id="creditProduction">0</span> <!-- Production count in brown -->
             </button>
-            <button class="resource-button">
-                <img src="https://killionaire23.github.io/TMMobile/Steel.png" alt="Steel">
+            <button class="resource-button" onclick="openModal('steel')">
+                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Steel.png" alt="Steel">
                 <span id="steelCount">0</span>
                 <span class="production-count" id="steelProduction">0</span>
             </button>
-            <button class="resource-button">
-                <img src="https://killionaire23.github.io/TMMobile/Titanium.png" alt="Titanium">
+            <button class="resource-button" onclick="openModal('titanium')">
+                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Titanium.png" alt="Titanium">
                 <span id="titaniumCount">0</span>
                 <span class="production-count" id="titaniumProduction">0</span>
             </button>
         </div>
         <div class="resources-row">
-            <button class="resource-button">
-                <img src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
+            <button class="resource-button" onclick="openModal('plant')">
+                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
                 <span id="plantCount">0</span>
                 <span class="production-count" id="plantProduction">0</span>
             </button>
-            <button class="resource-button">
-                <img src="https://killionaire23.github.io/TMMobile/Energy.png" alt="Energy">
+            <button class="resource-button" onclick="openModal('energy')">
+                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Energy.png" alt="Energy">
                 <span id="energyCount">0</span>
                 <span class="production-count" id="energyProduction">0</span>
             </button>
-            <button class="resource-button">
-                <img src="https://killionaire23.github.io/TMMobile/Heat.png" alt="Heat">
+            <button class="resource-button" onclick="openModal('heat')">
+                <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Heat.png" alt="Heat">
                 <span id="heatCount">0</span>
                 <span class="production-count" id="heatProduction">0</span>
             </button>
@@ -277,6 +322,16 @@
 
     <!-- Produce Button -->
     <button class="produce-button">Produce</button>
+</div>
+     <!-- Modal for Add/Remove Options -->
+<div id="resourceModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2>Update Resource</h2>
+        <p id="modalResourceName">Resource: Credit</p>
+        <button onclick="updateResource(1)">Add</button>
+        <button onclick="updateResource(-1)">Remove</button>
+    </div>
 </div>
 
 <h1>Tag Tracker</h1>
@@ -368,7 +423,43 @@
         document.getElementById('vpNumber').innerText = vpCount;
         saveGameState(); // Save after updating VP
     }
-    
+    let currentResource = '';
+
+function openModal(resource) {
+    currentResource = resource; // Store the current resource being edited
+    document.getElementById('modalResourceName').innerText = `Resource: ${capitalizeFirstLetter(resource)}`;
+    document.getElementById('resourceModal').style.display = "block";
+}
+
+function closeModal() {
+    document.getElementById('resourceModal').style.display = "none";
+    currentResource = ''; // Clear the current resource
+}
+
+function updateResource(delta) {
+    if (currentResource) {
+        const resourceCountElement = document.getElementById(`${currentResource}Count`);
+        let count = parseInt(resourceCountElement.innerText);
+        count += delta;
+        if (count < 0) count = 0; // Ensure count does not go below 0
+        resourceCountElement.innerText = count;
+
+        closeModal(); // Close modal after update
+    }
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Close the modal if user clicks outside of it
+window.onclick = function(event) {
+    const modal = document.getElementById('resourceModal');
+    if (event.target == modal) {
+        closeModal();
+    }
+}
+
     let cardsDatabase = [];
 
     // Load JSON Data and handle any errors
