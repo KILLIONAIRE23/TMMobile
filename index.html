@@ -307,11 +307,12 @@
         </button>
     </div>
     <div class="resources-row">
-        <button class="resource-button" onclick="openModal('plant')">
-            <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
-            <span id="plantresourceCount">0</span>
-            <span class="production-count" id="plantProduction">0</span>
-        </button>
+        <button class="resource-button" onclick="openModal('plantResource')">
+    <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Plant.png" alt="Plant">
+    <span id="plantResourceCount">0</span>  <!-- Corrected ID -->
+    <span class="production-count" id="plantResourceProduction">0</span> <!-- Corrected ID -->
+</button>
+
         <button class="resource-button" onclick="openModal('energy')">
             <img class="resource-icon" src="https://killionaire23.github.io/TMMobile/Energy.png" alt="Energy">
             <span id="energyresourceCount">0</span>
@@ -453,12 +454,14 @@ function closeModal() {
 function updateResource(delta) {
     if (currentResource) {
         const resourceCountElement = document.getElementById(`${currentResource}Count`);
+        if (!resourceCountElement) {
+            console.error(`Resource count element for "${currentResource}" not found.`);
+            return;
+        }
         let count = parseInt(resourceCountElement.innerText);
         count += delta;
         if (count < 0) count = 0; // Ensure count does not go below 0
         resourceCountElement.innerText = count;
-
-        closeModal(); // Close modal after update
     }
 }
 
@@ -529,14 +532,19 @@ window.onclick = function(event) {
 function updateProduction(delta) {
     if (currentResource) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
+        if (!productionCountElement) {
+            console.error(`Production count element for "${currentResource}" not found.`);
+            return;
+        }
         let production = parseInt(productionCountElement.innerText);
         production += delta;
+
         // Allow negative values for credit production only
         if (currentResource !== 'credit' && production < 0) {
             production = 0;
         }
+
         productionCountElement.innerText = production;
-        closeModal(); // Close modal after update
     }
 }
 
