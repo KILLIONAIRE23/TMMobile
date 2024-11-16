@@ -656,27 +656,40 @@ function updateProduction(delta) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
         const productionDisplayElement = document.getElementById('productionValueDisplay');
 
-        // Update the production value
         let production = parseInt(productionCountElement.innerText) + delta;
-
-        // Only allow negative values for 'credit' production
         if (currentResource !== 'credit' && production < 0) production = 0;
 
-        // Update both the button display and the modal display
         productionCountElement.innerText = production;
         productionDisplayElement.innerText = production;
+
+        saveGameState(); // Save immediately after update
     }
 }
 
 // Function to produce resources by adding production counts to resources
+function updateProduction(delta) {
+    if (currentResource) {
+        const productionCountElement = document.getElementById(`${currentResource}Production`);
+        const productionDisplayElement = document.getElementById('productionValueDisplay');
+
+        let production = parseInt(productionCountElement.innerText) + delta;
+        if (currentResource !== 'credit' && production < 0) production = 0;
+
+        productionCountElement.innerText = production;
+        productionDisplayElement.innerText = production;
+
+        saveGameState(); // Save immediately after update
+    }
+}
+
 function produceResources() {
     const resources = [
         { id: 'credit', countId: 'creditCount', productionId: 'creditProduction' },
         { id: 'steel', countId: 'steelCount', productionId: 'steelProduction' },
         { id: 'titanium', countId: 'titaniumCount', productionId: 'titaniumProduction' },
-        { id: 'plant', countId: 'plantResourceCount', productionId: 'plantResourceProduction' }, // corrected
-        { id: 'energy', countId: 'energyResourceCount', productionId: 'energyResourceProduction' }, // corrected
-        { id: 'heat', countId: 'heatCount', productionId: 'heatProduction' } // no changes
+        { id: 'plant', countId: 'plantResourceCount', productionId: 'plantResourceProduction' },
+        { id: 'energy', countId: 'energyResourceCount', productionId: 'energyResourceProduction' },
+        { id: 'heat', countId: 'heatCount', productionId: 'heatProduction' }
     ];
     
     let trValue = parseInt(document.getElementById('trCount').innerText);
@@ -694,13 +707,12 @@ function produceResources() {
             resourceValue += productionValue;
         }
 
-        if (resource.id !== 'credit' && resourceValue < 0) {
-            resourceValue = 0;
-        }
-
         resourceCountElement.innerText = resourceValue;
     });
+
+    saveGameState(); // Save immediately after producing resources
 }
+
 function openTRModal() {
     // Get the current TR value
     const trValueElement = document.getElementById('trCount');
