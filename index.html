@@ -551,31 +551,38 @@ function updateProduction(delta) {
 
 // Function to produce resources by adding production counts to resources
 function produceResources() {
-    const resources = ['credit', 'steel', 'titanium', 'plantresource', 'energy', 'heat'];
+    const resources = [
+        { id: 'credit', countId: 'creditCount', productionId: 'creditProduction' },
+        { id: 'steel', countId: 'steelCount', productionId: 'steelProduction' },
+        { id: 'titanium', countId: 'titaniumCount', productionId: 'titaniumProduction' },
+        { id: 'plant', countId: 'plantResourceCount', productionId: 'plantResourceProduction' }, // corrected
+        { id: 'energy', countId: 'energyResourceCount', productionId: 'energyResourceProduction' }, // corrected
+        { id: 'heat', countId: 'heatCount', productionId: 'heatProduction' } // no changes
+    ];
+    
     let trValue = parseInt(document.getElementById('trCount').innerText);
     
     resources.forEach(resource => {
-        const resourceCountElement = document.getElementById(`${resource}Count`);
-        const productionCountElement = document.getElementById(`${resource}Production`);
+        const resourceCountElement = document.getElementById(resource.countId);
+        const productionCountElement = document.getElementById(resource.productionId);
         
         let resourceValue = parseInt(resourceCountElement.innerText);
         let productionValue = parseInt(productionCountElement.innerText);
 
-        // Special logic for credit: add TR value to credit production
-        if (resource === 'credit') {
+        if (resource.id === 'credit') {
             resourceValue += productionValue + trValue;
         } else {
             resourceValue += productionValue;
         }
 
-        // Ensure the new value is not negative
-        if (resource !== 'credit' && resourceValue < 0) {
+        if (resource.id !== 'credit' && resourceValue < 0) {
             resourceValue = 0;
         }
 
         resourceCountElement.innerText = resourceValue;
     });
 }
+
     // Load game state from local storage
     function loadGameState() {
         const savedState = localStorage.getItem('terraformingMarsGameState');
