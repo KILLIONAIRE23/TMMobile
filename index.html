@@ -5,7 +5,23 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Kami's Terraforming Mars Tag Manager</title>
 <style>
-     
+     /* Style for round, uniform + and - buttons */
+    .round-button {
+        width: 50px; /* Uniform width */
+        height: 50px; /* Uniform height */
+        border-radius: 50%; /* Make buttons round */
+        font-size: 1.5em; /* Font size for + and - signs */
+        background-color: #e6e3e3; /* Button background color */
+        color: black; /* Text color */
+        border: 1px solid #888; /* Border color */
+        margin: 0 15px; /* Significant space between buttons */
+        cursor: pointer;
+    }
+
+    /* Optional: Button hover effect */
+    .round-button:hover {
+        background-color: #ccc; /* Slightly darker on hover */
+    }
      button.increment {
           margin-right: 0px; /* Adds space between + and - buttons */
      }
@@ -344,20 +360,21 @@
             <div style="display: flex; align-items: center; margin-bottom: 20px;">
                 <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span>
                 <h3 id="resourceValueDisplay" style="font-size: 2em; margin: 0 10px;">0</h3> <!-- Display for resource value -->
-                <button onclick="updateResource(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
-                <button onclick="updateResource(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
+                <button onclick="updateResource(1)" class="round-button">+</button>
+                <button onclick="updateResource(-1)" class="round-button">-</button>
             </div>
 
             <!-- Production Value Section with Label -->
             <div style="display: flex; align-items: center;">
-                <span style="font-size: 1.5em; color: brown; margin-right: 10px;">Production</span> <!-- Label for production -->
-                <p id="productionValueDisplay" style="font-size: 2em; color: brown; font-weight: bold; margin: 0 10px;">0</p> <!-- Display for production value -->
-                <button onclick="updateProduction(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
-                <button onclick="updateProduction(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
+                <span style="font-size: 1.5em; color: brown; margin-right: 10px;">Production</span>
+                <p id="productionValueDisplay" style="font-size: 2em; color: brown; font-weight: bold; margin: 0 10px;">0</p>
+                <button onclick="updateProduction(1)" class="round-button">+</button>
+                <button onclick="updateProduction(-1)" class="round-button">-</button>
             </div>
         </div>
     </div>
 </div>
+     
 <!-- Modal for TR Management -->
 <div id="trModal" class="modal">
     <div class="modal-content">
@@ -367,14 +384,11 @@
             <!-- TR Resource Value Section with Label -->
             <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span> <!-- Label for TR resource -->
             <h3 id="trValueDisplay" style="font-size: 2em; margin: 0 10px;">20</h3> <!-- Display for TR value -->
-            <button onclick="updateTR(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
-            <button onclick="updateTR(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
+            <button onclick="updateTR(1)" class="round-button">+</button>
+            <button onclick="updateTR(-1)" class="round-button">-</button>
         </div>
     </div>
 </div>
-
-
-
 
 <h1>Tag Tracker</h1>
 
