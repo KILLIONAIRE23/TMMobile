@@ -5,7 +5,7 @@
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>Kami's Terraforming Mars Tag Manager</title>
 <style>
-      /* Style for round, uniform + and - buttons */
+
     /* Style for round, uniform + and - buttons */
     .round-button {
         width: 50px; /* Uniform width */
@@ -27,11 +27,41 @@
     .modal-content {
         padding: 20px;
         border-radius: 10px;
-        max-width: 300px; /* Restrict width for mobile view */
-        width: 100%;
+        max-width: 300px;
+        width: 90%; /* Adjust to fit within mobile view */
         box-sizing: border-box;
     }
-
+      /* Flex container for resource and production rows */
+    .popup-section {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+    }
+       /* Individual row styling */
+    .popup-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+        flex-wrap: wrap; /* Enable wrapping for narrow screens */
+    }
+      /* Labels and values styling */
+    .popup-label {
+        font-size: 1.5em;
+        margin-right: 10px;
+    }
+    .resource-label {
+        color: black;
+    }
+    .production-label {
+        color: brown;
+    }
+    .popup-value {
+        font-size: 2em;
+        margin: 0 10px;
+    }
     /* Gap between buttons */
     .round-button + .round-button {
         margin-left: 10px; /* Adds space between + and - buttons */
@@ -55,7 +85,45 @@
         margin: 0 15px; /* Significant space between buttons */
         cursor: pointer;
     }
+ /* Button group styling */
+    .button-group {
+        display: flex;
+        gap: 10px; /* Space between + and - buttons */
+    }
+    .round-button {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 1.5em;
+        background-color: #e6e3e3;
+        color: black;
+        border: 1px solid #888;
+        cursor: pointer;
+    }
+    .round-button:hover {
+        background-color: #ccc;
+    }
 
+    /* Media query for smaller screens */
+    @media (max-width: 480px) {
+        .modal-content {
+            max-width: 100%; /* Allow modal to take full width */
+            padding: 15px; /* Reduce padding for mobile */
+        }
+        
+        .popup-row {
+            flex-direction: column; /* Stack elements vertically */
+            align-items: flex-start;
+        }
+
+        .button-group {
+            margin-top: 10px; /* Space buttons below value */
+        }
+
+        .popup-value {
+            margin-bottom: 10px; /* Add space between value and buttons */
+        }
+    }
     /* Optional: Button hover effect */
     .round-button:hover {
         background-color: #ccc; /* Slightly darker on hover */
@@ -392,23 +460,23 @@
 <div id="resourceModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <div style="display: flex; flex-direction: column; align-items: flex-start; color: black; width: 100%;">
-
+        <div class="popup-section">
+            
             <!-- Resource Section with Label, Value, and Buttons -->
-            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; margin-bottom: 20px;">
-                <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span>
-                <h3 id="resourceValueDisplay" style="font-size: 2em; margin: 0 10px;">0</h3>
-                <div style="display: flex; gap: 10px;">
+            <div class="popup-row">
+                <span class="popup-label resource-label">Resource</span>
+                <h3 id="resourceValueDisplay" class="popup-value">0</h3>
+                <div class="button-group">
                     <button onclick="updateResource(1)" class="round-button">+</button>
                     <button onclick="updateResource(-1)" class="round-button">-</button>
                 </div>
             </div>
 
             <!-- Production Section with Label, Value, and Buttons -->
-            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                <span style="font-size: 1.5em; color: brown; margin-right: 10px;">Production</span>
-                <p id="productionValueDisplay" style="font-size: 2em; color: brown; font-weight: bold; margin: 0 10px;">0</p>
-                <div style="display: flex; gap: 10px;">
+            <div class="popup-row">
+                <span class="popup-label production-label">Production</span>
+                <p id="productionValueDisplay" class="popup-value">0</p>
+                <div class="button-group">
                     <button onclick="updateProduction(1)" class="round-button">+</button>
                     <button onclick="updateProduction(-1)" class="round-button">-</button>
                 </div>
