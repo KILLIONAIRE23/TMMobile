@@ -631,24 +631,25 @@ function saveGameState() {
                 credit: parseInt(document.getElementById('creditCount').innerText),
                 steel: parseInt(document.getElementById('steelCount').innerText),
                 titanium: parseInt(document.getElementById('titaniumCount').innerText),
-                plant: parseInt(document.getElementById('plantResourceCount').innerText),
-                energy: parseInt(document.getElementById('energyResourceCount').innerText),
+                plant: parseInt(document.getElementById('plantResourceCount').innerText), // Corrected for plant
+                energy: parseInt(document.getElementById('energyResourceCount').innerText), // Corrected for energy
                 heat: parseInt(document.getElementById('heatCount').innerText)
             },
             productions: {
                 credit: parseInt(document.getElementById('creditProduction').innerText),
                 steel: parseInt(document.getElementById('steelProduction').innerText),
                 titanium: parseInt(document.getElementById('titaniumProduction').innerText),
-                plant: parseInt(document.getElementById('plantResourceProduction').innerText),
-                energy: parseInt(document.getElementById('energyResourceProduction').innerText),
+                plant: parseInt(document.getElementById('plantResourceProduction').innerText), // Corrected for plant production
+                energy: parseInt(document.getElementById('energyResourceProduction').innerText), // Corrected for energy production
                 heat: parseInt(document.getElementById('heatProduction').innerText)
             },
             trValue: parseInt(document.getElementById('trCount').innerText)
         };
         localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
-    }, 500);
+        // Debugging line to confirm the saved state
+        console.log(localStorage.getItem('terraformingMarsGameState'));
+    }, 500); // Save after 100ms if no other changes are made
 }
-
 
      // Function to update the production value
 function updateProduction(delta) {
@@ -760,18 +761,20 @@ function updateTR(delta) {
         });
 
         // Restore Resource Counts
-        Object.keys(gameState.resources).forEach(resource => {
-            if (document.getElementById(`${resource}Count`)) {
-                document.getElementById(`${resource}Count`).innerText = gameState.resources[resource];
-            }
-        });
+        document.getElementById('creditCount').innerText = gameState.resources.credit;
+        document.getElementById('steelCount').innerText = gameState.resources.steel;
+        document.getElementById('titaniumCount').innerText = gameState.resources.titanium;
+        document.getElementById('plantResourceCount').innerText = gameState.resources.plant; // Corrected for plant
+        document.getElementById('energyResourceCount').innerText = gameState.resources.energy; // Corrected for energy
+        document.getElementById('heatCount').innerText = gameState.resources.heat;
 
         // Restore Production Counts
-        Object.keys(gameState.productions).forEach(resource => {
-            if (document.getElementById(`${resource}Production`)) {
-                document.getElementById(`${resource}Production`).innerText = gameState.productions[resource];
-            }
-        });
+        document.getElementById('creditProduction').innerText = gameState.productions.credit;
+        document.getElementById('steelProduction').innerText = gameState.productions.steel;
+        document.getElementById('titaniumProduction').innerText = gameState.productions.titanium;
+        document.getElementById('plantResourceProduction').innerText = gameState.productions.plant; // Corrected for plant production
+        document.getElementById('energyResourceProduction').innerText = gameState.productions.energy; // Corrected for energy production
+        document.getElementById('heatProduction').innerText = gameState.productions.heat;
 
         // Restore TR Value
         document.getElementById('trCount').innerText = gameState.trValue || 0;
