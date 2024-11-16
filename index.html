@@ -283,10 +283,10 @@
      
     <!-- Terraforming Rating Button -->
 <div class="terraforming-container full-width">
-    <button class="terraforming-button">
-        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
-        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
-    </button>
+    <button class="terraforming-button" onclick="openTRModal()">
+    <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+    <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+</button>
 </div>
      
      <!-- Resources Buttons - 2 Rows of 3 Buttons -->
@@ -352,6 +352,18 @@
                 <button onclick="updateProduction(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
                 <button onclick="updateProduction(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
             </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for TR Management -->
+<div id="trModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeTRModal()">&times;</span>
+        <div style="display: flex; align-items: center; justify-content: center; color: black;">
+            <!-- TR Value Section -->
+            <h3 id="trValueDisplay" style="font-size: 2em; margin: 0 10px;">20</h3> <!-- Display for TR value -->
+            <button onclick="updateTR(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
+            <button onclick="updateTR(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
         </div>
     </div>
 </div>
@@ -600,6 +612,35 @@ function produceResources() {
 
         resourceCountElement.innerText = resourceValue;
     });
+}
+function openTRModal() {
+    // Get the current TR value
+    const trValueElement = document.getElementById('trCount');
+    const trValue = parseInt(trValueElement.innerText);
+
+    // Display the current TR value in the modal
+    document.getElementById('trValueDisplay').innerText = trValue;
+
+    // Show the TR modal
+    document.getElementById('trModal').style.display = "block";
+}
+
+function closeTRModal() {
+    // Hide the TR modal
+    document.getElementById('trModal').style.display = "none";
+}
+
+function updateTR(delta) {
+    const trValueElement = document.getElementById('trCount');
+    const trDisplayElement = document.getElementById('trValueDisplay');
+
+    // Update TR value
+    let trValue = parseInt(trValueElement.innerText) + delta;
+    if (trValue < 0) trValue = 0; // Prevent negative values
+
+    // Update both the button display and the modal display
+    trValueElement.innerText = trValue;
+    trDisplayElement.innerText = trValue;
 }
 
     // Load game state from local storage
