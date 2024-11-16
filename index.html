@@ -8,17 +8,17 @@
 
     /* Style for round, uniform + and - buttons */
     .round-button {
-        width: 50px; /* Uniform width */
-        height: 50px; /* Uniform height */
+        width: 40px; /* Adjusted size */
+        height: 40px; /* Adjusted size */
         border-radius: 50%; /* Make buttons round */
-        font-size: 1.5em; /* Font size for + and - signs */
+        font-size: 1.2em; /* Adjusted font size */
         background-color: #e6e3e3; /* Button background color */
         color: black; /* Text color */
         border: 1px solid #888; /* Border color */
         cursor: pointer;
     }
 
-    /* Optional: Button hover effect */
+    /* Button hover effect */
     .round-button:hover {
         background-color: #ccc; /* Slightly darker on hover */
     }
@@ -31,26 +31,29 @@
         width: 90%; /* Adjust to fit within mobile view */
         box-sizing: border-box;
     }
-      /* Flex container for resource and production rows */
+
+    /* Flex container for resource and production rows */
     .popup-section {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         width: 100%;
     }
-       /* Individual row styling */
+
+    /* Individual row styling */
     .popup-row {
         display: flex;
         align-items: center;
         justify-content: space-between;
         width: 100%;
         margin-bottom: 20px;
-        flex-wrap: wrap; /* Enable wrapping for narrow screens */
     }
-      /* Labels and values styling */
+
+    /* Labels and values styling */
     .popup-label {
-        font-size: 1.5em;
+        font-size: 1.2em;
         margin-right: 10px;
+        flex: 1;
     }
     .resource-label {
         color: black;
@@ -59,8 +62,14 @@
         color: brown;
     }
     .popup-value {
-        font-size: 2em;
+        font-size: 1.5em;
         margin: 0 10px;
+    }
+
+    /* Button group styling */
+    .button-group {
+        display: flex;
+        gap: 5px; /* Space between + and - buttons */
     }
 
     /* Alignment for labels */
@@ -68,36 +77,6 @@
         display: block;
         text-align: left;
         margin-left: 5px; /* Align left within the container */
-    }
-     /* Style for round, uniform + and - buttons */
-    .round-button {
-        width: 50px; /* Uniform width */
-        height: 50px; /* Uniform height */
-        border-radius: 50%; /* Make buttons round */
-        font-size: 1.5em; /* Font size for + and - signs */
-        background-color: #e6e3e3; /* Button background color */
-        color: black; /* Text color */
-        border: 1px solid #888; /* Border color */
-        margin: 0 15px; /* Significant space between buttons */
-        cursor: pointer;
-    }
- /* Button group styling */
-    .button-group {
-        display: flex;
-        gap: 10px; /* Space between + and - buttons */
-    }
-    .round-button {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-        font-size: 1.5em;
-        background-color: #e6e3e3;
-        color: black;
-        border: 1px solid #888;
-        cursor: pointer;
-    }
-    .round-button:hover {
-        background-color: #ccc;
     }
 
     /* Media query for smaller screens */
@@ -108,126 +87,119 @@
         }
         
         .popup-row {
-            flex-direction: column; /* Stack elements vertically */
-            align-items: flex-start;
+            flex-direction: row; /* Keep elements in a row on mobile */
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
         }
 
         .button-group {
-            margin-top: 10px; /* Space buttons below value */
+            margin-left: auto; /* Align button group to the right */
+        }
+        
+        .popup-label, .popup-value {
+            font-size: 1em; /* Slightly smaller font on mobile */
         }
 
-        .popup-value {
-            margin-bottom: 10px; /* Add space between value and buttons */
+        .round-button {
+            width: 35px; /* Slightly smaller button size */
+            height: 35px;
+            font-size: 1em;
         }
     }
-    /* Optional: Button hover effect */
-    .round-button:hover {
-        background-color: #ccc; /* Slightly darker on hover */
+
+    /* General Modal and Content Styles */
+    .modal {
+        display: none;
+        position: fixed;
+        z-index: 1;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
     }
-     button.increment {
-          margin-right: 0px; /* Adds space between + and - buttons */
-     }
-     /* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
-}
-/* Container for full-width buttons like Terraforming and Produce */
-.full-width {
-    max-width: 800px; /* Align with other elements on the page */
-    margin: 0 auto; /* Center the container */
-}
-.modal-content {
-    background-color: #fefefe;
-    color: black;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 10px;
-}
 
+    /* Container for full-width buttons like Terraforming and Produce */
+    .full-width {
+        max-width: 800px;
+        margin: 0 auto;
+    }
 
-.close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-}
+    /* Style for closing button */
+    .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
 
-.close:hover,
-.close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-}
-/* Futuristic Frame Style for the Box */
-        #personalIntro {
-            margin-top: 0px;
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(255, 140, 0, 0.9), rgba(255, 165, 0, 0.9));
-            color: #000000;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            border-radius: 20px;
-            box-shadow: 
-                0 0 20px rgba(0, 255, 255, 0.5),  /* Outer glow effect */
-                0 0 40px rgba(0, 255, 255, 0.4);  /* Stronger outer glow */
-            border: 2px solid transparent;
-            background-clip: padding-box;  /* Ensures the gradient does not spill into border */
-            position: relative; /* Allows the pseudo-elements to be positioned */
-        }
-     
-    /* General Box Styling similar to the About Me and My App section */
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+    }
+
+    /* Modal Content Basic Styling */
+    .modal-content {
+        background-color: #fefefe;
+        color: black;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 400px;
+        text-align: center;
+        border-radius: 10px;
+    }
+
+    /* Futuristic Frame Style for the Box */
+    #personalIntro {
+        margin-top: 0px;
+        padding: 20px;
+        background: linear-gradient(135deg, rgba(255, 140, 0, 0.9), rgba(255, 165, 0, 0.9));
+        color: #000000;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 20px;
+        box-shadow: 0 0 20px rgba(0, 255, 255, 0.5), 0 0 40px rgba(0, 255, 255, 0.4);
+        border: 2px solid transparent;
+        background-clip: padding-box;
+        position: relative;
+    }
+
+    /* Resource Tracker Box Styling */
     .resource-tracker-box {
         max-width: 800px;
         margin: 20px auto;
         padding: 20px;
         border: 3px solid #000000;
         background-image: url('https://killionaire23.github.io/TMMobile/ResourceBackground.jpg');
-        background-size: cover; /* Ensure the image covers the entire box */
+        background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-        background-attachment: scroll; /* Make sure it's scrollable for mobile devices */
+        background-attachment: scroll;
         color: #000000;
         border-radius: 15px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
-     
-        /* Futuristic Corners using Pseudo-elements */
-        #personalIntro::before, #personalIntro::after {
-            content: "";
-            position: absolute;
-            top: -10px;
-            left: -10px;
-            right: -10px;
-            bottom: -10px;
-            border: 2px solid rgba(0, 255, 255, 0.5);  /* Glowing cyan border for futuristic effect */
-            border-radius: 25px;
-            filter: blur(15px);
-            z-index: -1;
-        }
-     /* Span inside Resource Button for value */
+
+    /* Labels and Buttons */
     .resource-button span {
-        margin-top: 10px;  /* Increase the space between the icon and the number */
-        font-size: 1.5em;  /* Adjust the size of the number */
-        font-weight: bold; /* Make the number bold for visibility */
+        margin-top: 10px;
+        font-size: 1.5em;
+        font-weight: bold;
     }
-     /* Styles for search bar and button */
+
+    /* Search Bar and Button */
     #cardLookupSection {
-        max-width: 800px; /* Limit width to match the table */
-        margin: 20px auto; /* Center the section */
+        max-width: 800px;
+        margin: 20px auto;
     }
-    /* Styling for body, table, and cards */
+
+    /* Body, Table, and Card Styling */
     body {
         font-family: Arial, sans-serif;
         text-align: center;
@@ -236,17 +208,44 @@
         background-size: cover;
         color: white;
     }
-    table { width: 100%; max-width: 800px; margin: 0 auto; border-collapse: collapse; background-color: rgba(0, 0, 0, 0.7); }
-    th, td { padding: 10px; border: 1px solid #ccc; }
-    th { background-color: rgba(255, 255, 255, 0.2); }
-    button { margin: 5px; padding: 5px 10px; background-color: #333; color: white; }
-    img { max-width: 100%; width: 40px; height: auto; display: block; margin: 0 auto;}
-    h1, h2 { background-color: rgba(0, 0, 0, 0.6); padding: 10px; display: inline-block; border-radius: 10px;}
+    table { 
+        width: 100%; 
+        max-width: 800px; 
+        margin: 0 auto; 
+        border-collapse: collapse; 
+        background-color: rgba(0, 0, 0, 0.7); 
+    }
+    th, td { 
+        padding: 10px; 
+        border: 1px solid #ccc; 
+    }
+    th { 
+        background-color: rgba(255, 255, 255, 0.2); 
+    }
+    button { 
+        margin: 5px; 
+        padding: 5px 10px; 
+        background-color: #333; 
+        color: white; 
+    }
+    img { 
+        max-width: 100%; 
+        width: 40px; 
+        height: auto; 
+        display: block; 
+        margin: 0 auto; 
+    }
+    h1, h2 { 
+        background-color: rgba(0, 0, 0, 0.6); 
+        padding: 10px; 
+        display: inline-block; 
+        border-radius: 10px; 
+    }
 
-    /* Add these new styles for the VP Tracker Icon */
+    /* VP Tracker Icon */
     .icon-container {
         position: relative;
-        width: 200px; /* Adjust size as needed to make the icon relatively big */
+        width: 200px;
         margin: 20px auto;
     }
     .icon-container img {
@@ -259,142 +258,60 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        font-size: 50px; /* Adjust size for the VP number */
+        font-size: 50px;
         font-weight: bold;
         color: #ffffff;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
-    /* Style for making tag counter numbers more visible */
+    /* Tag Counter Visibility */
     #tagTable td span {
-        font-size: 1.5em; /* Make numbers bigger */
-        font-weight: bold; /* Make numbers thicker */
-        color: #ffffff; /* Ensure the numbers are visible */
+        font-size: 1.5em;
+        font-weight: bold;
+        color: #ffffff;
     }
 
-     /* Styles for the Terraforming Rating and Resources Section */
-.rating-container, .resources-container {
-    max-width: 800px;
-    margin: 20px auto;
-}
+    /* Terraforming Rating and Resources Section */
+    .rating-container, .resources-container {
+        max-width: 800px;
+        margin: 20px auto;
+    }
 
-/* Terraforming Rating Container */
-.terraforming-container {
-    text-align: center;
-    margin-bottom: 20px;
-}
+    /* Terraforming Rating Button */
+    .terraforming-button {
+        width: 100%;
+        padding: 20px;
+        font-size: 1.5em;
+        border: 1px solid #000000;
+        background-color: #e6e3e3;
+        color: black;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .terraforming-button img {
+        width: 60px;
+        height: auto;
+    }
+    .terraforming-button span {
+        margin-top: 10px;
+        font-size: 1.5em;
+        font-weight: bold;
+    }
 
-.terraforming-title {
-    font-size: 1.5em;
-    color: #ffffff; /* White color for contrast */
-    margin-bottom: 10px;
-}
-
-/* Terraforming Rating Button */
-.terraforming-button {
-    width: 100%; /* Take up full width of container */
-    padding: 20px;
-    font-size: 1.5em;
-    border: 1px solid #000000;
-    background-color: #e6e3e3;
-    color: black;
-    cursor: pointer;
-    border-radius: 10px;
-    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-.terraforming-button img {
-    width: 60px; /* Adjust size if necessary */
-    height: auto;
-}
-
-.terraforming-button span {
-    margin-top: 10px;
-    font-size: 1.5em;
-    font-weight: bold;
-}
-
-/* Container for the 3 equal-sized resource buttons */
-.resources-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-/* Individual Resource Button */
-.resource-button {
-    flex: 1;
-    padding: 15px;
-    margin: 0 5px;
-    border: 1px solid #000000;
-    font-size: 1em;
-    background-color: #e6e3e3;
-    color: black;
-    border-radius: 10px;
-    cursor: pointer;
-    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-    transition: background-color 0.3s ease;
-    position: relative; /* To properly position the values */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Make the button stand out a bit when hovered */
-.resource-button:hover {
-    background-color: #fff;
-}
-
-/* Image inside Resource Button */
-.resource-button img {
-    width: 60px;  /* Adjust size to fit nicely in the button */
-    height: 60px; /* Keep proportions consistent */
-}
-
-/* Span inside Resource Button for value */
-.resource-button span {
-    margin-top: 10px;  /* Space between the icon and the number */
-    font-size: 1.2em;  /* Adjust the size of the number */
-    font-weight: bold; /* Make the number bold for visibility */
-}
-
-/* Production count (brown number) under resource value */
-.production-count {
-    margin-top: 5px;
-    font-size: 1em;
-    font-weight: bold;
-    color: brown;  /* Brown color for resource production count */
-}
-
-/* Produce Button */
-.produce-button {
-    width: 100%; /* Take up full width of container */
-    padding: 10px;
-    font-size: 1.2em;
-    border: 1px solid #000000;
-    background-color: #e6e3e3;
-    color: black;
-    cursor: pointer;
-    border-radius: 10px;
-    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-}
-     
-/* Container for the 3 equal-sized resource buttons */
-.resources-row {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}
-
-
+    /* Resource Button Styles */
+    .resources-row {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
 
 </style>
+
 </head>
 <body>
 <h2>Standard Resources and TR</h2>
@@ -480,6 +397,7 @@
         </div>
     </div>
 </div>
+
 
 
      
