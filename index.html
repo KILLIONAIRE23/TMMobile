@@ -489,15 +489,79 @@ function updateResource(delta) {
         const resourceCountElement = document.getElementById(`${currentResource}Count`);
         const resourceDisplayElement = document.getElementById('resourceValueDisplay');
 
-        // Update the resource value
         let count = parseInt(resourceCountElement.innerText) + delta;
-        if (count < 0) count = 0; // Prevent negative values
+        if (count < 0) count = 0;
 
-        // Update both the button display and the modal display
         resourceCountElement.innerText = count;
         resourceDisplayElement.innerText = count;
+
+        saveGameState(); // Save state after updating resource
     }
 }
+
+function updateProduction(delta) {
+    if (currentResource) {
+        const productionCountElement = document.getElementById(`${currentResource}Production`);
+        const productionDisplayElement = document.getElementById('productionValueDisplay');
+
+        let production = parseInt(productionCountElement.innerText) + delta;
+        if (currentResource !== 'credit' && production < 0) production = 0;
+
+        productionCountElement.innerText = production;
+        productionDisplayElement.innerText = production;
+
+        saveGameState(); // Save state after updating production
+    }
+}
+
+function updateTR(delta) {
+    const trValueElement = document.getElementById('trCount');
+    const trDisplayElement = document.getElementById('trValueDisplay');
+
+    let trValue = parseInt(trValueElement.innerText) + delta;
+    if (trValue < 0) trValue = 0;
+
+    trValueElement.innerText = trValue;
+    trDisplayElement.innerText = trValue;
+
+    saveGameState(); // Save state after updating TR
+}
+
+function produceResources() {
+    const resources = [
+        { id: 'credit', countId: 'creditCount', productionId: 'creditProduction' },
+        { id: 'steel', countId: 'steelCount', productionId: 'steelProduction' },
+        { id: 'titanium', countId: 'titaniumCount', productionId: 'titaniumProduction' },
+        { id: 'plant', countId: 'plantResourceCount', productionId: 'plantResourceProduction' },
+        { id: 'energy', countId: 'energyResourceCount', productionId: 'energyResourceProduction' },
+        { id: 'heat', countId: 'heatCount', productionId: 'heatProduction' }
+    ];
+    
+    let trValue = parseInt(document.getElementById('trCount').innerText);
+    
+    resources.forEach(resource => {
+        const resourceCountElement = document.getElementById(resource.countId);
+        const productionCountElement = document.getElementById(resource.productionId);
+        
+        let resourceValue = parseInt(resourceCountElement.innerText);
+        let productionValue = parseInt(productionCountElement.innerText);
+
+        if (resource.id === 'credit') {
+            resourceValue += productionValue + trValue;
+        } else {
+            resourceValue += productionValue;
+        }
+
+        if (resource.id !== 'credit' && resourceValue < 0) {
+            resourceValue = 0;
+        }
+
+        resourceCountElement.innerText = resourceValue;
+    });
+
+    saveGameState(); // Save state after production
+}
+
 
 function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -556,12 +620,30 @@ window.onclick = function(event) {
 
     // Save game state to local storage
     function saveGameState() {
-        const gameState = {
-            vpCount,
-            tagCounts
-        };
-        localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
-    }
+    const gameState = {
+        vpCount,
+        tagCounts,
+        resources: {
+            credit: parseInt(document.getElementById('creditCount').innerText),
+            steel: parseInt(document.getElementById('steelCount').innerText),
+            titanium: parseInt(document.getElementById('titaniumCount').innerText),
+            plant: parseInt(document.getElementById('plantResourceCount').innerText),
+            energy: parseInt(document.getElementById('energyResourceCount').innerText),
+            heat: parseInt(document.getElementById('heatCount').innerText)
+        },
+        productions: {
+            credit: parseInt(document.getElementById('creditProduction').innerText),
+            steel: parseInt(document.getElementById('steelProduction').innerText),
+            titanium: parseInt(document.getElementById('titaniumProduction').innerText),
+            plant: parseInt(document.getElementById('plantResourceProduction').innerText),
+            energy: parseInt(document.getElementById('energyResourceProduction').innerText),
+            heat: parseInt(document.getElementById('heatProduction').innerText)
+        },
+        trValue: parseInt(document.getElementById('trCount').innerText)
+    };
+    localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
+}
+
      // Function to update the production value
 function updateProduction(delta) {
     if (currentResource) {
@@ -645,29 +727,58 @@ function updateTR(delta) {
 
     // Load game state from local storage
     function loadGameState() {
-        const savedState = localStorage.getItem('terraformingMarsGameState');
-        if (savedState) {
-            const gameState = JSON.parse(savedState);
-            vpCount = gameState.vpCount || 0;
-            document.getElementById('vpNumber').innerText = vpCount;
+    const savedState = localStorage.getItem('terraformingMarsGameState');
+    if (savedState) {
+        const gameState = JSON.parse(savedState);
 
-            Object.keys(gameState.tagCounts).forEach(tag => {
-                tagCounts[tag] = gameState.tagCounts[tag];
-                document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-            });
-        }
+        // Restore VP count
+        vpCount = gameState.vpCount || 0;
+        document.getElementById('vpNumber').innerText = vpCount;
+
+        // Restore Tag Counts
+        Object.keys(gameState.tagCounts).forEach(tag => {
+            tagCounts[tag] = gameState.tagCounts[tag];
+            document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+        });
+
+        // Restore Resource Counts
+        Object.keys(gameState.resources).forEach(resource => {
+            document.getElementById(`${resource}Count`).innerText = gameState.resources[resource];
+        });
+
+        // Restore Production Counts
+        Object.keys(gameState.productions).forEach(resource => {
+            document.getElementById(`${resource}Production`).innerText = gameState.productions[resource];
+        });
+
+        // Restore TR Value
+        document.getElementById('trCount').innerText = gameState.trValue;
     }
+}
+
 
     // Reset game state
     function resetGameState() {
-        vpCount = 0;
-        Object.keys(tagCounts).forEach(tag => {
-            tagCounts[tag] = 0;
-            document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
-        });
-        document.getElementById('vpNumber').innerText = vpCount;
-        localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
-    }
+    vpCount = 0;
+    Object.keys(tagCounts).forEach(tag => {
+        tagCounts[tag] = 0;
+        document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
+    });
+    document.getElementById('vpNumber').innerText = vpCount;
+
+    // Reset resources and productions
+    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
+    resources.forEach(resource => {
+        document.getElementById(`${resource}Count`).innerText = 0;
+        document.getElementById(`${resource}Production`).innerText = 0;
+    });
+
+    // Reset TR
+    document.getElementById('trCount').innerText = 20;
+
+    localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
+}
+
 
     // Load JSON and game state on Page Load
     document.addEventListener("DOMContentLoaded", () => {
