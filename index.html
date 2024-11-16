@@ -557,16 +557,28 @@
 </p>
 
 <script>
-        // Close the modal when clicking outside of the modal-content area
+        // Close modals when clicking outside of the modal-content areas
     window.onclick = function(event) {
         const trModal = document.getElementById('trModal');
+        const resourceModal = document.getElementById('resourceModal');
+        
+        // Check if the click is outside of the TR modal
         if (event.target == trModal) {
             closeTRModal();
+        }
+
+        // Check if the click is outside of the Resource modal
+        if (event.target == resourceModal) {
+            closeModal();
         }
     }
 
     function closeTRModal() {
         document.getElementById('trModal').style.display = "none";
+    }
+
+    function closeModal() {
+        document.getElementById('resourceModal').style.display = "none";
     }
     const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
 
