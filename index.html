@@ -27,14 +27,16 @@
 }
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto; /* 15% from the top and centered */
+    color: black;
+    margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
-    max-width: 400px; /* Limit max width to fit comfortably */
+    width: 80%;
+    max-width: 400px;
     text-align: center;
     border-radius: 10px;
 }
+
 
 .close {
     color: #aaa;
@@ -332,29 +334,28 @@
     <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
      <!-- Modal for Resource Management -->
+<!-- Modal for Resource Management -->
 <div id="resourceModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <div style="display: flex; align-items: center;">
-            <!-- Resource Values on the Left Side -->
-            <div style="flex: 1; text-align: left;">
-                <h3 id="resourceValueDisplay">0</h3> <!-- Display for resource value -->
-                <p id="productionValueDisplay" style="color: brown; font-weight: bold;">0</p> <!-- Display for production value -->
+        <div style="display: flex; flex-direction: column; align-items: center; color: black;">
+            <!-- Resource Value Section -->
+            <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <h3 id="resourceValueDisplay" style="font-size: 2em; margin: 0 10px;">0</h3> <!-- Display for resource value -->
+                <button onclick="updateResource(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
+                <button onclick="updateResource(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
             </div>
 
-            <!-- + and - Buttons on the Right Side -->
-            <div style="flex: 1; text-align: right;">
-                <!-- Buttons to update resource count -->
-                <button onclick="updateResource(1)">+</button>
-                <button onclick="updateResource(-1)">-</button>
-                
-                <!-- Buttons to update production count -->
-                <button onclick="updateProduction(1)">+</button>
-                <button onclick="updateProduction(-1)">-</button>
+            <!-- Production Value Section -->
+            <div style="display: flex; align-items: center;">
+                <p id="productionValueDisplay" style="font-size: 2em; color: brown; font-weight: bold; margin: 0 10px;">0</p> <!-- Display for production value -->
+                <button onclick="updateProduction(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
+                <button onclick="updateProduction(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <h1>Tag Tracker</h1>
