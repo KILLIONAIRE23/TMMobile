@@ -557,21 +557,25 @@
 </p>
 
 <script>
-        // Close modals when clicking outside of the modal-content areas
-    window.onclick = function(event) {
+        // Set up event listeners to close modals when clicking outside the modal-content area
+    document.addEventListener("DOMContentLoaded", function() {
         const trModal = document.getElementById('trModal');
         const resourceModal = document.getElementById('resourceModal');
-        
-        // Check if the click is outside of the TR modal
-        if (event.target == trModal) {
-            closeTRModal();
-        }
 
-        // Check if the click is outside of the Resource modal
-        if (event.target == resourceModal) {
-            closeModal();
-        }
-    }
+        // Click listener for TR modal
+        trModal.addEventListener('click', function(event) {
+            if (event.target === trModal) {
+                closeTRModal();
+            }
+        });
+
+        // Click listener for Resource modal
+        resourceModal.addEventListener('click', function(event) {
+            if (event.target === resourceModal) {
+                closeModal();
+            }
+        });
+    });
 
     function closeTRModal() {
         document.getElementById('trModal').style.display = "none";
