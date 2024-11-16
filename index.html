@@ -557,6 +557,17 @@
 </p>
 
 <script>
+        // Close the modal when clicking outside of the modal-content area
+    window.onclick = function(event) {
+        const trModal = document.getElementById('trModal');
+        if (event.target == trModal) {
+            closeTRModal();
+        }
+    }
+
+    function closeTRModal() {
+        document.getElementById('trModal').style.display = "none";
+    }
     const tagCounts = { earth: 0, space: 0, animal: 0, plant: 0, building: 0, event: 0, science: 0, energy: 0, microbe: 0, jovian: 0, city: 0, venus: 0 };
 
     function changeCount(tag, delta) {
