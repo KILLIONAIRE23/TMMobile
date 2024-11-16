@@ -783,26 +783,37 @@ function updateTR(delta) {
 
     // Reset game state
     function resetGameState() {
+    // Reset VP Count
     vpCount = 0;
+    document.getElementById('vpNumber').innerText = vpCount;
+
+    // Reset Tag Counts
     Object.keys(tagCounts).forEach(tag => {
         tagCounts[tag] = 0;
         document.getElementById(`${tag}Count`).innerText = tagCounts[tag];
     });
-    document.getElementById('vpNumber').innerText = vpCount;
 
-    // Reset resources and productions
-    const resources = ['credit', 'steel', 'titanium', 'plant', 'energy', 'heat'];
-    resources.forEach(resource => {
-        document.getElementById(`${resource}Count`).innerText = 0;
-        document.getElementById(`${resource}Production`).innerText = 0;
+    // Reset Resource and Production Counts
+    const resources = {
+        credit: { countId: 'creditCount', productionId: 'creditProduction' },
+        steel: { countId: 'steelCount', productionId: 'steelProduction' },
+        titanium: { countId: 'titaniumCount', productionId: 'titaniumProduction' },
+        plant: { countId: 'plantResourceCount', productionId: 'plantResourceProduction' },
+        energy: { countId: 'energyResourceCount', productionId: 'energyResourceProduction' },
+        heat: { countId: 'heatCount', productionId: 'heatProduction' }
+    };
+
+    Object.keys(resources).forEach(resource => {
+        document.getElementById(resources[resource].countId).innerText = 0; // Reset resource value to 0
+        document.getElementById(resources[resource].productionId).innerText = 0; // Reset production value to 0
     });
 
-    // Reset TR
-    document.getElementById('trCount').innerText = 20;
+    // Reset TR Value
+    document.getElementById('trCount').innerText = 20; // Initial TR value
 
-    localStorage.removeItem('terraformingMarsGameState'); // Clear saved state
+    // Clear saved state in localStorage
+    localStorage.removeItem('terraformingMarsGameState');
 }
-
 
     // Load JSON and game state on Page Load
     document.addEventListener("DOMContentLoaded", () => {
