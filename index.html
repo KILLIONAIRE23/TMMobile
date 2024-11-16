@@ -339,15 +339,18 @@
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <div style="display: flex; flex-direction: column; align-items: center; color: black;">
-            <!-- Resource Value Section -->
+            
+            <!-- Resource Value Section with Label -->
             <div style="display: flex; align-items: center; margin-bottom: 20px;">
+                <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span>
                 <h3 id="resourceValueDisplay" style="font-size: 2em; margin: 0 10px;">0</h3> <!-- Display for resource value -->
                 <button onclick="updateResource(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
                 <button onclick="updateResource(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
             </div>
 
-            <!-- Production Value Section -->
+            <!-- Production Value Section with Label -->
             <div style="display: flex; align-items: center;">
+                <span style="font-size: 1.5em; color: brown; margin-right: 10px;">Production</span> <!-- Label for production -->
                 <p id="productionValueDisplay" style="font-size: 2em; color: brown; font-weight: bold; margin: 0 10px;">0</p> <!-- Display for production value -->
                 <button onclick="updateProduction(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
                 <button onclick="updateProduction(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
@@ -360,13 +363,16 @@
     <div class="modal-content">
         <span class="close" onclick="closeTRModal()">&times;</span>
         <div style="display: flex; align-items: center; justify-content: center; color: black;">
-            <!-- TR Value Section -->
+            
+            <!-- TR Resource Value Section with Label -->
+            <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span> <!-- Label for TR resource -->
             <h3 id="trValueDisplay" style="font-size: 2em; margin: 0 10px;">20</h3> <!-- Display for TR value -->
             <button onclick="updateTR(1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">+</button>
             <button onclick="updateTR(-1)" style="font-size: 1.5em; padding: 10px; margin: 5px;">-</button>
         </div>
     </div>
 </div>
+
 
 
 
