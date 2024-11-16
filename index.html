@@ -331,22 +331,28 @@
     <div class="produce-container full-width">
     <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
-     <!-- Modal for Add/Remove Options -->
+     <!-- Modal for Resource Management -->
 <div id="resourceModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <h2>Update Resource</h2>
-        <p id="modalResourceName">Resource: Credit</p>
-        
-        <!-- Update Resource Count -->
-        <h3>Update Resource Value</h3>
-        <button onclick="updateResource(1)">Add Resource</button>
-        <button onclick="updateResource(-1)">Remove Resource</button>
-        
-        <!-- Update Production Count -->
-        <h3>Update Production Value</h3>
-        <button onclick="updateProduction(1)">Add Production</button>
-        <button onclick="updateProduction(-1)">Remove Production</button>
+        <div style="display: flex; align-items: center;">
+            <!-- Resource Values on the Left Side -->
+            <div style="flex: 1; text-align: left;">
+                <h3 id="resourceValueDisplay">0</h3> <!-- Display for resource value -->
+                <p id="productionValueDisplay" style="color: brown; font-weight: bold;">0</p> <!-- Display for production value -->
+            </div>
+
+            <!-- + and - Buttons on the Right Side -->
+            <div style="flex: 1; text-align: right;">
+                <!-- Buttons to update resource count -->
+                <button onclick="updateResource(1)">+</button>
+                <button onclick="updateResource(-1)">-</button>
+                
+                <!-- Buttons to update production count -->
+                <button onclick="updateProduction(1)">+</button>
+                <button onclick="updateProduction(-1)">-</button>
+            </div>
+        </div>
     </div>
 </div>
 
