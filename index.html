@@ -496,6 +496,17 @@
     <button onclick="searchCard()">Search</button>
     <div id="cardDetails"></div>
 </div>
+<!-- VP and TR Trackers -->
+<div id="vpTracker">
+    <h2>Victory Points Tracker</h2>
+    <div class="icon-container">
+        <img src="Mars.png" alt="Mars Icon">
+        <div id="vpNumber" class="vp-number">0</div> <!-- Initial VP value is 0 -->
+    </div>
+    <button onclick="changeVP(1)">Add VP</button>
+    <button onclick="changeVP(-1)">Remove VP</button>
+</div>
+    
 <h1>Tag Tracker</h1>
 
 <!-- Tag Tracker Table with All Tags -->
@@ -531,17 +542,6 @@
 <td><button onclick="changeCount('venus', 1)">+</button><button onclick="changeCount('venus', -1)">-</button></td></tr>
 </tbody>
 </table>
-
-<!-- VP and TR Trackers -->
-<div id="vpTracker">
-    <h2>Victory Points Tracker</h2>
-    <div class="icon-container">
-        <img src="Mars.png" alt="Mars Icon">
-        <div id="vpNumber" class="vp-number">0</div> <!-- Initial VP value is 0 -->
-    </div>
-    <button onclick="changeVP(1)">Add VP</button>
-    <button onclick="changeVP(-1)">Remove VP</button>
-</div>
 
 <!-- Reset Game Button -->
 <div id="resetSection" style="margin-top: 50px;">
