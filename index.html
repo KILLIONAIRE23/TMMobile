@@ -8,7 +8,24 @@
     <link rel="icon" href="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/appicon.png" type="image/png">
 
 <style>
+ /* Video container to make the video responsive */
+    .video-container {
+        position: relative;
+        padding-bottom: 56.25%; /* 16:9 aspect ratio */
+        height: 0;
+        overflow: hidden;
+        max-width: 100%;
+        background: #000;
+        margin: 0 auto 20px; /* Adds margin below the video for spacing */
+    }
 
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
     /* Style for round, uniform + and - buttons */
     .round-button {
         width: 40px; /* Adjusted size */
@@ -558,7 +575,18 @@
     </a></h2>
 </p>
 <p> Need a video to learn the game? Here is a video by Isaac Fryxelius!</p>
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/A9-FpNpptjM?si=-XM6B_-kjfaV_oLM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <!-- Section for "How to Play" YouTube Video -->
+<div id="howToPlay" style="max-width: 800px; margin: 20px auto; text-align: center; padding-bottom: 20px;">
+    <div class="video-container">
+        <iframe 
+            src="https://www.youtube.com/embed/abc123xyz" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+</div>
     
 <script>
         // Set up event listeners to close modals when clicking outside the modal-content area
