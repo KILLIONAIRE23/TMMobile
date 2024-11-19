@@ -525,19 +525,21 @@
     </div>
 </div>
     
-<!-- Search Card by Number Box with matching style (solid color) -->
-<div id="searchCardBox" style="background-color: rgba(245, 126, 55, 0.8); color: #FFFFFF; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black;">
+<!-- Search Card by Number Box with matching style (solid color, aligned) -->
+<div id="searchCardBox" style="background-color: #F57E37; color: #FFFFFF; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black; box-sizing: border-box;">
 
-    <h2 style="background-color: rgba(0, 0, 0, 0.6); padding: 0px; border-radius: 10px; display: inline-block; color: #FFFFFF;">Search Card by Number!</h2>
+    <h3 style="background-color: rgba(0, 0, 0, 0.6); padding: 8px 12px; border-radius: 10px; display: inline-block; color: #FFFFFF;">Search Card by Number!</h3>
+    
     <p>Enter the unique number of your card to automatically apply its VP and tags!</p>
     <p>IMPORTANT: This does NOT include VP-per-resource cards, as they constantly change.</p>
     
-    <input id="cardNumberInput" placeholder="Enter card number" type="text" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;">
+    <input id="cardNumberInput" placeholder="Enter card number" type="text" style="width: calc(100% - 20px); padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
     
     <button onclick="searchCard()" style="padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Search</button>
     
     <div id="cardDetails" style="margin-top: 10px; color: #FFFFFF;"></div>
 </div>
+
     
 <!-- VP and TR Trackers -->
 <div id="vpTracker">
