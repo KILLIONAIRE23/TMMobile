@@ -8,7 +8,14 @@
     <link rel="icon" href="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/appicon.png" type="image/png">
 
 <style>
-
+    
+@media (max-width: 480px) {
+    #searchCardBox {
+        width: 90%;
+        margin: 10px auto;
+    }
+}
+    
     .highlight-heading {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 10px;
@@ -517,15 +524,21 @@
         </div>
     </div>
 </div>
-<!-- Card Search by Number -->
-<div id="searchCardBox" style="background-color: #000000; color: #FFFFFF; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black;">
-    <h2>Search Card by Number!</h2>
-    <p>Enter the unique number of your card to automatically apply its VPs and tags!</p>
+    
+<!-- Search Card by Number Box with matching style (solid color) -->
+<div id="searchCardBox" style="background-color: #F57E37; color: #FFFFFF; max-width: 800px; margin: 20px auto; padding: 20px; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black;">
+
+    <h2 style="background-color: rgba(0, 0, 0, 0.6); padding: 10px; border-radius: 10px; display: inline-block; color: #FFFFFF;">Search Card by Number!</h2>
+    <p>Enter the unique number of your card to automatically apply its VP and tags!</p>
     <p>IMPORTANT: This does NOT include VP-per-resource cards, as they constantly change.</p>
-    <input id="cardNumberInput" placeholder="Enter card number" type="text"/>
-    <button onclick="searchCard()">Search</button>
-    <div id="cardDetails"></div>
+    
+    <input id="cardNumberInput" placeholder="Enter card number" type="text" style="width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc;">
+    
+    <button onclick="searchCard()" style="padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Search</button>
+    
+    <div id="cardDetails" style="margin-top: 10px; color: #FFFFFF;"></div>
 </div>
+    
 <!-- VP and TR Trackers -->
 <div id="vpTracker">
     <h2>Victory Points Tracker</h2>
