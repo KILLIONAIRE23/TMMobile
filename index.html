@@ -9,6 +9,35 @@
 
 <style>
     
+/* Style for each news item card */
+    .rss-item {
+        background-color: rgba(0, 0, 0, 0.7);
+        padding: 15px;
+        border-radius: 10px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .rss-item h4 {
+        color: #ffffff;
+        font-size: 1.2em;
+        margin: 0 0 10px;
+    }
+
+    .rss-item p {
+        color: #cccccc;
+        margin: 5px 0;
+    }
+
+    .rss-item a {
+        color: #ffa500;
+        text-decoration: none;
+    }
+
+    .rss-item a:hover {
+        text-decoration: underline;
+    }
+    
 @media (max-width: 480px) {
     #searchCardBox {
         width: 90%;
@@ -1095,8 +1124,8 @@ function updateTR(delta) {
 </script>
 
     <div id="rssFeedContainer" style="padding: 20px; background-color: rgba(245, 126, 55, 0.8); color: #FFFFFF; max-width: 800px; width: 100%; margin: 20px auto; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black; box-sizing: border-box;">
-    <h3 style="background-color: rgba(0, 0, 0, 0.6); padding: 4px; border-radius: 10px; display: inline-block; color: #FFFFFF;">Check out what the fans are talking about!</h3>
-    <ul id="rssFeedList" style="padding-left: 0; list-style-type: none;"></ul>
+    <h3 style="background-color: rgba(0, 0, 0, 0.6); padding: 4px; border-radius: 10px; display: inline-block; color: #FFFFFF;">Latest News</h3>
+    <div id="rssFeedList"></div>
 </div>
     
    <!-- Personal Introduction Text Box -->
