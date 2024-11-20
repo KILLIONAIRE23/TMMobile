@@ -679,7 +679,7 @@ async function fetchRSSFeed() {
 
                 // Description snippet
                 const description = document.createElement('p');
-                description.innerText = item.description
+                description.innerHTML = item.description
                     ? item.description.substring(0, 150) + '...' // Limit description length
                     : 'No description available.';
 
