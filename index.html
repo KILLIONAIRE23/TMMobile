@@ -632,20 +632,35 @@ async function fetchRSSFeed() {
             rssFeedList.innerHTML = '';
 
             items.forEach(item => {
-                const listItem = document.createElement('li');
-                listItem.style.marginBottom = '10px';
-                
-                // Create title link
+                // Create container for each item
+                const itemDiv = document.createElement('div');
+                itemDiv.classList.add('rss-item');
+
+                // Title with link
+                const title = document.createElement('h4');
                 const titleLink = document.createElement('a');
                 titleLink.href = item.link;
                 titleLink.target = '_blank';
-                titleLink.style.color = '#FFFFFF';
-                titleLink.style.textDecoration = 'none';
                 titleLink.innerText = item.title;
+                title.appendChild(titleLink);
 
-                // Append link to the list item and add to the container
-                listItem.appendChild(titleLink);
-                rssFeedList.appendChild(listItem);
+                // Publication date
+                const date = document.createElement('p');
+                date.innerText = `Published on: ${new Date(item.pubDate).toLocaleDateString()}`;
+
+                // Description snippet
+                const description = document.createElement('p');
+                description.innerText = item.description
+                    ? item.description.substring(0, 150) + '...' // Limit description length
+                    : 'No description available.';
+
+                // Append elements to item container
+                itemDiv.appendChild(title);
+                itemDiv.appendChild(date);
+                itemDiv.appendChild(description);
+
+                // Append item to feed list
+                rssFeedList.appendChild(itemDiv);
             });
         } else {
             console.error('Failed to fetch RSS feed:', data.message);
