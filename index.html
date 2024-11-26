@@ -217,23 +217,38 @@
     align-items: center;
 }
     
-/* History Section */
+
+/* Remove the Close (X) button */
+.close {
+    display: none; /* Hides the close button */
+}
+
+
+/* History section styles */
 .history-section {
     font-size: 1em;
     margin-top: 20px;
     width: 100%;
 }
 
-/* Remove the Close (X) button */
-.close {
-    display: none; /* Hides the close button */
-}
-    
 .history-item {
     padding: 5px;
     font-size: 1em;
     color: #666;
+    text-align: left;
 }
+
+/* Add a background color for clarity */
+.history-item.resource-history {
+    background-color: rgba(0, 255, 0, 0.1); /* Light green for resource changes */
+}
+
+.history-item.production-history {
+    background-color: rgba(255, 140, 0, 0.1); /* Light orange for production changes */
+}
+
+
+    
 /* Button styling */
 .round-button {
     width: 60px; /* Increased button size */
@@ -866,6 +881,93 @@ document.addEventListener('DOMContentLoaded', fetchRSSFeed);
         });
     });
 
+// Initialize history objects for each resource
+const resourceHistory = {
+    credit: [],
+    steel: [],
+    titanium: [],
+    plant: [],
+    energy: [],
+    heat: [],
+};
+
+    // Function to add to resource history
+function addToResourceHistory(resource, change) {
+    const timestamp = new Date().toLocaleTimeString();
+    const historyEntry = `${timestamp}: ${change} ${capitalizeFirstLetter(resource)} Resource`;
+    
+    // Push the history entry to the specific resource history
+    resourceHistory[resource].push(historyEntry);
+    
+    // Update the history section for the resource
+    updateHistoryDisplay(resource);
+}
+
+// Function to update the history display for a specific resource
+function updateHistoryDisplay(resource) {
+    const historyContainer = document.getElementById(`${resource}History`);
+    
+    // Clear the history container first
+    historyContainer.innerHTML = '';
+    
+    // Add all history entries to the container
+    resourceHistory[resource].forEach(entry => {
+        const historyItem = document.createElement('div');
+        historyItem.classList.add('history-item');
+        historyItem.textContent = entry;
+        
+        // Append the item to the history section
+        historyContainer.appendChild(historyItem);
+    });
+}
+
+// Update history when a resource value changes
+function updateResourceHistory(resource, delta) {
+    if (delta > 0) {
+        addToResourceHistory(resource, `+${delta}`);
+    } else if (delta < 0) {
+        addToResourceHistory(resource, `${delta}`);
+    }
+}
+
+// Similarly, update production history
+function updateProductionHistory(resource, delta) {
+    if (delta > 0) {
+        addToResourceHistory(resource, `+${delta}`);
+    } else if (delta < 0) {
+        addToResourceHistory(resource, `${delta}`);
+    }
+}
+
+// When updating resource (credit, steel, etc.)
+function updateResourceValue(resource, delta) {
+    // Find the current resource element and production element
+    const resourceElement = document.getElementById(`${resource}Count`);
+    let currentResourceValue = parseInt(resourceElement.innerText);
+    currentResourceValue += delta;
+
+    // Update the value in the UI
+    resourceElement.innerText = currentResourceValue;
+
+    // Call the function to update the history for that resource
+    updateResourceHistory(resource, delta);
+}
+
+// When updating production (for resource production)
+function updateProductionValue(resource, delta) {
+    // Find the current production element
+    const productionElement = document.getElementById(`${resource}Production`);
+    let currentProductionValue = parseInt(productionElement.innerText);
+    currentProductionValue += delta;
+
+    // Update the value in the UI
+    productionElement.innerText = currentProductionValue;
+
+    // Call the function to update the history for production change
+    updateProductionHistory(resource, delta);
+}
+
+    
     function closeTRModal() {
         document.getElementById('trModal').style.display = "none";
     }
@@ -921,32 +1023,7 @@ function closeModal() {
     document.getElementById('resourceModal').style.display = "none";
     currentResource = ''; // Clear the current resource
 }
-    
-// Function to update resource value and add history entry
-function updateResourceValue(valueChange, type) {
-    const resourceValue = document.getElementById('resourceValue');
-    let currentValue = parseInt(resourceValue.innerText);
-    currentValue += valueChange;
 
-    // Update value display
-    resourceValue.innerText = currentValue;
-
-    // Track the change in history
-    updateHistory(valueChange, type, 'Resource');
-}
-
-// Function to update production value and add history entry
-function updateProductionValue(valueChange, type) {
-    const productionValue = document.getElementById('productionValue');
-    let currentValue = parseInt(productionValue.innerText);
-    currentValue += valueChange;
-
-    // Update production display
-    productionValue.innerText = currentValue;
-
-    // Track the change in history
-    updateHistory(valueChange, type, 'Production');
-}
 
     // Function to update history section
 function updateHistory(valueChange, type, category) {
