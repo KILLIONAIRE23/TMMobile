@@ -767,6 +767,7 @@ document.addEventListener('DOMContentLoaded', fetchRSSFeed);
         saveGameState(); // Save after updating VP
     }
     let currentResource = '';
+let historyLog = []; // Array to store history
 
 function openModal(resource) {
     currentResource = resource;
@@ -781,6 +782,9 @@ function openModal(resource) {
     // Set these values in the modal
     document.getElementById('resourceValueDisplay').innerText = resourceValue;
     document.getElementById('productionValueDisplay').innerText = productionValue;
+    
+    // Clear and update the history log
+    updateHistoryLog();
     
     // Display the modal
     document.getElementById('resourceModal').style.display = "block";
@@ -802,6 +806,10 @@ function updateResource(delta) {
         resourceCountElement.innerText = count;
         resourceDisplayElement.innerText = count;
 
+        // Log the change to history
+        logHistory(`${delta > 0 ? '+' : ''}${delta} Resource`);
+        updateHistoryLog();
+
         saveGameState(); // Save immediately after update
     }
 }
@@ -817,8 +825,31 @@ function updateProduction(delta) {
         productionCountElement.innerText = production;
         productionDisplayElement.innerText = production;
 
+        // Log the change to history
+        logHistory(`${delta > 0 ? '+' : ''}${delta} Production`);
+        updateHistoryLog();
+
         saveGameState(); // Save immediately after update
     }
+}
+
+function logHistory(message) {
+    const timestamp = new Date().toLocaleTimeString();
+    historyLog.unshift(`${timestamp}: ${message}`);
+    if (historyLog.length > 10) {
+        historyLog.pop(); // Limit to the latest 10 entries
+    }
+}
+
+function updateHistoryLog() {
+    const historyElement = document.getElementById('historyLog');
+    historyElement.innerHTML = ''; // Clear current history
+
+    historyLog.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = entry;
+        historyElement.appendChild(li);
+    });
 }
      
 function updateTR(delta) {
