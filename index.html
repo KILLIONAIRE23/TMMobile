@@ -513,29 +513,25 @@
         <span class="close" onclick="closeModal()">&times;</span>
         <div class="popup-section">
             
-            <!-- Popup for Resource -->
-<div class="popup-section">
-    <span class="popup-label resource-label">Resource</span>
-    <h3 id="resourceValueDisplay" class="popup-value" style="font-size: 3em;">0</h3>
-    <div class="button-group">
-        <button onclick="updateResource(-5)" class="popup-button red">-5</button>
-        <button onclick="updateResource(-1)" class="popup-button red">-1</button>
-        <button onclick="updateResource(1)" class="popup-button green">+1</button>
-        <button onclick="updateResource(5)" class="popup-button green">+5</button>
-    </div>
-</div>
+            <!-- Resource Section with Label, Value, and Buttons -->
+            <div class="popup-row">
+                <span class="popup-label resource-label">Resource</span>
+                <h3 id="resourceValueDisplay" class="popup-value">0</h3>
+                <div class="button-group">
+                    <button onclick="updateResource(1)" class="round-button">+</button>
+                    <button onclick="updateResource(-1)" class="round-button">-</button>
+                </div>
+            </div>
 
-            <!-- Popup for Production -->
-<div class="popup-section">
-    <span class="popup-label production-label">Production</span>
-    <h3 id="productionValueDisplay" class="popup-value" style="font-size: 3em;">0</h3>
-    <div class="button-group">
-        <button onclick="updateProduction(-5)" class="popup-button red">-5</button>
-        <button onclick="updateProduction(-1)" class="popup-button red">-1</button>
-        <button onclick="updateProduction(1)" class="popup-button green">+1</button>
-        <button onclick="updateProduction(5)" class="popup-button green">+5</button>
-    </div>
-</div>
+            <!-- Production Section with Label, Value, and Buttons -->
+            <div class="popup-row">
+                <span class="popup-label production-label">Production</span>
+                <p id="productionValueDisplay" class="popup-value">0</p>
+                <div class="button-group">
+                    <button onclick="updateProduction(1)" class="round-button">+</button>
+                    <button onclick="updateProduction(-1)" class="round-button">-</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
