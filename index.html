@@ -91,16 +91,66 @@
     .round-button:hover {
         background-color: #ccc; /* Slightly darker on hover */
     }
+/* Green (Positive) Buttons */
+.popup-button.green {
+    background-color: #28a745;
+}
 
-    /* Modal adjustments for alignment */
-    .modal-content {
-        padding: 20px;
-        border-radius: 10px;
-        max-width: 300px;
-        width: 90%; /* Adjust to fit within mobile view */
-        box-sizing: border-box;
+.popup-button.green:hover {
+    background-color: #218838;
+}
+
+/* Red (Negative) Buttons */
+.popup-button.red {
+    background-color: #dc3545;
+}
+
+.popup-button.red:hover {
+    background-color: #c82333;
+}
+
+/* History Section */
+#historyLog {
+    font-size: 0.9em;
+    color: #333;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .button-group {
+        gap: 3px;
     }
 
+    .popup-button {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9em;
+    }
+}
+    /* Modal Adjustments */
+.modal-content {
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 300px;
+    width: 90%; /* Adjust to fit within mobile view */
+    box-sizing: border-box;
+}
+    
+/* Button Styles */
+.popup-button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px; /* Make buttons square-like */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
     /* Flex container for resource and production rows */
     .popup-section {
         display: flex;
@@ -131,20 +181,21 @@
         color: brown;
     }
 
-    /* Center the value with the buttons */
-    .popup-value {
-        font-size: 1.5em;
-        margin-right: 15px; /* Add spacing between value and buttons */
-        display: flex;
-        align-items: center; /* Center value vertically */
-    }
+    /* Centered Labels */
+.popup-value {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 15px;
+}
 
-    /* Button group styling */
-    .button-group {
-        display: flex;
-        gap: 10px; /* Space between + and - buttons */
-        align-items: center; /* Center buttons vertically with the value */
-    }
+    /* Button Group Layout */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Space between buttons */
+    justify-content: center;
+    margin-bottom: 15px;
+}
 
     /* Alignment for labels */
     .modal-content div > span {
@@ -510,50 +561,36 @@
 <div id="resourceModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        
-        <!-- Centered Resource Section -->
-        <div style="text-align: center; margin-bottom: 20px;">
-            <h3>Resource</h3>
-            <p id="resourceValueDisplay" style="font-size: 2em; margin: 10px 0;">0</p>
-            
-            <!-- Resource Buttons -->
-            <div class="button-group" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
-                <button onclick="updateResource(-10)" class="square-button">-10</button>
-                <button onclick="updateResource(-5)" class="square-button">-5</button>
-                <button onclick="updateResource(-1)" class="square-button">-1</button>
-                <button onclick="updateResource(1)" class="square-button">+1</button>
-                <button onclick="updateResource(5)" class="square-button">+5</button>
-                <button onclick="updateResource(10)" class="square-button">+10</button>
-            </div>
+
+        <!-- Resource Section -->
+        <h3 style="text-align: center;">Resource</h3>
+        <h3 id="resourceValueDisplay" class="popup-value">0</h3>
+        <div class="button-group">
+            <button onclick="updateResource(-10)" class="popup-button red">-10</button>
+            <button onclick="updateResource(-5)" class="popup-button red">-5</button>
+            <button onclick="updateResource(-1)" class="popup-button red">-1</button>
+            <button onclick="updateResource(1)" class="popup-button green">+1</button>
+            <button onclick="updateResource(5)" class="popup-button green">+5</button>
+            <button onclick="updateResource(10)" class="popup-button green">+10</button>
         </div>
-        
-        <!-- Centered Production Section -->
-        <div style="text-align: center; margin-bottom: 20px;">
-            <h3>Production</h3>
-            <p id="productionValueDisplay" style="font-size: 2em; margin: 10px 0;">0</p>
-            
-            <!-- Production Buttons -->
-            <div class="button-group" style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
-                <button onclick="updateProduction(-10)" class="square-button">-10</button>
-                <button onclick="updateProduction(-5)" class="square-button">-5</button>
-                <button onclick="updateProduction(-1)" class="square-button">-1</button>
-                <button onclick="updateProduction(1)" class="square-button">+1</button>
-                <button onclick="updateProduction(5)" class="square-button">+5</button>
-                <button onclick="updateProduction(10)" class="square-button">+10</button>
-            </div>
+
+        <!-- Production Section -->
+        <h3 style="text-align: center; color: brown;">Production</h3> <!-- Same color as before popup -->
+        <h3 id="productionValueDisplay" class="popup-value" style="color: brown;">0</h3>
+        <div class="button-group">
+            <button onclick="updateProduction(-10)" class="popup-button red">-10</button>
+            <button onclick="updateProduction(-5)" class="popup-button red">-5</button>
+            <button onclick="updateProduction(-1)" class="popup-button red">-1</button>
+            <button onclick="updateProduction(1)" class="popup-button green">+1</button>
+            <button onclick="updateProduction(5)" class="popup-button green">+5</button>
+            <button onclick="updateProduction(10)" class="popup-button green">+10</button>
         </div>
-        
+
         <!-- History Section -->
-        <div style="text-align: center; margin-top: 20px;">
-            <h3>History</h3>
-            <ul id="historyLog" style="list-style: none; padding: 0; color: black; background-color: #f9f9f9; border-radius: 10px; padding: 10px; max-height: 150px; overflow-y: auto;">
-                <!-- History items will be dynamically added here -->
-            </ul>
-        </div>
+        <h3 style="text-align: center;">History</h3>
+        <ul id="historyLog" style="list-style: none; padding: 0; max-height: 100px; overflow-y: auto;"></ul>
     </div>
 </div>
-
-
 
      
 <!-- Modal for TR Management -->
