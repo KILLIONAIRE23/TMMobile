@@ -8,6 +8,75 @@
     <link rel="icon" href="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/appicon.png" type="image/png">
 
 <style>
+
+/* Increase font size for resource and production values */
+.popup-value {
+    font-size: 3em; /* Large font size for both PC and mobile */
+    font-weight: bold;
+}
+
+/* Button Group Layout */
+.button-group {
+    display: flex;
+    flex-wrap: nowrap; /* Prevent wrapping */
+    gap: 10px; /* Space between buttons */
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Buttons General Style */
+.popup-button {
+    flex: 1 1 auto; /* Allow buttons to shrink */
+    max-width: 50px; /* Limit max width */
+    height: 50px; /* Increase button height */
+    border: none;
+    font-size: 1.2em; /* Keep the button font size unchanged */
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px; /* Square shape */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Green Buttons */
+.popup-button.green {
+    background-color: #28a745;
+}
+
+.popup-button.green:hover {
+    background-color: #218838;
+}
+
+/* Red Buttons */
+.popup-button.red {
+    background-color: #dc3545;
+}
+
+.popup-button.red:hover {
+    background-color: #c82333;
+}
+
+/* Responsive Design for Small Screens */
+@media (max-width: 480px) {
+    .button-group {
+        gap: 5px; /* Reduce space between buttons */
+    }
+
+    .popup-button {
+        max-width: 45px; /* Reduce button size */
+        height: 45px;
+        font-size: 1em; /* Adjust font size for buttons */
+    }
+
+    /* Ensure font size for values increases on mobile as well */
+    .popup-value {
+        font-size: 2.5em; /* Slightly smaller than desktop */
+    }
+}
+
+
     
 /* Style for each news item card */
     .rss-item {
@@ -92,48 +161,8 @@
         background-color: #ccc; /* Slightly darker on hover */
     }
 
-   /* Green Buttons */
-.popup-button.green {
-    background-color: #28a745;
-}
 
-.popup-button.green:hover {
-    background-color: #218838;
-}
 
-/* Red Buttons */
-.popup-button.red {
-    background-color: #dc3545;
-}
-
-.popup-button.red:hover {
-    background-color: #c82333;
-}
-
-/* Increase font size for values */
-.popup-value {
-    font-size: 3em; /* Double the size for resource and production values */
-    font-weight: bold;
-}
-
-/* Responsive Design for Small Screens */
-@media (max-width: 480px) {
-    .button-group {
-        gap: 5px; /* Reduce space between buttons */
-    }
-
-    .popup-button {
-        max-width: 45px; /* Reduce button size */
-        height: 45px;
-        font-size: 1em; /* Adjust font size */
-    }
-
-    /* Increase font size for values on mobile too */
-    .popup-value {
-        font-size: 2.5em; /* Slightly smaller than desktop */
-    }
-}
-    
     /* History Section */
 #historyLog {
     font-size: 0.9em;
@@ -149,22 +178,6 @@
     box-sizing: border-box;
 }
     
-/* Buttons General Style */
-.popup-button {
-    flex: 1 1 auto; /* Allow buttons to shrink */
-    max-width: 50px; /* Limit max width */
-    height: 50px; /* Increase button height */
-    border: none;
-    font-size: 1.2em; /* Increase font size for better visibility */
-    font-weight: bold;
-    color: #fff;
-    border-radius: 5px; /* Square shape */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
     /* Flex container for resource and production rows */
     .popup-section {
         display: flex;
@@ -212,34 +225,6 @@
         margin-left: 5px; /* Align left within the container */
     }
 
-    /* Media query for smaller screens */
-    @media (max-width: 480px) {
-        .modal-content {
-            max-width: 100%; /* Allow modal to take full width */
-            padding: 15px; /* Reduce padding for mobile */
-        }
-        
-        .popup-row {
-            flex-direction: row; /* Keep elements in a row on mobile */
-            align-items: center;
-            justify-content: space-between;
-            gap: 5px;
-        }
-
-        .button-group {
-            margin-left: auto; /* Align button group to the right */
-        }
-        
-        .popup-label, .popup-value {
-            font-size: 1em; /* Slightly smaller font on mobile */
-        }
-
-        .round-button {
-            width: 35px; /* Slightly smaller button size */
-            height: 35px;
-            font-size: 1em;
-        }
-    }
      /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
