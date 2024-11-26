@@ -9,6 +9,35 @@
 
 <style>
 
+/* Modal styles */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+
+/* Modal content styling */
+.modal-content {
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 400px; /* Width for larger screens */
+    box-sizing: border-box;
+    background-color: #fff;
+    color: black;
+    margin: 15% auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+    
     .square-button {
     width: calc(100% / 6 - 5px); /* Adjust for six buttons in a row with spacing */
     padding: 10px; /* Adjust padding for text clarity */
@@ -115,6 +144,18 @@
         background-color: #ccc; /* Slightly darker on hover */
     }
 
+    /* Positive button colors */
+.round-button.positive {
+    background-color: #4CAF50; /* Green for + buttons */
+}
+
+/* Negative button colors */
+.round-button.negative {
+    background-color: #F44336; /* Red for - buttons */
+}
+
+
+    
     /* Modal adjustments for alignment */
     .modal-content {
         padding: 20px;
@@ -141,12 +182,12 @@
         margin-bottom: 20px;
     }
 
-    /* Labels and values styling */
-    .popup-label {
-        font-size: 1.2em;
-        margin-right: 10px;
-        flex: 1;
-    }
+    /* Popup Label Styles */
+.popup-label {
+    font-size: 1.5em; /* Larger font size for labels */
+    margin-bottom: 5px;
+}
+
     .resource-label {
         color: black;
     }
@@ -154,22 +195,49 @@
         color: brown;
     }
 
-/* Centered Labels */
+/* Resource and Production value font size */
 .popup-value {
-    font-size: 1.5em;
-    text-align: center;
-    margin-bottom: 15px;
+    font-size: 2em; /* Make values bigger for better visibility */
+    margin-bottom: 15px; /* Reduced space between value and buttons */
 }
 
-  /* Button Group Layout */
+  /* Button group styling for better alignment */
 .button-group {
     display: flex;
-    flex-wrap: wrap;
-    gap: 5px; /* Space between buttons */
+    flex-wrap: wrap; /* Ensure buttons don't overflow */
     justify-content: center;
-    margin-bottom: 15px;
+    gap: 10px; /* Space between buttons */
+    align-items: center;
+}
+    
+/* History Section */
+.history-section {
+    font-size: 1em;
+    margin-top: 20px;
+    width: 100%;
 }
 
+.history-item {
+    padding: 5px;
+    font-size: 1em;
+    color: #666;
+}
+/* Button styling */
+.round-button {
+    width: 60px; /* Increased button size */
+    height: 60px;
+    font-size: 1.2em; /* Font size inside the buttons */
+    background-color: #e6e3e3; /* Default color */
+    color: black;
+    border: 1px solid #888;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px; /* Square buttons */
+    margin: 5px; /* Added space between buttons */
+}
+    
 /* Button Styles */
 .popup-button {
     width: 45px;
@@ -234,45 +302,27 @@
         margin-left: 5px; /* Align left within the container */
     }
 
-    /* Media query for smaller screens */
-    @media (max-width: 480px) {
-        .modal-content {
-            max-width: 100%; /* Allow modal to take full width */
-            padding: 15px; /* Reduce padding for mobile */
-        }
-        
-        .popup-row {
-            flex-direction: row; /* Keep elements in a row on mobile */
-            align-items: center;
-            justify-content: space-between;
-            gap: 5px;
-        }
-
-        .button-group {
-            margin-left: auto; /* Align button group to the right */
-        }
-        
-        .popup-label, .popup-value {
-            font-size: 1em; /* Slightly smaller font on mobile */
-        }
-
-        .round-button {
-            width: 35px; /* Slightly smaller button size */
-            height: 35px;
-            font-size: 1em;
-        }
+    /* Media query for mobile adjustments */
+@media (max-width: 480px) {
+    .modal-content {
+        width: 100%; /* Full width on mobile */
+        padding: 15px;
     }
-     /* Modal styles */
-.modal {
-    display: none; /* Hidden by default */
-    position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    left: 0;
-    top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
-    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+
+    .round-button {
+        width: 45px; /* Make the buttons slightly smaller on mobile */
+        height: 45px;
+    }
+
+    .popup-value {
+        font-size: 1.8em; /* Slightly smaller value text on mobile */
+    }
+
+    .popup-label {
+        font-size: 1.2em; /* Smaller label text on mobile */
+    }
 }
+    
 /* Container for full-width buttons like Terraforming and Produce */
 .full-width {
     max-width: 800px; /* Align with other elements on the page */
@@ -624,7 +674,6 @@
 </div>
 
 
-     
 <!-- Modal for TR Management -->
 <div id="trModal" class="modal">
     <div class="modal-content">
