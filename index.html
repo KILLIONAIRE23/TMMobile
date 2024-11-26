@@ -806,13 +806,14 @@ function updateResource(delta) {
         resourceCountElement.innerText = count;
         resourceDisplayElement.innerText = count;
 
-        // Log the change to history
-        logHistory(`${delta > 0 ? '+' : ''}${delta} Resource`);
+        // Log the change to history (specify type as "Resource")
+        logHistory(delta, 'Resource');
         updateHistoryLog();
 
         saveGameState(); // Save immediately after update
     }
 }
+
 
 function updateProduction(delta) {
     if (currentResource) {
@@ -833,9 +834,11 @@ function updateProduction(delta) {
     }
 }
 
-function logHistory(message) {
+function logHistory(delta, type) {
     const timestamp = new Date().toLocaleTimeString();
-    historyLog.unshift(`${timestamp}: ${message}`);
+    const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
+    historyLog.unshift(`${timestamp}: ${action} ${type}`);
+    
     if (historyLog.length > 10) {
         historyLog.pop(); // Limit to the latest 10 entries
     }
