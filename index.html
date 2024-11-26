@@ -9,19 +9,21 @@
 
 <style>
 
+
 /* Increase font size for resource and production values */
 .popup-value {
     font-size: 3em; /* Large font size for both PC and mobile */
     font-weight: bold;
+    margin: 0 0 10px 0; /* Reduce margin between the value and buttons */
 }
 
-/* Button Group Layout */
+/* Adjust button size and layout */
 .button-group {
     display: flex;
     flex-wrap: nowrap; /* Prevent wrapping */
     gap: 10px; /* Space between buttons */
     justify-content: center;
-    margin-bottom: 15px;
+    margin-bottom: 10px; /* Reduce bottom margin to make popup shorter */
 }
 
 /* Buttons General Style */
@@ -169,13 +171,18 @@
     color: #333;
     text-align: center;
 }
-    /* Modal Adjustments */
+    
+    /* Modal Content Styling */
 .modal-content {
-    padding: 20px;
+    padding: 15px; /* Reduce padding to make it shorter */
     border-radius: 10px;
     max-width: 300px;
     width: 90%; /* Adjust to fit within mobile view */
     box-sizing: border-box;
+    position: absolute; /* Absolute positioning for centering */
+    top: 50%; /* Position the popup vertically in the center */
+    left: 50%; /* Position the popup horizontally in the center */
+    transform: translate(-50%, -50%); /* Adjust to exactly center */
 }
     
     /* Flex container for resource and production rows */
@@ -241,18 +248,6 @@
     max-width: 800px; /* Align with other elements on the page */
     margin: 0 auto; /* Center the container */
 }
-.modal-content {
-    background-color: #fefefe;
-    color: black;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 80%;
-    max-width: 400px;
-    text-align: center;
-    border-radius: 10px;
-}
-
 
 .close {
     color: #aaa;
