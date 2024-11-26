@@ -8,6 +8,29 @@
     <link rel="icon" href="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/appicon.png" type="image/png">
 
 <style>
+
+    .square-button {
+    width: calc(100% / 6 - 5px); /* Adjust for six buttons in a row with spacing */
+    padding: 10px; /* Adjust padding for text clarity */
+    background-color: #e6e3e3;
+    color: black;
+    font-size: 1em;
+    border: 1px solid #888;
+    cursor: pointer;
+    border-radius: 5px; /* Slightly rounded corners for a softer square look */
+    text-align: center;
+}
+
+.square-button:hover {
+    background-color: #ccc; /* Slightly darker hover effect */
+}
+
+@media (max-width: 480px) {
+    .square-button {
+        width: calc(100% / 3 - 10px); /* Adjust for smaller screens */
+    }
+}
+    
     
 /* Style for each news item card */
     .rss-item {
@@ -131,21 +154,79 @@
         color: brown;
     }
 
-    /* Center the value with the buttons */
-    .popup-value {
-        font-size: 1.5em;
-        margin-right: 15px; /* Add spacing between value and buttons */
-        display: flex;
-        align-items: center; /* Center value vertically */
-    }
+/* Centered Labels */
+.popup-value {
+    font-size: 1.5em;
+    text-align: center;
+    margin-bottom: 15px;
+}
 
-    /* Button group styling */
+  /* Button Group Layout */
+.button-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Space between buttons */
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+/* Button Styles */
+.popup-button {
+    width: 45px;
+    height: 45px;
+    border: none;
+    font-size: 1em;
+    font-weight: bold;
+    color: #fff;
+    border-radius: 5px; /* Make buttons square-like */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Green (Positive) Buttons */
+.popup-button.green {
+    background-color: #28a745;
+}
+
+.popup-button.green:hover {
+    background-color: #218838;
+}
+
+/* Red (Negative) Buttons */
+.popup-button.red {
+    background-color: #dc3545;
+}
+
+.popup-button.red:hover {
+    background-color: #c82333;
+}
+
+
+/* History Section */
+#historyLog {
+    font-size: 0.9em;
+    color: #333;
+    text-align: center;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
     .button-group {
-        display: flex;
-        gap: 10px; /* Space between + and - buttons */
-        align-items: center; /* Center buttons vertically with the value */
+        gap: 3px;
     }
 
+    .popup-button {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9em;
+    }
+}
+
+
+
+    
     /* Alignment for labels */
     .modal-content div > span {
         display: block;
@@ -506,36 +587,41 @@
     <div class="produce-container full-width">
     <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
-     <!-- Modal for Resource Management -->
+    
 <!-- Modal for Resource Management -->
 <div id="resourceModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
-        <div class="popup-section">
-            
-            <!-- Resource Section with Label, Value, and Buttons -->
-            <div class="popup-row">
-                <span class="popup-label resource-label">Resource</span>
-                <h3 id="resourceValueDisplay" class="popup-value">0</h3>
-                <div class="button-group">
-                    <button onclick="updateResource(1)" class="round-button">+</button>
-                    <button onclick="updateResource(-1)" class="round-button">-</button>
-                </div>
-            </div>
 
-            <!-- Production Section with Label, Value, and Buttons -->
-            <div class="popup-row">
-                <span class="popup-label production-label">Production</span>
-                <p id="productionValueDisplay" class="popup-value">0</p>
-                <div class="button-group">
-                    <button onclick="updateProduction(1)" class="round-button">+</button>
-                    <button onclick="updateProduction(-1)" class="round-button">-</button>
-                </div>
-            </div>
+        <!-- Resource Section -->
+        <h3 style="text-align: center;">Resource</h3>
+        <h3 id="resourceValueDisplay" class="popup-value">0</h3>
+        <div class="button-group">
+            <button onclick="updateResource(-10)" class="popup-button red">-10</button>
+            <button onclick="updateResource(-5)" class="popup-button red">-5</button>
+            <button onclick="updateResource(-1)" class="popup-button red">-1</button>
+            <button onclick="updateResource(1)" class="popup-button green">+1</button>
+            <button onclick="updateResource(5)" class="popup-button green">+5</button>
+            <button onclick="updateResource(10)" class="popup-button green">+10</button>
         </div>
+
+        <!-- Production Section -->
+        <h3 style="text-align: center; color: brown;">Production</h3> <!-- Same color as before popup -->
+        <h3 id="productionValueDisplay" class="popup-value" style="color: brown;">0</h3>
+        <div class="button-group">
+            <button onclick="updateProduction(-10)" class="popup-button red">-10</button>
+            <button onclick="updateProduction(-5)" class="popup-button red">-5</button>
+            <button onclick="updateProduction(-1)" class="popup-button red">-1</button>
+            <button onclick="updateProduction(1)" class="popup-button green">+1</button>
+            <button onclick="updateProduction(5)" class="popup-button green">+5</button>
+            <button onclick="updateProduction(10)" class="popup-button green">+10</button>
+        </div>
+
+        <!-- History Section -->
+        <h3 style="text-align: center;">History</h3>
+        <ul id="historyLog" style="list-style: none; padding: 0; max-height: 100px; overflow-y: auto;"></ul>
     </div>
 </div>
-
 
 
      
@@ -750,6 +836,7 @@ document.addEventListener('DOMContentLoaded', fetchRSSFeed);
         saveGameState(); // Save after updating VP
     }
     let currentResource = '';
+let historyLog = []; // Array to store history
 
 function openModal(resource) {
     currentResource = resource;
@@ -764,6 +851,9 @@ function openModal(resource) {
     // Set these values in the modal
     document.getElementById('resourceValueDisplay').innerText = resourceValue;
     document.getElementById('productionValueDisplay').innerText = productionValue;
+    
+    // Clear and update the history log
+    updateHistoryLog();
     
     // Display the modal
     document.getElementById('resourceModal').style.display = "block";
@@ -785,6 +875,10 @@ function updateResource(delta) {
         resourceCountElement.innerText = count;
         resourceDisplayElement.innerText = count;
 
+        // Log the change to history (specify type as "Resource")
+        logHistory(delta, 'Resource');
+        updateHistoryLog();
+
         saveGameState(); // Save immediately after update
     }
 }
@@ -800,9 +894,37 @@ function updateProduction(delta) {
         productionCountElement.innerText = production;
         productionDisplayElement.innerText = production;
 
+        // Log the change to history (specify type as "Production")
+        logHistory(delta, 'Production');
+        updateHistoryLog();
+
         saveGameState(); // Save immediately after update
     }
 }
+
+
+function logHistory(delta, type) {
+    const timestamp = new Date().toLocaleTimeString();
+    const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
+    historyLog.unshift(`${timestamp}: ${action} ${type}`);
+    
+    if (historyLog.length > 10) {
+        historyLog.pop(); // Limit to the latest 10 entries
+    }
+}
+
+
+function updateHistoryLog() {
+    const historyElement = document.getElementById('historyLog');
+    historyElement.innerHTML = ''; // Clear current history
+
+    historyLog.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = entry;
+        historyElement.appendChild(li);
+    });
+}
+
      
 function updateTR(delta) {
     const trValueElement = document.getElementById('trCount');
