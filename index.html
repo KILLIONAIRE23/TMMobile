@@ -8,77 +8,6 @@
     <link rel="icon" href="https://raw.githubusercontent.com/KILLIONAIRE23/TMMobile/main/appicon.png" type="image/png">
 
 <style>
-
-
-/* Increase font size for resource and production values */
-.popup-value {
-    font-size: 3em; /* Large font size for both PC and mobile */
-    font-weight: bold;
-    margin: 0 0 10px 0; /* Reduce margin between the value and buttons */
-}
-
-/* Adjust button size and layout */
-.button-group {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    gap: 10px; /* Space between buttons */
-    justify-content: center;
-    margin-bottom: 10px; /* Reduce bottom margin to make popup shorter */
-}
-
-/* Buttons General Style */
-.popup-button {
-    flex: 1 1 auto; /* Allow buttons to shrink */
-    max-width: 50px; /* Limit max width */
-    height: 50px; /* Increase button height */
-    border: none;
-    font-size: 1.2em; /* Keep the button font size unchanged */
-    font-weight: bold;
-    color: #fff;
-    border-radius: 5px; /* Square shape */
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-/* Green Buttons */
-.popup-button.green {
-    background-color: #28a745;
-}
-
-.popup-button.green:hover {
-    background-color: #218838;
-}
-
-/* Red Buttons */
-.popup-button.red {
-    background-color: #dc3545;
-}
-
-.popup-button.red:hover {
-    background-color: #c82333;
-}
-
-/* Responsive Design for Small Screens */
-@media (max-width: 480px) {
-    .button-group {
-        gap: 5px; /* Reduce space between buttons */
-    }
-
-    .popup-button {
-        max-width: 45px; /* Reduce button size */
-        height: 45px;
-        font-size: 1em; /* Adjust font size for buttons */
-    }
-
-    /* Ensure font size for values increases on mobile as well */
-    .popup-value {
-        font-size: 2.5em; /* Slightly smaller than desktop */
-    }
-}
-
-
     
 /* Style for each news item card */
     .rss-item {
@@ -163,28 +92,15 @@
         background-color: #ccc; /* Slightly darker on hover */
     }
 
+    /* Modal adjustments for alignment */
+    .modal-content {
+        padding: 20px;
+        border-radius: 10px;
+        max-width: 300px;
+        width: 90%; /* Adjust to fit within mobile view */
+        box-sizing: border-box;
+    }
 
-
-    /* History Section */
-#historyLog {
-    font-size: 0.9em;
-    color: #333;
-    text-align: center;
-}
-    
-    /* Modal Content Styling */
-.modal-content {
-    padding: 15px; /* Reduce padding to make it shorter */
-    border-radius: 10px;
-    max-width: 300px;
-    width: 90%; /* Adjust to fit within mobile view */
-    box-sizing: border-box;
-    position: absolute; /* Absolute positioning for centering */
-    top: 50%; /* Position the popup vertically in the center */
-    left: 50%; /* Position the popup horizontally in the center */
-    transform: translate(-50%, -50%); /* Adjust to exactly center */
-}
-    
     /* Flex container for resource and production rows */
     .popup-section {
         display: flex;
@@ -215,22 +131,28 @@
         color: brown;
     }
 
-    /* Button Group Layout (General) */
-.button-group {
-    display: flex;
-    flex-wrap: nowrap; /* Prevent wrapping */
-    gap: 10px; /* Space between buttons */
-    justify-content: center;
-    margin-bottom: 15px;
-}
+    /* Center the value with the buttons */
+    .popup-value {
+        font-size: 1.5em;
+        margin-right: 15px; /* Add spacing between value and buttons */
+        display: flex;
+        align-items: center; /* Center value vertically */
+    }
 
-    
+    /* Button group styling */
+    .button-group {
+        display: flex;
+        gap: 10px; /* Space between + and - buttons */
+        align-items: center; /* Center buttons vertically with the value */
+    }
+
     /* Alignment for labels */
     .modal-content div > span {
         display: block;
         text-align: left;
         margin-left: 5px; /* Align left within the container */
     }
+
     /* Media query for smaller screens */
     @media (max-width: 480px) {
         .modal-content {
@@ -259,24 +181,34 @@
             font-size: 1em;
         }
     }
-
      /* Modal styles */
-/* Modal Styles */
 .modal {
     display: none; /* Hidden by default */
-    position: fixed; /* Fixed position to stay on top */
-    z-index: 1; /* Ensures it's on top of other content */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full screen width */
-    height: 100%; /* Full screen height */
-    background-color: rgba(0, 0, 0, 0.5); /* Transparent black background */
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
 }
 /* Container for full-width buttons like Terraforming and Produce */
 .full-width {
     max-width: 800px; /* Align with other elements on the page */
     margin: 0 auto; /* Center the container */
 }
+.modal-content {
+    background-color: #fefefe;
+    color: black;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+    border-radius: 10px;
+}
+
 
 .close {
     color: #aaa;
@@ -575,35 +507,36 @@
     <button class="produce-button" onclick="produceResources()">Produce</button>
 </div>
      <!-- Modal for Resource Management -->
+<!-- Modal for Resource Management -->
 <div id="resourceModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
+        <div class="popup-section">
+            
+            <!-- Resource Section with Label, Value, and Buttons -->
+            <div class="popup-row">
+                <span class="popup-label resource-label">Resource</span>
+                <h3 id="resourceValueDisplay" class="popup-value">0</h3>
+                <div class="button-group">
+                    <button onclick="updateResource(1)" class="round-button">+</button>
+                    <button onclick="updateResource(-1)" class="round-button">-</button>
+                </div>
+            </div>
 
-        <!-- Resource Section -->
-        <h3 style="text-align: center;">Resource</h3>
-        <h3 id="resourceValueDisplay" class="popup-value">0</h3>
-        <div class="button-group">
-            <button onclick="updateResource(-5)" class="popup-button red">-5</button>
-            <button onclick="updateResource(-1)" class="popup-button red">-1</button>
-            <button onclick="updateResource(1)" class="popup-button green">+1</button>
-            <button onclick="updateResource(5)" class="popup-button green">+5</button>
+            <!-- Production Section with Label, Value, and Buttons -->
+            <div class="popup-row">
+                <span class="popup-label production-label">Production</span>
+                <p id="productionValueDisplay" class="popup-value">0</p>
+                <div class="button-group">
+                    <button onclick="updateProduction(1)" class="round-button">+</button>
+                    <button onclick="updateProduction(-1)" class="round-button">-</button>
+                </div>
+            </div>
         </div>
-
-        <!-- Production Section -->
-        <h3 style="text-align: center; color: brown;">Production</h3> <!-- Same color as before popup -->
-        <h3 id="productionValueDisplay" class="popup-value" style="color: brown;">0</h3>
-        <div class="button-group">
-            <button onclick="updateProduction(-5)" class="popup-button red">-5</button>
-            <button onclick="updateProduction(-1)" class="popup-button red">-1</button>
-            <button onclick="updateProduction(1)" class="popup-button green">+1</button>
-            <button onclick="updateProduction(5)" class="popup-button green">+5</button>
-        </div>
-
-        <!-- History Section -->
-        <h3 style="text-align: center;">History</h3>
-        <ul id="historyLog" style="list-style: none; padding: 0; max-height: 100px; overflow-y: auto;"></ul>
     </div>
 </div>
+
+
 
      
 <!-- Modal for TR Management -->
@@ -817,7 +750,6 @@ document.addEventListener('DOMContentLoaded', fetchRSSFeed);
         saveGameState(); // Save after updating VP
     }
     let currentResource = '';
-let historyLog = []; // Array to store history
 
 function openModal(resource) {
     currentResource = resource;
@@ -832,9 +764,6 @@ function openModal(resource) {
     // Set these values in the modal
     document.getElementById('resourceValueDisplay').innerText = resourceValue;
     document.getElementById('productionValueDisplay').innerText = productionValue;
-    
-    // Clear and update the history log
-    updateHistoryLog();
     
     // Display the modal
     document.getElementById('resourceModal').style.display = "block";
@@ -856,33 +785,23 @@ function updateResource(delta) {
         resourceCountElement.innerText = count;
         resourceDisplayElement.innerText = count;
 
-        // Log the change to history (specify type as "Resource")
-        logHistory(delta, 'Resource');
-        updateHistoryLog();
-
         saveGameState(); // Save immediately after update
     }
 }
 
-function logHistory(delta, type) {
-    const timestamp = new Date().toLocaleTimeString();
-    const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
-    historyLog.unshift(`${timestamp}: ${action} ${type}`);
-    
-    if (historyLog.length > 10) {
-        historyLog.pop(); // Limit to the latest 10 entries
+function updateProduction(delta) {
+    if (currentResource) {
+        const productionCountElement = document.getElementById(`${currentResource}Production`);
+        const productionDisplayElement = document.getElementById('productionValueDisplay');
+
+        let production = parseInt(productionCountElement.innerText) + delta;
+        if (currentResource !== 'credit' && production < 0) production = 0;
+
+        productionCountElement.innerText = production;
+        productionDisplayElement.innerText = production;
+
+        saveGameState(); // Save immediately after update
     }
-}
-
-function updateHistoryLog() {
-    const historyElement = document.getElementById('historyLog');
-    historyElement.innerHTML = ''; // Clear current history
-
-    historyLog.forEach(entry => {
-        const li = document.createElement('li');
-        li.textContent = entry;
-        historyElement.appendChild(li);
-    });
 }
      
 function updateTR(delta) {
@@ -1022,7 +941,8 @@ function saveGameState() {
     }, 500); // Save after 100ms if no other changes are made
 }
 
-    function updateProduction(delta) {
+     // Function to update the production value
+function updateProduction(delta) {
     if (currentResource) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
         const productionDisplayElement = document.getElementById('productionValueDisplay');
@@ -1033,14 +953,25 @@ function saveGameState() {
         productionCountElement.innerText = production;
         productionDisplayElement.innerText = production;
 
-        // Log the change to history (specify type as "Production")
-        logHistory(delta, 'Production');
-        updateHistoryLog();
-
         saveGameState(); // Save immediately after update
     }
 }
 
+// Function to produce resources by adding production counts to resources
+function updateProduction(delta) {
+    if (currentResource) {
+        const productionCountElement = document.getElementById(`${currentResource}Production`);
+        const productionDisplayElement = document.getElementById('productionValueDisplay');
+
+        let production = parseInt(productionCountElement.innerText) + delta;
+        if (currentResource !== 'credit' && production < 0) production = 0;
+
+        productionCountElement.innerText = production;
+        productionDisplayElement.innerText = production;
+
+        saveGameState(); // Save immediately after update
+    }
+}
 
 function produceResources() {
     const resources = [
