@@ -92,7 +92,7 @@
         background-color: #ccc; /* Slightly darker on hover */
     }
 
-    /* Green Buttons */
+   /* Green Buttons */
 .popup-button.green {
     background-color: #28a745;
 }
@@ -110,16 +110,27 @@
     background-color: #c82333;
 }
 
+/* Increase font size for values */
+.popup-value {
+    font-size: 3em; /* Double the size for resource and production values */
+    font-weight: bold;
+}
+
 /* Responsive Design for Small Screens */
 @media (max-width: 480px) {
     .button-group {
-        gap: 3px; /* Reduce space between buttons */
+        gap: 5px; /* Reduce space between buttons */
     }
 
     .popup-button {
-        max-width: 40px; /* Reduce button size */
-        height: 40px;
-        font-size: 0.8em; /* Adjust font size */
+        max-width: 45px; /* Reduce button size */
+        height: 45px;
+        font-size: 1em; /* Adjust font size */
+    }
+
+    /* Increase font size for values on mobile too */
+    .popup-value {
+        font-size: 2.5em; /* Slightly smaller than desktop */
     }
 }
     
@@ -141,10 +152,10 @@
 /* Buttons General Style */
 .popup-button {
     flex: 1 1 auto; /* Allow buttons to shrink */
-    max-width: 45px; /* Limit max width */
-    height: 45px;
+    max-width: 50px; /* Limit max width */
+    height: 50px; /* Increase button height */
     border: none;
-    font-size: 1em;
+    font-size: 1.2em; /* Increase font size for better visibility */
     font-weight: bold;
     color: #fff;
     border-radius: 5px; /* Square shape */
@@ -153,6 +164,7 @@
     align-items: center;
     justify-content: center;
 }
+
     /* Flex container for resource and production rows */
     .popup-section {
         display: flex;
@@ -194,11 +206,12 @@
 .button-group {
     display: flex;
     flex-wrap: nowrap; /* Prevent wrapping */
-    gap: 5px; /* Space between buttons */
+    gap: 10px; /* Space between buttons */
     justify-content: center;
     margin-bottom: 15px;
 }
 
+    
     /* Alignment for labels */
     .modal-content div > span {
         display: block;
@@ -568,24 +581,20 @@
         <h3 style="text-align: center;">Resource</h3>
         <h3 id="resourceValueDisplay" class="popup-value">0</h3>
         <div class="button-group">
-            <button onclick="updateResource(-10)" class="popup-button red">-10</button>
             <button onclick="updateResource(-5)" class="popup-button red">-5</button>
             <button onclick="updateResource(-1)" class="popup-button red">-1</button>
             <button onclick="updateResource(1)" class="popup-button green">+1</button>
             <button onclick="updateResource(5)" class="popup-button green">+5</button>
-            <button onclick="updateResource(10)" class="popup-button green">+10</button>
         </div>
 
         <!-- Production Section -->
         <h3 style="text-align: center; color: brown;">Production</h3> <!-- Same color as before popup -->
         <h3 id="productionValueDisplay" class="popup-value" style="color: brown;">0</h3>
         <div class="button-group">
-            <button onclick="updateProduction(-10)" class="popup-button red">-10</button>
             <button onclick="updateProduction(-5)" class="popup-button red">-5</button>
             <button onclick="updateProduction(-1)" class="popup-button red">-1</button>
             <button onclick="updateProduction(1)" class="popup-button green">+1</button>
             <button onclick="updateProduction(5)" class="popup-button green">+5</button>
-            <button onclick="updateProduction(10)" class="popup-button green">+10</button>
         </div>
 
         <!-- History Section -->
