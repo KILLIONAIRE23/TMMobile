@@ -814,26 +814,6 @@ function updateResource(delta) {
     }
 }
 
-
-function updateProduction(delta) {
-    if (currentResource) {
-        const productionCountElement = document.getElementById(`${currentResource}Production`);
-        const productionDisplayElement = document.getElementById('productionValueDisplay');
-
-        let production = parseInt(productionCountElement.innerText) + delta;
-        if (currentResource !== 'credit' && production < 0) production = 0;
-
-        productionCountElement.innerText = production;
-        productionDisplayElement.innerText = production;
-
-        // Log the change to history
-        logHistory(`${delta > 0 ? '+' : ''}${delta} Production`);
-        updateHistoryLog();
-
-        saveGameState(); // Save immediately after update
-    }
-}
-
 function logHistory(delta, type) {
     const timestamp = new Date().toLocaleTimeString();
     const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
@@ -992,8 +972,7 @@ function saveGameState() {
     }, 500); // Save after 100ms if no other changes are made
 }
 
-     // Function to update the production value
-function updateProduction(delta) {
+    function updateProduction(delta) {
     if (currentResource) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
         const productionDisplayElement = document.getElementById('productionValueDisplay');
@@ -1004,25 +983,14 @@ function updateProduction(delta) {
         productionCountElement.innerText = production;
         productionDisplayElement.innerText = production;
 
-        saveGameState(); // Save immediately after update
-    }
-}
-
-// Function to produce resources by adding production counts to resources
-function updateProduction(delta) {
-    if (currentResource) {
-        const productionCountElement = document.getElementById(`${currentResource}Production`);
-        const productionDisplayElement = document.getElementById('productionValueDisplay');
-
-        let production = parseInt(productionCountElement.innerText) + delta;
-        if (currentResource !== 'credit' && production < 0) production = 0;
-
-        productionCountElement.innerText = production;
-        productionDisplayElement.innerText = production;
+        // Log the change to history (specify type as "Production")
+        logHistory(delta, 'Production');
+        updateHistoryLog();
 
         saveGameState(); // Save immediately after update
     }
 }
+
 
 function produceResources() {
     const resources = [
