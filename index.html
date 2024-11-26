@@ -91,7 +91,8 @@
     .round-button:hover {
         background-color: #ccc; /* Slightly darker on hover */
     }
-/* Green (Positive) Buttons */
+
+    /* Green Buttons */
 .popup-button.green {
     background-color: #28a745;
 }
@@ -100,7 +101,7 @@
     background-color: #218838;
 }
 
-/* Red (Negative) Buttons */
+/* Red Buttons */
 .popup-button.red {
     background-color: #dc3545;
 }
@@ -109,24 +110,24 @@
     background-color: #c82333;
 }
 
-/* History Section */
+/* Responsive Design for Small Screens */
+@media (max-width: 480px) {
+    .button-group {
+        gap: 3px; /* Reduce space between buttons */
+    }
+
+    .popup-button {
+        max-width: 40px; /* Reduce button size */
+        height: 40px;
+        font-size: 0.8em; /* Adjust font size */
+    }
+}
+    
+    /* History Section */
 #historyLog {
     font-size: 0.9em;
     color: #333;
     text-align: center;
-}
-
-/* Responsive Design */
-@media (max-width: 480px) {
-    .button-group {
-        gap: 3px;
-    }
-
-    .popup-button {
-        width: 40px;
-        height: 40px;
-        font-size: 0.9em;
-    }
 }
     /* Modal Adjustments */
 .modal-content {
@@ -137,15 +138,16 @@
     box-sizing: border-box;
 }
     
-/* Button Styles */
+/* Buttons General Style */
 .popup-button {
-    width: 45px;
+    flex: 1 1 auto; /* Allow buttons to shrink */
+    max-width: 45px; /* Limit max width */
     height: 45px;
     border: none;
     font-size: 1em;
     font-weight: bold;
     color: #fff;
-    border-radius: 5px; /* Make buttons square-like */
+    border-radius: 5px; /* Square shape */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -188,10 +190,10 @@
     margin-bottom: 15px;
 }
 
-    /* Button Group Layout */
+    /* Button Group Layout (General) */
 .button-group {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap; /* Prevent wrapping */
     gap: 5px; /* Space between buttons */
     justify-content: center;
     margin-bottom: 15px;
