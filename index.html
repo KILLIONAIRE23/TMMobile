@@ -912,7 +912,45 @@ function closeModal() {
     document.getElementById('resourceModal').style.display = "none";
     currentResource = ''; // Clear the current resource
 }
+    
+// Function to update resource value and add history entry
+function updateResourceValue(valueChange, type) {
+    const resourceValue = document.getElementById('resourceValue');
+    let currentValue = parseInt(resourceValue.innerText);
+    currentValue += valueChange;
 
+    // Update value display
+    resourceValue.innerText = currentValue;
+
+    // Track the change in history
+    updateHistory(valueChange, type, 'Resource');
+}
+
+// Function to update production value and add history entry
+function updateProductionValue(valueChange, type) {
+    const productionValue = document.getElementById('productionValue');
+    let currentValue = parseInt(productionValue.innerText);
+    currentValue += valueChange;
+
+    // Update production display
+    productionValue.innerText = currentValue;
+
+    // Track the change in history
+    updateHistory(valueChange, type, 'Production');
+}
+
+    // Function to update history section
+function updateHistory(valueChange, type, category) {
+    const historyContainer = document.getElementById('historyContainer');
+    const timestamp = new Date().toLocaleTimeString(); // Timestamp of the change
+    const historyEntry = document.createElement('div');
+
+    // Add resource/production change to history
+    historyEntry.classList.add('history-item');
+    historyEntry.innerHTML = `${timestamp}: ${valueChange} ${category} ${type}`;
+    historyContainer.appendChild(historyEntry);
+}
+    
 function updateResource(delta) {
     if (currentResource) {
         const resourceCountElement = document.getElementById(`${currentResource}Count`);
