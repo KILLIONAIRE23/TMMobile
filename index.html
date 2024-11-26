@@ -902,7 +902,6 @@ function updateProduction(delta) {
     }
 }
 
-
 function logHistory(delta, type) {
     const timestamp = new Date().toLocaleTimeString();
     const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
@@ -1061,38 +1060,6 @@ function saveGameState() {
         // Debugging line to confirm the saved state
         console.log(localStorage.getItem('terraformingMarsGameState'));
     }, 500); // Save after 100ms if no other changes are made
-}
-
-     // Function to update the production value
-function updateProduction(delta) {
-    if (currentResource) {
-        const productionCountElement = document.getElementById(`${currentResource}Production`);
-        const productionDisplayElement = document.getElementById('productionValueDisplay');
-
-        let production = parseInt(productionCountElement.innerText) + delta;
-        if (currentResource !== 'credit' && production < 0) production = 0;
-
-        productionCountElement.innerText = production;
-        productionDisplayElement.innerText = production;
-
-        saveGameState(); // Save immediately after update
-    }
-}
-
-// Function to produce resources by adding production counts to resources
-function updateProduction(delta) {
-    if (currentResource) {
-        const productionCountElement = document.getElementById(`${currentResource}Production`);
-        const productionDisplayElement = document.getElementById('productionValueDisplay');
-
-        let production = parseInt(productionCountElement.innerText) + delta;
-        if (currentResource !== 'credit' && production < 0) production = 0;
-
-        productionCountElement.innerText = production;
-        productionDisplayElement.innerText = production;
-
-        saveGameState(); // Save immediately after update
-    }
 }
 
 function produceResources() {
