@@ -231,6 +231,34 @@
         text-align: left;
         margin-left: 5px; /* Align left within the container */
     }
+    /* Media query for smaller screens */
+    @media (max-width: 480px) {
+        .modal-content {
+            max-width: 100%; /* Allow modal to take full width */
+            padding: 15px; /* Reduce padding for mobile */
+        }
+        
+        .popup-row {
+            flex-direction: row; /* Keep elements in a row on mobile */
+            align-items: center;
+            justify-content: space-between;
+            gap: 5px;
+        }
+
+        .button-group {
+            margin-left: auto; /* Align button group to the right */
+        }
+        
+        .popup-label, .popup-value {
+            font-size: 1em; /* Slightly smaller font on mobile */
+        }
+
+        .round-button {
+            width: 35px; /* Slightly smaller button size */
+            height: 35px;
+            font-size: 1em;
+        }
+    }
 
      /* Modal styles */
 .modal {
