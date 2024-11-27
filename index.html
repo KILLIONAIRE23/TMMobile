@@ -899,23 +899,32 @@ let historyLogs = {}; // Object to store unique history for each resource
 function openModal(resource) {
     currentResource = resource;
 
-     // Get the current values for the resource and production
+    // Get the current values for the resource and production
     const resourceCountElement = document.getElementById(`${resource}Count`);
     const productionCountElement = document.getElementById(`${resource}Production`);
+    
+    if (!resourceCountElement || !productionCountElement) {
+        console.error(`Element not found for resource: ${resource}`);
+        return;
+    }
     
     const resourceValue = parseInt(resourceCountElement.innerText);
     const productionValue = parseInt(productionCountElement.innerText);
 
-     // Set these values in the modal
+    // Set these values in the modal
     document.getElementById('resourceValueDisplay').innerText = resourceValue;
     document.getElementById('productionValueDisplay').innerText = productionValue;
-    
-    
-   // Clear and update the history log
+
+    // Update the history log
     updateHistoryLog();
-    
+
     // Display the modal
-    document.getElementById('resourceModal').style.display = "block";
+    const resourceModal = document.getElementById('resourceModal');
+    if (resourceModal) {
+        resourceModal.style.display = "block";
+    } else {
+        console.error("Resource modal element not found.");
+    }
 }
 
 function closeModal() {
