@@ -487,6 +487,27 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
+.tr-modal .vp-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8em; /* Adjust to match TR size requirements */
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Container adjustments specifically for the TR modal */
+.tr-modal .icon-container {
+    position: relative;
+    width: 60px;  /* Ensure size matches TR value */
+    height: 60px; /* Consistent height */
+    border-radius: 50%;
+    margin-top: 10px;
+}
+
+    
     /* Style for making tag counter numbers more visible */
     #tagTable td span {
         font-size: 1.5em; /* Make numbers bigger */
@@ -708,17 +729,35 @@
 
 
 
-<!-- Modal for TR Management -->
+<!-- Modal for TR and VP Management -->
 <div id="trModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeTRModal()">&times;</span>
-        <div style="display: flex; align-items: center; justify-content: center; color: black;">
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; color: black; gap: 20px;">
             
             <!-- TR Resource Value Section with Label -->
-            <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span> <!-- Label for TR resource -->
-            <h3 id="trValueDisplay" style="font-size: 2em; margin: 0 10px;">20</h3> <!-- Display for TR value -->
-            <button onclick="updateTR(1)" class="round-button">+</button>
-            <button onclick="updateTR(-1)" class="round-button">-</button>
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.5em; color: black; margin-bottom: 10px;">Terraforming Rating</span>
+                <div style="display: flex; align-items: center;">
+                    <span id="trValueDisplay" style="font-size: 2em; margin-right: 10px;">20</span> <!-- Display for TR value -->
+                    <button onclick="updateTR(1)" class="round-button">+</button>
+                    <button onclick="updateTR(-1)" class="round-button">-</button>
+                </div>
+            </div>
+
+            <!-- VP Tracker Section -->
+            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
+                <span style="font-size: 1.5em; color: black; margin-bottom: 10px;">Victory Points</span>
+                <div class="icon-container">
+                    <img src="Mars.png" alt="Mars Icon" style="width: 60px; height: auto;">
+                    <div id="vpValueDisplay" class="vp-number">0</div> <!-- Display VP number -->
+                </div>
+                <div style="display: flex; margin-top: 10px;">
+                    <button onclick="changeVP(1)" class="round-button">+</button>
+                    <button onclick="changeVP(-1)" class="round-button">-</button>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
