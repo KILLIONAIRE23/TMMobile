@@ -729,17 +729,18 @@
     
     <p>Enter the unique number of your card to automatically apply its VP and tags!</p>
     <p>IMPORTANT: This does NOT include VP-per-resource cards, as they constantly change.</p>
-
-<!-- Cards Played Button Added Below -->
-    <button onclick="openCardsPlayedModal()" style="padding: 10px 20px; margin-top: 5px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Cards Played</button>
-
     
     <input id="cardNumberInput" placeholder="Enter card number" type="text" style="width: calc(100% - 20px); padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
     
-    <button onclick="searchCard()" style="padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Search</button>
+    <!-- Flex container for Search and Cards Played buttons -->
+    <div id="buttonContainer" style="display: flex; justify-content: space-between; gap: 10px; margin-top: 10px;">
+        <button onclick="searchCard()" style="padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Search</button>
+        <button onclick="openCardsPlayedModal()" style="padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Cards Played</button>
+    </div>
     
     <div id="cardDetails" style="margin-top: 10px; color: #FFFFFF;"></div>
 </div>
+
 
 <!-- Modal for Cards Played -->
 <div id="cardsPlayedModal" class="modal">
