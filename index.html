@@ -189,10 +189,11 @@
         margin-bottom: 20px;
     }
 
-    /* Popup Label Styles */
+/* Reduce spacing between the label and the value in the modal */
 .popup-label {
     font-size: 1.5em; /* Larger font size for labels */
-    margin-bottom: 0px;
+    margin: 0; /* Remove default margins */
+    text-align: center;
 }
 
     .resource-label {
@@ -202,10 +203,9 @@
         color: brown;
     }
 
-/* Resource and Production value font size */
 .popup-value {
     font-size: 2em; /* Make values bigger for better visibility */
-    margin-bottom: 5px; /* Reduced space between value and buttons */
+    margin: 5px 0; /* Reduce space between the label and the value */
 }
 
   /* Button group styling for better alignment */
@@ -304,7 +304,12 @@
     }
 }
 
-
+/* Remove unnecessary margin or padding for h3 elements specifically in the modal */
+.modal-content h3 {
+    margin: 5px 0; /* Adjust the margin to reduce spacing */
+    padding: 0; /* Ensure there's no padding */
+    line-height: 1.2; /* Adjust line height to make it tighter */
+}
 
     
     /* Alignment for labels */
