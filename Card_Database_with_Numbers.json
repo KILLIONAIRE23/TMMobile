@@ -6098,6 +6098,23 @@
         "Tag: Event": 0
     },
     {
+        "Card Number": "C20",
+        "Card Name": "Luna Governor",
+        "VP": 0,
+        "Tag: Science": 0,
+        "Tag: Building": 0,
+        "Tag: Space": 0,
+        "Tag: Microbe": 0,
+        "Tag: Plant": 0,
+        "Tag: Animal": 0,
+        "Tag: City": 0,
+        "Tag: Earth": 2,
+        "Tag: Jovian": 0,
+        "Tag: Energy": 0,
+        "Tag: Venus": 0,
+        "Tag: Event": 0
+    },
+    {
         "Card Number": "C35",
         "Card Name": "Rim Freighters",
         "VP": 0,
