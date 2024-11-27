@@ -895,8 +895,15 @@ document.addEventListener('DOMContentLoaded', fetchRSSFeed);
     }
     let currentResource = '';
 let historyLog = [];  // Properly initialize as an empty array
-    let historyLogs = {}; // Object to store unique history for each resource
-
+    let historyLogs = {
+    credit: [],
+    steel: [],
+    titanium: [],
+    plantResource: [],
+    energyResource: [],
+    heat: []
+};
+    
 function openModal(resource) {
     currentResource = resource;
 
