@@ -1210,24 +1210,19 @@ function searchCard() {
             }
         });
 
-        // Check if the card is a duplicate
-        let duplicateText = '';
-        if (playedCards.has(cardNumber)) {
-            duplicateText = ' <span style="color: red;">DUPLICATE</span>';
-        } else {
-            playedCards.add(cardNumber); // Add card number to played cards set
-            cardsPlayed.push(card); // Add the card to the cards played list for display
-        }
+        // Display card details
+        document.getElementById("cardDetails").innerHTML = `
+            <p>Found card: ${card['Card Name']} with VP: ${card.VP} ${card.isDuplicate ? '<span style="color: red;">DUPLICATE</span>' : ''}</p>
+        `;
 
-        document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']}${duplicateText} with VP: ${card.VP}</p>`;
-        console.log("Card found:", card);
+        // Clear the input box after displaying details
+        document.getElementById('cardNumberInput').value = '';
+
+        console.log("Card found:", card); 
     } else {
         document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
-        console.log("Card not found:", cardInput);
+        console.log("Card not found:", cardInput); 
     }
-
-    // Clear the input field after searching
-    document.getElementById('cardNumberInput').value = '';
 }
 
 // Open the Cards Played Modal
