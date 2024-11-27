@@ -204,9 +204,20 @@
         margin-top: 20px; /* Add more space above "Production" label to separate from resource buttons */
     }
 
+/* Style for square boxes for Resource and Production values */
 .popup-value {
-    font-size: 2em; /* Make values bigger for better visibility */
-    margin: 5px 0; /* Reduce space between the label and the value */
+    width: 100px;           /* Define a fixed width to make the value container square */
+    height: 100px;          /* Height should be equal to width to ensure a square shape */
+    display: flex;          /* Flexbox to center align the content */
+    align-items: center;    /* Vertically center the content */
+    justify-content: center;/* Horizontally center the content */
+    border: 2px solid black;/* Border to give it a box effect */
+    border-radius: 10px;    /* Optional: Slightly round the corners */
+    margin: 10px 0;         /* Add some spacing above and below */
+    font-size: 2em;         /* Larger text for better readability */
+    font-weight: bold;      /* Make the text bold */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); /* Shadow for a better visual effect */
+    background-color: #f9f9f9; /* Light background color for contrast */
 }
 
   /* Button group styling for better alignment */
@@ -668,9 +679,9 @@
 <!-- Modal for Resource Management -->
 <div id="resourceModal" class="modal">
     <div class="modal-content">
-        <!-- Resource Section -->
-        <h3 style="text-align: center;">Resource</h3>
-        <h3 id="resourceValueDisplay" class="popup-value">0</h3>
+         <!-- Resource Section -->
+        <h3 class="popup-label">Resource</h3>
+        <div id="resourceValueDisplay" class="popup-value">295</div> <!-- Now in a square box -->
         <div class="button-group">
             <button onclick="updateResource(-5)" class="popup-button red">-5</button>
             <button onclick="updateResource(-1)" class="popup-button red">-1</button>
@@ -679,8 +690,8 @@
         </div>
 
         <!-- Production Section -->
-        <h3 style="text-align: center; color: brown;">Production</h3> <!-- Same color as before popup -->
-        <h3 id="productionValueDisplay" class="popup-value" style="color: brown;">0</h3>
+         <h3 class="popup-label production-label" style="color: brown;">Production</h3>
+        <div id="productionValueDisplay" class="popup-value">1</div> <!-- Now in a square box -->
         <div class="button-group">
             <button onclick="updateProduction(-5)" class="popup-button red">-5</button>
             <button onclick="updateProduction(-1)" class="popup-button red">-1</button>
