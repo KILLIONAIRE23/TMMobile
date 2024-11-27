@@ -217,38 +217,23 @@
     align-items: center;
 }
     
-
-/* Remove the Close (X) button */
-.close {
-    display: none; /* Hides the close button */
-}
-
-
-/* History section styles */
+/* History Section */
 .history-section {
     font-size: 1em;
     margin-top: 20px;
     width: 100%;
 }
 
+/* Remove the Close (X) button */
+.close {
+    display: none; /* Hides the close button */
+}
+    
 .history-item {
     padding: 5px;
     font-size: 1em;
     color: #666;
-    text-align: left;
 }
-
-/* Add a background color for clarity */
-.history-item.resource-history {
-    background-color: rgba(0, 255, 0, 0.1); /* Light green for resource changes */
-}
-
-.history-item.production-history {
-    background-color: rgba(255, 140, 0, 0.1); /* Light orange for production changes */
-}
-
-
-    
 /* Button styling */
 .round-button {
     width: 60px; /* Increased button size */
@@ -666,10 +651,9 @@
 </div>
     
 <!-- Modal for Resource Management -->
+<!-- Modal for Resource Management -->
 <div id="resourceModal" class="modal">
     <div class="modal-content">
-        <span class="close" onclick="closeModal()">&times;</span>
-
         <!-- Resource Section -->
         <h3 style="text-align: center;">Resource</h3>
         <h3 id="resourceValueDisplay" class="popup-value">0</h3>
@@ -692,15 +676,10 @@
 
         <!-- History Section -->
         <h3 style="text-align: center;">History</h3>
-<div id="historyLog">
-  <div id="creditHistory" class="history-section"></div>
-  <div id="steelHistory" class="history-section"></div>
-  <div id="titaniumHistory" class="history-section"></div>
-  <div id="plantHistory" class="history-section"></div>
-  <div id="energyHistory" class="history-section"></div>
-  <div id="heatHistory" class="history-section"></div>
+        <ul id="historyLog" class="history-log" style="list-style: none; padding: 0; max-height: 100px; overflow-y: auto;"></ul>
+    </div>
 </div>
-</div>
+
 
 
 
@@ -887,91 +866,6 @@ document.addEventListener('DOMContentLoaded', fetchRSSFeed);
         });
     });
 
-// Initialize history objects for each resource
-const resourceHistory = {
-    credit: [],
-    steel: [],
-    titanium: [],
-    plant: [],
-    energy: [],
-    heat: [],
-};
-
-    function addToResourceHistory(resource, change, type) {
-    const timestamp = new Date().toLocaleTimeString();
-    const historyEntry = `${timestamp}: ${change} ${type}`;
-    
-    // Push the history entry to the specific resource history
-    resourceHistory[resource].push(historyEntry);
-
-    // Update the history section for the resource
-    updateHistoryDisplay(resource);
-}
-
-function updateHistoryDisplay(resource) {
-    const historyContainer = document.getElementById(`${resource}History`);
-    
-    // Clear the history container
-    historyContainer.innerHTML = '';
-    
-    // Add all history entries to the container
-    resourceHistory[resource].forEach(entry => {
-        const historyItem = document.createElement('div');
-        historyItem.classList.add('history-item');
-        historyItem.textContent = entry;
-
-        historyContainer.appendChild(historyItem);
-    });
-}
-
-
-// Update history when a resource value changes
-function updateResourceHistory(resource, delta) {
-    if (delta > 0) {
-        addToResourceHistory(resource, `+${delta}`);
-    } else if (delta < 0) {
-        addToResourceHistory(resource, `${delta}`);
-    }
-}
-
-// Similarly, update production history
-function updateProductionHistory(resource, delta) {
-    if (delta > 0) {
-        addToResourceHistory(resource, `+${delta}`);
-    } else if (delta < 0) {
-        addToResourceHistory(resource, `${delta}`);
-    }
-}
-
-// When updating resource (credit, steel, etc.)
-function updateResourceValue(resource, delta) {
-    // Find the current resource element and production element
-    const resourceElement = document.getElementById(`${resource}Count`);
-    let currentResourceValue = parseInt(resourceElement.innerText);
-    currentResourceValue += delta;
-
-    // Update the value in the UI
-    resourceElement.innerText = currentResourceValue;
-
-    // Call the function to update the history for that resource
-    updateResourceHistory(resource, delta);
-}
-
-// When updating production (for resource production)
-function updateProductionValue(resource, delta) {
-    // Find the current production element
-    const productionElement = document.getElementById(`${resource}Production`);
-    let currentProductionValue = parseInt(productionElement.innerText);
-    currentProductionValue += delta;
-
-    // Update the value in the UI
-    productionElement.innerText = currentProductionValue;
-
-    // Call the function to update the history for production change
-    updateProductionHistory(resource, delta);
-}
-
-    
     function closeTRModal() {
         document.getElementById('trModal').style.display = "none";
     }
@@ -1000,26 +894,28 @@ function updateProductionValue(resource, delta) {
         saveGameState(); // Save after updating VP
     }
     let currentResource = '';
-let historyLog = []; // Array to store history
+let historyLogs = {}; // Object to store unique history for each resource
 
 function openModal(resource) {
     currentResource = resource;
 
-    // Update resource and production values
+     // Get the current values for the resource and production
     const resourceCountElement = document.getElementById(`${resource}Count`);
     const productionCountElement = document.getElementById(`${resource}Production`);
+    
+    const resourceValue = parseInt(resourceCountElement.innerText);
+    const productionValue = parseInt(productionCountElement.innerText);
 
-    document.getElementById('resourceValueDisplay').innerText = resourceCountElement.innerText;
-    document.getElementById('productionValueDisplay').innerText = productionCountElement.innerText;
-
-    // Hide all history sections and only show the relevant one
-    document.querySelectorAll('.history-section').forEach(section => {
-        section.style.display = 'none';
-    });
-    document.getElementById(`${resource}History`).style.display = 'block';
-
-    // Show modal
-    document.getElementById('resourceModal').style.display = 'block';
+     // Set these values in the modal
+    document.getElementById('resourceValueDisplay').innerText = resourceValue;
+    document.getElementById('productionValueDisplay').innerText = productionValue;
+    
+    
+   // Clear and update the history log
+    updateHistoryLog();
+    
+    // Display the modal
+    document.getElementById('resourceModal').style.display = "block";
 }
 
 function closeModal() {
@@ -1027,6 +923,44 @@ function closeModal() {
     currentResource = ''; // Clear the current resource
 }
 
+    
+function updateResource(delta) {
+    if (currentResource) {
+        const resourceCountElement = document.getElementById(`${currentResource}Count`);
+        const resourceDisplayElement = document.getElementById('resourceValueDisplay');
+
+        let count = parseInt(resourceCountElement.innerText) + delta;
+        if (count < 0) count = 0;
+
+        resourceCountElement.innerText = count;
+        resourceDisplayElement.innerText = count;
+
+        // Log the change to history (specify type as "Resource")
+        logHistory(delta, 'Resource');
+        updateHistoryLog();
+
+        saveGameState(); // Save immediately after update
+    }
+}
+    
+function updateProduction(delta) {
+    if (currentResource) {
+        const productionCountElement = document.getElementById(`${currentResource}Production`);
+        const productionDisplayElement = document.getElementById('productionValueDisplay');
+
+        let production = parseInt(productionCountElement.innerText) + delta;
+        if (currentResource !== 'credit' && production < 0) production = 0;
+
+        productionCountElement.innerText = production;
+        productionDisplayElement.innerText = production;
+
+        // Log the change to history (specify type as "Production")
+        logHistory(delta, 'Production');
+        updateHistoryLog();
+
+        saveGameState(); // Save immediately after update
+    }
+}
 
     // Function to update history section
 function updateHistory(valueChange, type, category) {
@@ -1051,8 +985,11 @@ function updateResource(delta) {
         resourceCountElement.innerText = count;
         resourceDisplayElement.innerText = count;
 
-        // Update specific resource history
-        addToResourceHistory(currentResource, delta > 0 ? `+${delta}` : `${delta}`, 'Resource');
+        // Log the change to history (specify type as "Resource")
+        logHistory(delta, 'Resource');
+        updateHistoryLog();
+
+        saveGameState(); // Save immediately after update
     }
 }
 
@@ -1062,23 +999,33 @@ function updateProduction(delta) {
         const productionDisplayElement = document.getElementById('productionValueDisplay');
 
         let production = parseInt(productionCountElement.innerText) + delta;
-        if (production < 0) production = 0;
+        if (currentResource !== 'credit' && production < 0) production = 0;
 
         productionCountElement.innerText = production;
         productionDisplayElement.innerText = production;
 
-        // Update specific resource production history
-        addToResourceHistory(currentResource, delta > 0 ? `+${delta}` : `${delta}`, 'Production');
+        // Log the change to history (specify type as "Production")
+        logHistory(delta, 'Production');
+        updateHistoryLog();
+
+        saveGameState(); // Save immediately after update
     }
 }
 
 function logHistory(delta, type) {
     const timestamp = new Date().toLocaleTimeString();
     const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
-    historyLog.unshift(`${timestamp}: ${action} ${type}`);
     
-    if (historyLog.length > 10) {
-        historyLog.pop(); // Limit to the latest 10 entries
+    // Initialize history for the current resource if not already present
+    if (!historyLogs[currentResource]) {
+        historyLogs[currentResource] = [];
+    }
+
+    historyLogs[currentResource].unshift(`${timestamp}: ${action} ${type}`);
+    
+    // Limit to the latest 10 entries per resource
+    if (historyLogs[currentResource].length > 10) {
+        historyLogs[currentResource].pop();
     }
 }
 
@@ -1087,11 +1034,13 @@ function updateHistoryLog() {
     const historyElement = document.getElementById('historyLog');
     historyElement.innerHTML = ''; // Clear current history
 
-    historyLog.forEach(entry => {
-        const li = document.createElement('li');
-        li.textContent = entry;
-        historyElement.appendChild(li);
-    });
+    if (historyLogs[currentResource]) {
+        historyLogs[currentResource].forEach(entry => {
+            const li = document.createElement('li');
+            li.textContent = entry;
+            historyElement.appendChild(li);
+        });
+    }
 }
 
      
