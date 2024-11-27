@@ -1200,6 +1200,8 @@ window.onclick = function(event) {
             document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
             console.log("Card not found:", cardInput); 
         }
+        // Clear the input field after searching
+    document.getElementById('cardNumberInput').value = '';
     }
 
     // Save game state to local storage
