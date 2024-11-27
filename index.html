@@ -910,12 +910,7 @@ function openModal(resource) {
     // Get the current values for the resource and production
     const resourceCountElement = document.getElementById(`${resource}Count`);
     const productionCountElement = document.getElementById(`${resource}Production`);
-    
-    if (!resourceCountElement || !productionCountElement) {
-        console.error(`Element not found for resource: ${resource}`);
-        return;
-    }
-    
+
     const resourceValue = parseInt(resourceCountElement.innerText);
     const productionValue = parseInt(productionCountElement.innerText);
 
@@ -923,16 +918,11 @@ function openModal(resource) {
     document.getElementById('resourceValueDisplay').innerText = resourceValue;
     document.getElementById('productionValueDisplay').innerText = productionValue;
 
-    // Update the history log
+    // Update the history log for the current resource
     updateHistoryLog();
 
     // Display the modal
-    const resourceModal = document.getElementById('resourceModal');
-    if (resourceModal) {
-        resourceModal.style.display = "block";
-    } else {
-        console.error("Resource modal element not found.");
-    }
+    document.getElementById('resourceModal').style.display = "block";
 }
 
 function closeModal() {
@@ -1030,27 +1020,31 @@ function updateProduction(delta) {
 }
 
 function logHistory(delta, type) {
-    const timestamp = new Date().toLocaleTimeString();
-    const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
+    if (currentResource) {
+        const timestamp = new Date().toLocaleTimeString();
+        const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
 
-    // Store history entry with HTML for color formatting
-    const historyEntry = `
-        <span style="color: blue;">${timestamp}</span>: 
-        <span style="color: ${delta > 0 ? 'green' : 'red'};">${action}</span> 
-        <span style="color: ${type === 'Production' ? 'brown' : 'black'};">${type}</span>
-    `;
-    
-    // Ensure `historyLog` is an array and add new entries
-    if (!Array.isArray(historyLog)) {
-        historyLog = []; // Reinitialize if it is not an array
+        // Create a history entry with formatted HTML
+        const historyEntry = `
+            <span style="color: blue;">${timestamp}</span>: 
+            <span style="color: ${delta > 0 ? 'green' : 'red'};">${action}</span> 
+            <span style="color: ${type === 'Production' ? 'brown' : 'black'};">${type}</span>
+        `;
+
+        // Ensure `historyLogs[currentResource]` is an array and add the new entry
+        if (!Array.isArray(historyLogs[currentResource])) {
+            historyLogs[currentResource] = [];
+        }
+        historyLogs[currentResource].unshift(historyEntry);
+
+        // Limit the history to the latest 10 entries
+        if (historyLogs[currentResource].length > 10) {
+            historyLogs[currentResource].pop();
+        }
+
+        // Update the displayed history log
+        updateHistoryLog();
     }
-    historyLog.unshift(historyEntry); // Add the new entry at the beginning
-
-    if (historyLog.length > 10) {
-        historyLog.pop(); // Limit to the latest 10 entries
-    }
-
-    updateHistoryLog();
 }
 
 
@@ -1058,11 +1052,13 @@ function updateHistoryLog() {
     const historyElement = document.getElementById('historyLog');
     historyElement.innerHTML = ''; // Clear current history
 
-    historyLog.forEach(entry => {
-        const li = document.createElement('li');
-        li.innerHTML = entry; // Use innerHTML to apply HTML formatting
-        historyElement.appendChild(li);
-    });
+    if (currentResource && Array.isArray(historyLogs[currentResource])) {
+        historyLogs[currentResource].forEach(entry => {
+            const li = document.createElement('li');
+            li.innerHTML = entry; // Use innerHTML to apply HTML formatting
+            historyElement.appendChild(li);
+        });
+    }
 }
 
      
@@ -1195,16 +1191,16 @@ function saveGameState() {
                 credit: parseInt(document.getElementById('creditCount').innerText),
                 steel: parseInt(document.getElementById('steelCount').innerText),
                 titanium: parseInt(document.getElementById('titaniumCount').innerText),
-                plant: parseInt(document.getElementById('plantResourceCount').innerText),
-                energy: parseInt(document.getElementById('energyResourceCount').innerText),
+                plantResource: parseInt(document.getElementById('plantResourceCount').innerText),
+                energyResource: parseInt(document.getElementById('energyResourceCount').innerText),
                 heat: parseInt(document.getElementById('heatCount').innerText)
             },
             productions: {
                 credit: parseInt(document.getElementById('creditProduction').innerText),
                 steel: parseInt(document.getElementById('steelProduction').innerText),
                 titanium: parseInt(document.getElementById('titaniumProduction').innerText),
-                plant: parseInt(document.getElementById('plantResourceProduction').innerText),
-                energy: parseInt(document.getElementById('energyResourceProduction').innerText),
+                plantResource: parseInt(document.getElementById('plantResourceProduction').innerText),
+                energyResource: parseInt(document.getElementById('energyResourceProduction').innerText),
                 heat: parseInt(document.getElementById('heatProduction').innerText)
             },
             trValue: parseInt(document.getElementById('trCount').innerText),
@@ -1213,6 +1209,7 @@ function saveGameState() {
         localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
     }, 500); // Save after 500ms if no other changes are made
 }
+
 
 
 function openTRModal() {
@@ -1245,8 +1242,7 @@ function updateTR(delta) {
     trDisplayElement.innerText = trValue;
 }
 
-    // Load the game state from local storage, including history logs
-function loadGameState() {
+    function loadGameState() {
     const savedState = localStorage.getItem('terraformingMarsGameState');
     if (savedState) {
         const gameState = JSON.parse(savedState);
@@ -1265,25 +1261,34 @@ function loadGameState() {
         document.getElementById('creditCount').innerText = gameState.resources.credit;
         document.getElementById('steelCount').innerText = gameState.resources.steel;
         document.getElementById('titaniumCount').innerText = gameState.resources.titanium;
-        document.getElementById('plantResourceCount').innerText = gameState.resources.plant;
-        document.getElementById('energyResourceCount').innerText = gameState.resources.energy;
+        document.getElementById('plantResourceCount').innerText = gameState.resources.plantResource;
+        document.getElementById('energyResourceCount').innerText = gameState.resources.energyResource;
         document.getElementById('heatCount').innerText = gameState.resources.heat;
 
         // Restore Production Counts
         document.getElementById('creditProduction').innerText = gameState.productions.credit;
         document.getElementById('steelProduction').innerText = gameState.productions.steel;
         document.getElementById('titaniumProduction').innerText = gameState.productions.titanium;
-        document.getElementById('plantResourceProduction').innerText = gameState.productions.plant;
-        document.getElementById('energyResourceProduction').innerText = gameState.productions.energy;
+        document.getElementById('plantResourceProduction').innerText = gameState.productions.plantResource;
+        document.getElementById('energyResourceProduction').innerText = gameState.productions.energyResource;
         document.getElementById('heatProduction').innerText = gameState.productions.heat;
 
         // Restore TR Value
         document.getElementById('trCount').innerText = gameState.trValue || 0;
 
         // Restore History Logs
-        historyLogs = gameState.historyLogs || {};
+        historyLogs = gameState.historyLogs || {
+            credit: [],
+            steel: [],
+            titanium: [],
+            plantResource: [],
+            energyResource: [],
+            heat: []
+        };
+        updateHistoryLog(); // Update UI for the currently selected resource's history log
     }
 }
+
 
     // Reset game state
     function resetGameState() {
