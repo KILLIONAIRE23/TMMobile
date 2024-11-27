@@ -729,6 +729,10 @@
     
     <p>Enter the unique number of your card to automatically apply its VP and tags!</p>
     <p>IMPORTANT: This does NOT include VP-per-resource cards, as they constantly change.</p>
+
+<!-- Cards Played Button Added Below -->
+    <button onclick="openCardsPlayedModal()" style="width: calc(100% - 20px); padding: 10px 20px; margin-top: 5px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Cards Played</button>
+</div>
     
     <input id="cardNumberInput" placeholder="Enter card number" type="text" style="width: calc(100% - 20px); padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box;">
     
@@ -736,9 +740,6 @@
     
     <div id="cardDetails" style="margin-top: 10px; color: #FFFFFF;"></div>
 
-    <!-- Cards Played Button Added Below -->
-    <button onclick="openCardsPlayedModal()" style="width: calc(100% - 20px); padding: 10px 20px; margin-top: 5px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Cards Played</button>
-</div>
 
 <!-- Modal for Cards Played -->
 <div id="cardsPlayedModal" class="modal">
