@@ -1250,6 +1250,14 @@ function openCardsPlayedModal() {
 function closeCardsPlayedModal() {
     document.getElementById('cardsPlayedModal').style.display = "none";
 }
+
+// Event listener to close modal when clicking outside of it
+window.onclick = function(event) {
+    const cardsPlayedModal = document.getElementById('cardsPlayedModal');
+    if (event.target === cardsPlayedModal) {
+        closeCardsPlayedModal();
+    }
+};
     
     // Save game state to local storage
     let saveTimeout;
