@@ -192,7 +192,7 @@
     /* Popup Label Styles */
 .popup-label {
     font-size: 1.5em; /* Larger font size for labels */
-    margin-bottom: 5px;
+    margin-bottom: 2px;
 }
 
     .resource-label {
@@ -1015,18 +1015,20 @@ function updateProduction(delta) {
 function logHistory(delta, type) {
     const timestamp = new Date().toLocaleTimeString();
     const action = delta > 0 ? `+${delta}` : delta; // Format the delta with a "+" for positive values
-    
-    // Initialize history for the current resource if not already present
-    if (!historyLogs[currentResource]) {
-        historyLogs[currentResource] = [];
+
+    // Store history entry with HTML for color formatting
+    const historyEntry = `
+        <span style="color: blue;">${timestamp}</span>: 
+        <span style="color: ${delta > 0 ? 'green' : 'red'};">${action}</span> 
+        <span style="color: ${type === 'Production' ? 'brown' : 'black'};">${type}</span>
+    `;
+    historyLog.unshift(historyEntry);
+
+    if (historyLog.length > 10) {
+        historyLog.pop(); // Limit to the latest 10 entries
     }
 
-    historyLogs[currentResource].unshift(`${timestamp}: ${action} ${type}`);
-    
-    // Limit to the latest 10 entries per resource
-    if (historyLogs[currentResource].length > 10) {
-        historyLogs[currentResource].pop();
-    }
+    updateHistoryLog();
 }
 
 
@@ -1034,13 +1036,11 @@ function updateHistoryLog() {
     const historyElement = document.getElementById('historyLog');
     historyElement.innerHTML = ''; // Clear current history
 
-    if (historyLogs[currentResource]) {
-        historyLogs[currentResource].forEach(entry => {
-            const li = document.createElement('li');
-            li.textContent = entry;
-            historyElement.appendChild(li);
-        });
-    }
+    historyLog.forEach(entry => {
+        const li = document.createElement('li');
+        li.innerHTML = entry; // Use innerHTML to apply HTML formatting
+        historyElement.appendChild(li);
+    });
 }
 
      
