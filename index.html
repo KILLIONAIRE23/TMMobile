@@ -1068,7 +1068,7 @@ function produceResources() {
     ];
     
     let trValue = parseInt(document.getElementById('trCount').innerText);
-    
+
     resources.forEach(resource => {
         const resourceCountElement = document.getElementById(resource.countId);
         const productionCountElement = document.getElementById(resource.productionId);
@@ -1077,20 +1077,27 @@ function produceResources() {
         let productionValue = parseInt(productionCountElement.innerText);
 
         if (resource.id === 'credit') {
+            // For credit, add both production and TR value
             resourceValue += productionValue + trValue;
+        } else if (resource.id === 'heat') {
+            // For heat, add heat production and current energy resource value (not production)
+            const energyValue = parseInt(document.getElementById('energyResourceCount').innerText);
+            resourceValue += productionValue + energyValue;
+        } else if (resource.id === 'energy') {
+            // For energy, reset to 0 and add production value
+            resourceValue = productionValue;
         } else {
+            // For other resources, just add production value
             resourceValue += productionValue;
         }
 
-        if (resource.id !== 'credit' && resourceValue < 0) {
-            resourceValue = 0;
-        }
-
+        // Update the resource value display
         resourceCountElement.innerText = resourceValue;
     });
 
     saveGameState(); // Save immediately after producing resources
 }
+
 
 
 function capitalizeFirstLetter(string) {
@@ -1179,47 +1186,6 @@ function saveGameState() {
         };
         localStorage.setItem('terraformingMarsGameState', JSON.stringify(gameState));
     }, 500); // Save after 500ms if no other changes are made
-}
-
-function produceResources() {
-    const resources = [
-        { id: 'credit', countId: 'creditCount', productionId: 'creditProduction' },
-        { id: 'steel', countId: 'steelCount', productionId: 'steelProduction' },
-        { id: 'titanium', countId: 'titaniumCount', productionId: 'titaniumProduction' },
-        { id: 'plant', countId: 'plantResourceCount', productionId: 'plantResourceProduction' },
-        { id: 'energy', countId: 'energyResourceCount', productionId: 'energyResourceProduction' },
-        { id: 'heat', countId: 'heatCount', productionId: 'heatProduction' }
-    ];
-    
-    let trValue = parseInt(document.getElementById('trCount').innerText);
-
-    resources.forEach(resource => {
-        const resourceCountElement = document.getElementById(resource.countId);
-        const productionCountElement = document.getElementById(resource.productionId);
-        
-        let resourceValue = parseInt(resourceCountElement.innerText);
-        let productionValue = parseInt(productionCountElement.innerText);
-
-        if (resource.id === 'credit') {
-            // For credit, add both production and TR value
-            resourceValue += productionValue + trValue;
-        } else if (resource.id === 'heat') {
-            // For heat, add heat production, energy resource, and current heat resource
-            const energyValue = parseInt(document.getElementById('energyResourceCount').innerText);
-            resourceValue += productionValue + energyValue;
-        } else if (resource.id === 'energy') {
-            // For energy, reset to 0 and add production value
-            resourceValue = productionValue;
-        } else {
-            // For other resources, just add production value
-            resourceValue += productionValue;
-        }
-
-        // Update the resource value display
-        resourceCountElement.innerText = resourceValue;
-    });
-
-    saveGameState(); // Save immediately after producing resources
 }
 
 
