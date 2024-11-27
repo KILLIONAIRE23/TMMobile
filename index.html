@@ -1192,16 +1192,19 @@ window.onclick = function(event) {
         }
     }
 
-    // Track cards played in an array
-let cardsPlayed = [];
+    let cardsPlayed = []; // Array to store cards that have been played
 
 function searchCard() {
+    // Get the user input from the search field
     const cardInput = document.getElementById('cardNumberInput').value.trim();
     const isNumeric = /^\d+$/.test(cardInput);
     const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
+
+    // Find the card in the database using the card number
     const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
 
     if (card) {
+        // Handle VP and tags for the card
         changeVP(Number(card.VP) || 0);
         Object.keys(card).forEach(key => {
             if (key.startsWith("Tag:") && card[key] === 1) {
@@ -1210,7 +1213,15 @@ function searchCard() {
             }
         });
 
-        // Display card details
+        // Add the card to the cardsPlayed list and mark duplicates if found
+        const isDuplicate = cardsPlayed.some(c => c['Card Number'] === cardNumber);
+        if (!isDuplicate) {
+            cardsPlayed.push(card);
+        } else {
+            card.isDuplicate = true; // Mark card as duplicate
+        }
+
+        // Display card details in the HTML element with id "cardDetails"
         document.getElementById("cardDetails").innerHTML = `
             <p>Found card: ${card['Card Name']} with VP: ${card.VP} ${card.isDuplicate ? '<span style="color: red;">DUPLICATE</span>' : ''}</p>
         `;
@@ -1218,13 +1229,36 @@ function searchCard() {
         // Clear the input box after displaying details
         document.getElementById('cardNumberInput').value = '';
 
+        // Update the cards played log in the modal
+        updateCardsPlayedLog();
+
         console.log("Card found:", card); 
     } else {
+        // If no card is found, display the "Card not found" message
         document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
         console.log("Card not found:", cardInput); 
     }
 }
 
+function updateCardsPlayedLog() {
+    const cardsPlayedElement = document.getElementById('cardsPlayedLog');
+    cardsPlayedElement.innerHTML = ''; // Clear the previous list
+
+    if (cardsPlayed.length === 0) {
+        cardsPlayedElement.innerHTML = '<p>No cards have been played yet.</p>';
+    } else {
+        cardsPlayed.forEach(card => {
+            const cardEntry = document.createElement('p');
+            cardEntry.textContent = `Card: ${card['Card Name']} (VP: ${card.VP})`;
+            if (card.isDuplicate) {
+                cardEntry.innerHTML += ' <span style="color: red;">DUPLICATE</span>';
+            }
+            cardsPlayedElement.appendChild(cardEntry);
+        });
+    }
+}
+
+    
 // Open the Cards Played Modal
 function openCardsPlayedModal() {
     const cardsPlayedListElement = document.getElementById('cardsPlayedList');
