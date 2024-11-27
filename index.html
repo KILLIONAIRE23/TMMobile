@@ -738,6 +738,20 @@
     <div id="cardDetails" style="margin-top: 10px; color: #FFFFFF;"></div>
 </div>
 
+<!-- Cards Played Section -->
+<div id="cardsPlayedBox" style="background-color: rgba(245, 126, 55, 0.8); max-width: 800px; margin: 20px auto; padding: 5px 15px; border-radius: 15px; box-shadow: 0 0px 30px rgba(0, 0, 0, 1); border: 3px solid black; box-sizing: border-box;">
+    <h3 style="background-color: rgba(0, 0, 0, 0.6); padding: 8px 12px; border-radius: 10px; display: inline-block; color: #FFFFFF;">Cards Played</h3>
+    <button onclick="openCardsPlayedModal()" style="padding: 10px 20px; background-color: #333; color: white; border-radius: 5px; cursor: pointer; border: none;">Show Cards Played</button>
+</div>
+
+<!-- Modal for Cards Played -->
+<div id="cardsPlayedModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeCardsPlayedModal()">&times;</span>
+        <h3 style="text-align: center;">Cards Played</h3>
+        <ul id="cardsPlayedList" style="list-style: none; padding: 0; max-height: 300px; overflow-y: auto;"></ul>
+    </div>
+</div>
     
 <!-- VP and TR Trackers -->
 <div id="vpTracker">
@@ -1178,8 +1192,8 @@ window.onclick = function(event) {
         }
     }
 
-    // Create a set to keep track of played card numbers
-let playedCards = new Set();
+    // Track cards played in an array
+let cardsPlayed = [];
 
 function searchCard() {
     const cardInput = document.getElementById('cardNumberInput').value.trim();
@@ -1202,6 +1216,7 @@ function searchCard() {
             duplicateText = ' <span style="color: red;">DUPLICATE</span>';
         } else {
             playedCards.add(cardNumber); // Add card number to played cards set
+            cardsPlayed.push(card); // Add the card to the cards played list for display
         }
 
         document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']}${duplicateText} with VP: ${card.VP}</p>`;
@@ -1215,7 +1230,27 @@ function searchCard() {
     document.getElementById('cardNumberInput').value = '';
 }
 
+// Open the Cards Played Modal
+function openCardsPlayedModal() {
+    const cardsPlayedListElement = document.getElementById('cardsPlayedList');
+    cardsPlayedListElement.innerHTML = ''; // Clear existing list
 
+    // Add each played card to the list
+    cardsPlayed.forEach((card, index) => {
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `${index + 1}. ${card['Card Name']} (Card Number: ${card['Card Number']})`;
+        cardsPlayedListElement.appendChild(listItem);
+    });
+
+    // Show the modal
+    document.getElementById('cardsPlayedModal').style.display = "block";
+}
+
+// Close the Cards Played Modal
+function closeCardsPlayedModal() {
+    document.getElementById('cardsPlayedModal').style.display = "none";
+}
+    
     // Save game state to local storage
     let saveTimeout;
 
