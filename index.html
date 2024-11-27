@@ -9,6 +9,70 @@
 
 <style>
 
+/* Victory Points Section */
+.vp-section {
+    display: flex;
+    align-items: center;
+}
+
+/* Icon container for VP tracker */
+.icon-container {
+    position: relative;
+    width: 40px; /* Adjust to match TR icon size */
+    height: 40px; /* Ensure consistent size */
+}
+
+/* Mars Icon for VP */
+.vp-icon {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+/* VP Number Styling */
+.vp-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5em; /* Adjust size to match the TR value */
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+    
+    /* TR Value styling */
+.tr-value {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+}
+
+/* TR Icon styling */
+.tr-icon {
+    width: 40px; /* Adjust size to match the desired height */
+    height: auto;
+}
+    
+    /* Terraforming Rating Section */
+.tr-section {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between TR icon and value */
+}
+
+/* Wrapper to hold both TR and VP sections side by side */
+.terraforming-vp-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; /* Add some padding for aesthetics */
+    background-color: #e6e3e3; /* Match existing background color */
+    border-radius: 10px;
+    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+    
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -643,12 +707,23 @@
 <body>
 <h2>Standard Resources & TR</h2>
      
-    <!-- Terraforming Rating Button -->
+    <!-- Terraforming Rating and VP Tracker Button -->
 <div class="terraforming-container full-width">
-    <button class="terraforming-button" onclick="openTRModal()">
-        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
-        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
-    </button>
+    <div class="terraforming-vp-wrapper">
+        <!-- TR Section -->
+        <div class="tr-section">
+            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR Icon" class="tr-icon">
+            <span id="trCount" class="tr-value">20</span>
+        </div>
+
+        <!-- VP Tracker Section -->
+        <div class="vp-section">
+            <div class="icon-container">
+                <img src="Mars.png" alt="Mars Icon" class="vp-icon">
+                <div id="vpNumberTRBox" class="vp-number">0</div> <!-- VP value for TR box -->
+            </div>
+        </div>
+    </div>
 </div>
      
      <!-- Resources Buttons - 2 Rows of 3 Buttons -->
