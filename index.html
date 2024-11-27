@@ -9,70 +9,6 @@
 
 <style>
 
-/* Victory Points Section */
-.vp-section {
-    display: flex;
-    align-items: center;
-}
-
-/* Icon container for VP tracker */
-.icon-container {
-    position: relative;
-    width: 40px; /* Adjust to match TR icon size */
-    height: 40px; /* Ensure consistent size */
-}
-
-/* Mars Icon for VP */
-.vp-icon {
-    width: 100%;
-    height: auto;
-    border-radius: 50%;
-}
-
-/* VP Number Styling */
-.vp-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.5em; /* Adjust size to match the TR value */
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-    
-    /* TR Value styling */
-.tr-value {
-    font-size: 2em;
-    font-weight: bold;
-    color: black;
-}
-
-/* TR Icon styling */
-.tr-icon {
-    width: 40px; /* Adjust size to match the desired height */
-    height: auto;
-}
-    
-    /* Terraforming Rating Section */
-.tr-section {
-    display: flex;
-    align-items: center;
-    gap: 10px; /* Space between TR icon and value */
-}
-
-/* Wrapper to hold both TR and VP sections side by side */
-.terraforming-vp-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px; /* Add some padding for aesthetics */
-    background-color: #e6e3e3; /* Match existing background color */
-    border-radius: 10px;
-    box-shadow: 0 0px 30px rgba(0, 0, 0, 0.4);
-    width: 100%;
-}
-    
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -551,27 +487,6 @@
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
 
-.tr-modal .vp-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.8em; /* Adjust to match TR size requirements */
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-/* Container adjustments specifically for the TR modal */
-.tr-modal .icon-container {
-    position: relative;
-    width: 60px;  /* Ensure size matches TR value */
-    height: 60px; /* Consistent height */
-    border-radius: 50%;
-    margin-top: 10px;
-}
-
-    
     /* Style for making tag counter numbers more visible */
     #tagTable td span {
         font-size: 1.5em; /* Make numbers bigger */
@@ -707,23 +622,12 @@
 <body>
 <h2>Standard Resources & TR</h2>
      
-    <!-- Terraforming Rating and VP Tracker Button -->
+    <!-- Terraforming Rating Button -->
 <div class="terraforming-container full-width">
-    <div class="terraforming-vp-wrapper">
-        <!-- TR Section -->
-        <div class="tr-section">
-            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR Icon" class="tr-icon">
-            <span id="trCount" class="tr-value">20</span>
-        </div>
-
-        <!-- VP Tracker Section -->
-        <div class="vp-section">
-            <div class="icon-container">
-                <img src="Mars.png" alt="Mars Icon" class="vp-icon">
-                <div id="vpNumberTRBox" class="vp-number">0</div> <!-- VP value for TR box -->
-            </div>
-        </div>
-    </div>
+    <button class="terraforming-button" onclick="openTRModal()">
+        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+    </button>
 </div>
      
      <!-- Resources Buttons - 2 Rows of 3 Buttons -->
@@ -804,35 +708,17 @@
 
 
 
-<!-- Modal for TR and VP Management -->
+<!-- Modal for TR Management -->
 <div id="trModal" class="modal">
     <div class="modal-content">
         <span class="close" onclick="closeTRModal()">&times;</span>
-        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; color: black; gap: 20px;">
+        <div style="display: flex; align-items: center; justify-content: center; color: black;">
             
             <!-- TR Resource Value Section with Label -->
-            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                <span style="font-size: 1.5em; color: black; margin-bottom: 10px;">Terraforming Rating</span>
-                <div style="display: flex; align-items: center;">
-                    <span id="trValueDisplay" style="font-size: 2em; margin-right: 10px;">20</span> <!-- Display for TR value -->
-                    <button onclick="updateTR(1)" class="round-button">+</button>
-                    <button onclick="updateTR(-1)" class="round-button">-</button>
-                </div>
-            </div>
-
-            <!-- VP Tracker Section -->
-            <div style="flex: 1; display: flex; flex-direction: column; align-items: center;">
-                <span style="font-size: 1.5em; color: black; margin-bottom: 10px;">Victory Points</span>
-                <div class="icon-container">
-                    <img src="Mars.png" alt="Mars Icon" style="width: 60px; height: auto;">
-                    <div id="vpValueDisplay" class="vp-number">0</div> <!-- Display VP number -->
-                </div>
-                <div style="display: flex; margin-top: 10px;">
-                    <button onclick="changeVP(1)" class="round-button">+</button>
-                    <button onclick="changeVP(-1)" class="round-button">-</button>
-                </div>
-            </div>
-
+            <span style="font-size: 1.5em; color: black; margin-right: 10px;">Resource</span> <!-- Label for TR resource -->
+            <h3 id="trValueDisplay" style="font-size: 2em; margin: 0 10px;">20</h3> <!-- Display for TR value -->
+            <button onclick="updateTR(1)" class="round-button">+</button>
+            <button onclick="updateTR(-1)" class="round-button">-</button>
         </div>
     </div>
 </div>
