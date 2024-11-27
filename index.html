@@ -1178,31 +1178,43 @@ window.onclick = function(event) {
         }
     }
 
-    // Search Card by Card Number and update VP and tags
-    function searchCard() {
-        const cardInput = document.getElementById('cardNumberInput').value.trim();
-        const isNumeric = /^\d+$/.test(cardInput);
-        const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
-        const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
+    // Create a set to keep track of played card numbers
+let playedCards = new Set();
 
-        if (card) {
-            changeVP(Number(card.VP) || 0);
-            Object.keys(card).forEach(key => {
-                if (key.startsWith("Tag:") && card[key] === 1) {
-                    const tag = key.replace("Tag: ", "").toLowerCase();
-                    changeCount(tag, 1);
-                }
-            });
+function searchCard() {
+    const cardInput = document.getElementById('cardNumberInput').value.trim();
+    const isNumeric = /^\d+$/.test(cardInput);
+    const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
+    const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
 
-            document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP}</p>`;
-            console.log("Card found:", card); 
+    if (card) {
+        changeVP(Number(card.VP) || 0);
+        Object.keys(card).forEach(key => {
+            if (key.startsWith("Tag:") && card[key] === 1) {
+                const tag = key.replace("Tag: ", "").toLowerCase();
+                changeCount(tag, 1);
+            }
+        });
+
+        // Check if the card is a duplicate
+        let duplicateText = '';
+        if (playedCards.has(cardNumber)) {
+            duplicateText = ' <span style="color: red;">DUPLICATE</span>';
         } else {
-            document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
-            console.log("Card not found:", cardInput); 
+            playedCards.add(cardNumber); // Add card number to played cards set
         }
-        // Clear the input field after searching
-    document.getElementById('cardNumberInput').value = '';
+
+        document.getElementById("cardDetails").innerHTML = `<p>Found card: ${card['Card Name']}${duplicateText} with VP: ${card.VP}</p>`;
+        console.log("Card found:", card);
+    } else {
+        document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+        console.log("Card not found:", cardInput);
     }
+
+    // Clear the input field after searching
+    document.getElementById('cardNumberInput').value = '';
+}
+
 
     // Save game state to local storage
     let saveTimeout;
