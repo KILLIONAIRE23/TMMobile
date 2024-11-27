@@ -1069,6 +1069,10 @@ function produceResources() {
     
     let trValue = parseInt(document.getElementById('trCount').innerText);
 
+// Capture the current energy value before production starts
+    let currentEnergyValue = parseInt(document.getElementById('energyResourceCount').innerText);
+
+    
     resources.forEach(resource => {
         const resourceCountElement = document.getElementById(resource.countId);
         const productionCountElement = document.getElementById(resource.productionId);
@@ -1082,7 +1086,7 @@ function produceResources() {
         } else if (resource.id === 'heat') {
             // For heat, add heat production and current energy resource value (not production)
             const energyValue = parseInt(document.getElementById('energyResourceCount').innerText);
-            resourceValue += productionValue + energyValue;
+            resourceValue += productionValue + currentEnergyValue;
         } else if (resource.id === 'energy') {
             // For energy, reset to 0 and add production value
             resourceValue = productionValue;
