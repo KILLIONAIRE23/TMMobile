@@ -1342,16 +1342,13 @@ window.onclick = function(event) {
     let cardsPlayed = []; // Array to store cards that have been played
 
 function searchCard() {
-    // Get the user input from the search field
     const cardInput = document.getElementById('cardNumberInput').value.trim();
     const isNumeric = /^\d+$/.test(cardInput);
     const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
-
-    // Find the card in the database using the card number
     const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
 
+    const cardDetailsElement = document.getElementById("cardDetails");
     if (card) {
-        // Handle VP and tags for the card
         changeVP(Number(card.VP) || 0);
         Object.keys(card).forEach(key => {
             if (key.startsWith("Tag:") && card[key] === 1) {
@@ -1360,31 +1357,23 @@ function searchCard() {
             }
         });
 
-        // Add the card to the cardsPlayed list and mark duplicates if found
-        const isDuplicate = cardsPlayed.some(c => c['Card Number'] === cardNumber);
-        if (!isDuplicate) {
-            cardsPlayed.push(card);
-        } else {
-            card.isDuplicate = true; // Mark card as duplicate
+        // Adding DUPLICATE logic if the card is played again
+        const cardPlayedAlready = playedCards.includes(cardNumber);
+        let duplicateText = cardPlayedAlready ? "<span style='color: red;'>DUPLICATE</span>" : "";
+        cardDetailsElement.innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP} ${duplicateText}</p>`;
+
+        if (!cardPlayedAlready) {
+            playedCards.push(cardNumber); // Keep track of played cards
         }
-
-        // Display card details in the HTML element with id "cardDetails"
-        document.getElementById("cardDetails").innerHTML = `
-            <p>Found card: ${card['Card Name']} with VP: ${card.VP} ${card.isDuplicate ? '<span style="color: red;">DUPLICATE</span>' : ''}</p>
-        `;
-
-        // Clear the input box after displaying details
-        document.getElementById('cardNumberInput').value = '';
-
-        // Update the cards played log in the modal
-        updateCardsPlayedLog();
 
         console.log("Card found:", card); 
     } else {
-        // If no card is found, display the "Card not found" message
-        document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
+        cardDetailsElement.innerHTML = "<p>Card not found. Please try a different number.</p>";
         console.log("Card not found:", cardInput); 
     }
+
+    // Clear the input field after search
+    document.getElementById('cardNumberInput').value = '';
 }
 
 function updateCardsPlayedLog() {
