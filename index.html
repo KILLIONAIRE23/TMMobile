@@ -622,12 +622,24 @@
 <h2>Standard Resources & TR</h2>
      
     <!-- Terraforming Rating Button -->
-<div class="terraforming-container full-width">
-    <button class="terraforming-button" onclick="openTRModal()">
-        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
-        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
-    </button>
+<div class="terraforming-container full-width" style="display: flex; justify-content: space-between; align-items: center; padding: 10px;">
+    <!-- Terraforming Rating Button on the Left -->
+    <div class="tr-container" style="display: flex; flex-direction: column; align-items: center;">
+        <button class="terraforming-button" onclick="openTRModal()">
+            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+            <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+        </button>
+    </div>
+
+    <!-- VP Tracker without Buttons on the Right -->
+    <div class="vp-container" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="icon-container" style="position: relative; width: 80px; height: 80px;">
+            <img src="Mars.png" alt="Mars Icon" style="width: 100%; height: auto; border-radius: 50%;">
+            <div id="vpCountNoButtons" class="vp-number" style="font-size: 30px;">3</div> <!-- Value is dynamic -->
+        </div>
+    </div>
 </div>
+
      
      <!-- Resources Buttons - 2 Rows of 3 Buttons -->
 <div class="resources-container">
@@ -1036,6 +1048,14 @@ function updateResource(delta) {
     }
 }
 
+function changeVP(delta) {
+    vpCount += delta;
+    if (vpCount < 0) { vpCount = 0; }
+    document.getElementById('vpNumber').innerText = vpCount; // Update original VP tracker
+    document.getElementById('vpCountNoButtons').innerText = vpCount; // Update the new VP tracker without buttons
+    saveGameState(); // Save after updating VP
+}
+    
 function updateProduction(delta) {
     if (currentResource) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
