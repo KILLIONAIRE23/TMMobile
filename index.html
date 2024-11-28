@@ -9,6 +9,42 @@
 
 <style>
 
+/* Combined container styles for TR and VP tracker */
+.combined-container {
+    background-color: #ececec;
+    border-radius: 15px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 800px; /* Matches the width of other elements, like resource rows */
+    margin: 20px auto;
+    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+/* Terraforming Rating and VP tracker adjustments for mobile */
+@media (max-width: 480px) {
+    .combined-container {
+        width: 90%; /* Make it adapt to the mobile view, similar to other elements */
+        padding: 10px;
+    }
+
+    .icon-container {
+        width: 60px; /* Adjust the VP icon size for smaller screens */
+        height: 60px;
+    }
+
+    .vp-number {
+        font-size: 20px; /* Decrease VP number size for mobile if needed */
+    }
+
+    .terraforming-button img {
+        width: 60px; /* Resize TR icon for better fit on mobile */
+    }
+}
+    
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -621,7 +657,7 @@
 <body>
 <h2>Standard Resources & TR</h2>
      
-<div class="combined-container" style="background-color: #ececec; border-radius: 15px; padding: 15px; display: flex; align-items: center; justify-content: space-between; max-width: 600px; margin: 20px auto; box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);">
+<div class="combined-container">
     <!-- Terraforming Rating Button on the Left -->
     <div class="tr-container" style="display: flex; flex-direction: column; align-items: center;">
         <button class="terraforming-button" onclick="openTRModal()">
