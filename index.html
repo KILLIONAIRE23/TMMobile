@@ -9,140 +9,6 @@
 
 <style>
 
-/* Smaller Mars icon for VP Tracker inside TR container */
-.small-vp-icon-container {
-    position: relative;
-    width: 80px; /* Reduce width to make it smaller */
-    height: 80px; /* Reduce height to make it smaller */
-}
-
-/* Style for the number within the smaller Mars icon */
-.small-vp-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 24px; /* Reduce font size for smaller VP icon */
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
-}
-
-/* Updated TR and VP container styling */
-.tr-vp-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    max-width: 800px; /* Align with other elements like resources */
-    margin: 20px auto;
-    padding: 10px;
-    background-color: #f0f0f0; /* Light gray background */
-    border-radius: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-    box-sizing: border-box;
-}
-
-/* Smaller VP Tracker for TR + VP Container */
-.tr-container {
-    display: flex;
-    justify-content: space-between; /* Space out TR and VP elements */
-    align-items: center; /* Align items vertically center */
-    width: 100%;
-    padding: 10px; /* Add some padding for better visual spacing */
-    background-color: #f5f5f5;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    box-sizing: border-box;
-}
-
-.tr-container img {
-    width: 60px; /* Set a consistent width for the TR icon */
-    height: auto;
-}
-
-.tr-container span {
-    font-size: 2em;
-    font-weight: bold;
-    color: black;
-}
-
-/* Styling for the VP container on the right */
-.vp-container {
-    display: flex;
-    align-items: center;
-}
-
-.icon-container {
-    position: relative;
-    width: 60px; /* Adjust size to match TR */
-    height: auto;
-}
-
-.icon-container img {
-    width: 60px;
-    height: auto;
-    border-radius: 50%;
-}
-
-.icon-container .vp-number {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 1.8em; /* Adjust size for the VP number */
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
-}
-
-/* Ensure the width adjusts based on the device */
-@media (max-width: 480px) {
-    .tr-vp-container {
-        width: 90%; /* Make it more mobile-friendly */
-    }
-    .tr-container img,
-    .icon-container {
-        width: 50px; /* Decrease icon size for mobile view */
-    }
-}
-    
-/* Combined container styles for TR and VP tracker */
-.combined-container {
-    background-color: #ececec;
-    border-radius: 15px;
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    max-width: 800px; /* Matches the width of other elements, like resource rows */
-    margin: 20px auto;
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.5);
-    box-sizing: border-box;
-}
-
-/* Terraforming Rating and VP tracker adjustments for mobile */
-@media (max-width: 480px) {
-    .combined-container {
-        width: 90%; /* Make it adapt to the mobile view, similar to other elements */
-        padding: 10px;
-    }
-
-    .icon-container {
-        width: 60px; /* Adjust the VP icon size for smaller screens */
-        height: 60px;
-    }
-
-    .vp-number {
-        font-size: 20px; /* Decrease VP number size for mobile if needed */
-    }
-
-    .terraforming-button img {
-        width: 60px; /* Resize TR icon for better fit on mobile */
-    }
-}
-    
 /* Modal styles */
 .modal {
     display: none; /* Hidden by default */
@@ -755,21 +621,13 @@
 <body>
 <h2>Standard Resources & TR</h2>
      
-<!-- Terraforming Rating and VP Tracker Box -->
-<div class="tr-container full-width">
-    <!-- Terraforming Rating Section -->
-    <div>
-        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR" style="width: 50px; height: 50px;">
-        <span id="trCount" style="font-size: 24px;">20</span> <!-- Adjusted to match smaller TR value -->
-    </div>
-
-    <!-- Smaller VP Tracker Section -->
-    <div class="small-vp-icon-container">
-        <img src="Mars.png" alt="VP Icon" style="width: 100%; height: auto; border-radius: 50%;">
-        <div id="trVpNumber" class="small-vp-number">0</div>
-    </div>
+    <!-- Terraforming Rating Button -->
+<div class="terraforming-container full-width">
+    <button class="terraforming-button" onclick="openTRModal()">
+        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
+    </button>
 </div>
-
      
      <!-- Resources Buttons - 2 Rows of 3 Buttons -->
 <div class="resources-container">
@@ -1178,14 +1036,6 @@ function updateResource(delta) {
     }
 }
 
-function changeVP(delta) {
-    vpCount += delta;
-    if (vpCount < 0) { vpCount = 0; }
-    document.getElementById('vpNumber').innerText = vpCount; // Update original VP tracker
-    document.getElementById('vpCountNoButtons').innerText = vpCount; // Update the new VP tracker without buttons
-    saveGameState(); // Save after updating VP
-}
-    
 function updateProduction(delta) {
     if (currentResource) {
         const productionCountElement = document.getElementById(`${currentResource}Production`);
@@ -1342,13 +1192,16 @@ window.onclick = function(event) {
     let cardsPlayed = []; // Array to store cards that have been played
 
 function searchCard() {
+    // Get the user input from the search field
     const cardInput = document.getElementById('cardNumberInput').value.trim();
     const isNumeric = /^\d+$/.test(cardInput);
     const cardNumber = isNumeric ? parseInt(cardInput, 10) : cardInput;
+
+    // Find the card in the database using the card number
     const card = cardsDatabase.find(c => c['Card Number'] === cardNumber);
 
-    const cardDetailsElement = document.getElementById("cardDetails");
     if (card) {
+        // Handle VP and tags for the card
         changeVP(Number(card.VP) || 0);
         Object.keys(card).forEach(key => {
             if (key.startsWith("Tag:") && card[key] === 1) {
@@ -1357,23 +1210,31 @@ function searchCard() {
             }
         });
 
-        // Adding DUPLICATE logic if the card is played again
-        const cardPlayedAlready = playedCards.includes(cardNumber);
-        let duplicateText = cardPlayedAlready ? "<span style='color: red;'>DUPLICATE</span>" : "";
-        cardDetailsElement.innerHTML = `<p>Found card: ${card['Card Name']} with VP: ${card.VP} ${duplicateText}</p>`;
-
-        if (!cardPlayedAlready) {
-            playedCards.push(cardNumber); // Keep track of played cards
+        // Add the card to the cardsPlayed list and mark duplicates if found
+        const isDuplicate = cardsPlayed.some(c => c['Card Number'] === cardNumber);
+        if (!isDuplicate) {
+            cardsPlayed.push(card);
+        } else {
+            card.isDuplicate = true; // Mark card as duplicate
         }
+
+        // Display card details in the HTML element with id "cardDetails"
+        document.getElementById("cardDetails").innerHTML = `
+            <p>Found card: ${card['Card Name']} with VP: ${card.VP} ${card.isDuplicate ? '<span style="color: red;">DUPLICATE</span>' : ''}</p>
+        `;
+
+        // Clear the input box after displaying details
+        document.getElementById('cardNumberInput').value = '';
+
+        // Update the cards played log in the modal
+        updateCardsPlayedLog();
 
         console.log("Card found:", card); 
     } else {
-        cardDetailsElement.innerHTML = "<p>Card not found. Please try a different number.</p>";
+        // If no card is found, display the "Card not found" message
+        document.getElementById("cardDetails").innerHTML = "<p>Card not found. Please try a different number.</p>";
         console.log("Card not found:", cardInput); 
     }
-
-    // Clear the input field after search
-    document.getElementById('cardNumberInput').value = '';
 }
 
 function updateCardsPlayedLog() {
