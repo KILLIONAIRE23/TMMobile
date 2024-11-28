@@ -9,6 +9,79 @@
 
 <style>
 
+/* Updated TR and VP container styling */
+.tr-vp-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 800px; /* Align with other elements like resources */
+    margin: 20px auto;
+    padding: 10px;
+    background-color: #f0f0f0; /* Light gray background */
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+}
+
+/* Styling for the TR container on the left */
+.tr-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tr-container img {
+    width: 60px; /* Set a consistent width for the TR icon */
+    height: auto;
+}
+
+.tr-container span {
+    font-size: 2em;
+    font-weight: bold;
+    color: black;
+}
+
+/* Styling for the VP container on the right */
+.vp-container {
+    display: flex;
+    align-items: center;
+}
+
+.icon-container {
+    position: relative;
+    width: 60px; /* Adjust size to match TR */
+    height: auto;
+}
+
+.icon-container img {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+
+.icon-container .vp-number {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.8em; /* Adjust size for the VP number */
+    font-weight: bold;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Ensure the width adjusts based on the device */
+@media (max-width: 480px) {
+    .tr-vp-container {
+        width: 90%; /* Make it more mobile-friendly */
+    }
+    .tr-container img,
+    .icon-container {
+        width: 50px; /* Decrease icon size for mobile view */
+    }
+}
+    
 /* Combined container styles for TR and VP tracker */
 .combined-container {
     background-color: #ececec;
@@ -657,20 +730,16 @@
 <body>
 <h2>Standard Resources & TR</h2>
      
-<div class="combined-container">
-    <!-- Terraforming Rating Button on the Left -->
-    <div class="tr-container" style="display: flex; flex-direction: column; align-items: center;">
-        <button class="terraforming-button" onclick="openTRModal()">
-            <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
-            <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
-        </button>
+<!-- Terraforming Rating and VP Tracker Container -->
+<div class="tr-vp-container full-width">
+    <div class="tr-container">
+        <img src="https://killionaire23.github.io/TMMobile/TR.png" alt="TR">
+        <span id="trCount">20</span> <!-- Initial value for Terraforming Rating -->
     </div>
-
-    <!-- VP Tracker without Buttons on the Right -->
-    <div class="vp-container" style="display: flex; flex-direction: column; align-items: center;">
-        <div class="icon-container" style="position: relative; width: 80px; height: 80px;">
-            <img src="Mars.png" alt="Mars Icon" style="width: 100%; height: auto; border-radius: 50%;">
-            <div id="vpCountNoButtons" class="vp-number" style="font-size: 30px;">3</div> <!-- Value is dynamic -->
+    <div class="vp-container">
+        <div class="icon-container">
+            <img src="Mars.png" alt="Mars Icon">
+            <div class="vp-number">0</div> 
         </div>
     </div>
 </div>
